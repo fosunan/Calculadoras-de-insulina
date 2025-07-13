@@ -17,22 +17,15 @@
       padding: 0 1rem;
       background-image: url('Imagen de fondo presentación.png'); /* IMAGEN DE FONDO */
       background-size: cover;
-      /* Cubre toda la pantalla */
       background-position: center;
-      /* Centra la imagen de fondo */
       background-attachment: fixed;
-      /* Mantiene la imagen fija al hacer scroll */
       background-color: #f9f9f9;
-      /* Color de fallback si la imagen no carga */
       color: #333;
       font-size: 1em;
-      /* Tamaño de fuente base relativo */
     }
     h1, h2 {
       color: #008000;
-      /* Verde oscuro similar al logo */
       font-size: 1.8em;
-      /* Ajuste para mejor lectura en móvil */
       margin-top: 1.5rem;
       margin-bottom: 0.8rem;
     }
@@ -48,7 +41,6 @@
         font-size: 1.5em;
         margin-bottom: 0.2em;
         color: #008000;
-        /* Verde oscuro similar al logo */
     }
     .hospital-info p {
         font-size: 0.9em;
@@ -58,7 +50,7 @@
     .main-title {
         text-align: center;
         font-size: 3.6em; /* Doble de 1.8em */
-        color: #008000; /* Verde oscuro */
+        color: #008000;
         font-weight: bold;
         margin-top: 1rem;
         margin-bottom: 1.5rem;
@@ -67,75 +59,53 @@
       font-weight: bold;
       display: block;
       margin-top: 1em;
-      /* Ajustado a em */
     }
     input[type=number], select {
       width: 100%;
       max-width: 200px; /* Incrementado para mejor pulsación en móvil */
       padding: 0.5em;
-      /* Ajustado a em */
       margin-top: 0.2em;
-      /* Ajustado a em */
       margin-bottom: 0.6em;
-      /* Ajustado a em */
       border: 1px solid #ccc;
       border-radius: 4px;
       font-size: 1em;
-      /* Asegura que el texto dentro del input no sea muy pequeño */
     }
     .checkbox-inline {
       display: inline-block;
-      margin-right: 1.5em; /* Ajustado a em */
+      margin-right: 1.5em;
       font-size: 1em;
-      /* Asegura que el texto de la checkbox sea legible */
     }
     .checkbox-inline input {
       margin-right: 0.5em;
-      /* Espacio entre checkbox y texto */
       vertical-align: middle;
-      /* Alinea el checkbox con el texto */
     }
     #datosAyerContainer, #correccionRatioContainerAvanzado {
       background: #e6ffe6;
-      /* Verde muy claro */
       border: 1px solid #99e699;
-      /* Verde más fuerte */
       padding: 1em;
-      /* Ajustado a em */
       margin-top: 0.8em;
-      /* Ajustado a em */
       border-radius: 6px;
     }
     button {
       margin-top: 1.2em;
-      /* Ajustado a em */
       padding: 0.7em 1.2em;
-      /* Ajustado a em */
       background-color: #008000;
-      /* Verde oscuro */
       color: white;
       border: none;
       border-radius: 4px;
       font-size: 1.1em;
-      /* Un poco más grande para facilitar la pulsación */
       cursor: pointer;
       width: auto;
-      /* Ancho automático, no 100% */
       display: block;
-      /* Para que ocupe su propia línea si es necesario */
     }
     button:hover {
       background-color: #005500;
-      /* Verde más oscuro al pasar el ratón */
     }
     .resultado {
       margin-top: 1.5em;
-      /* Ajustado a em */
       font-size: 1.3em;
-      /* Ajustado para mayor visibilidad */
       font-weight: bold;
       color: #004d00;
-      /* Verde oscuro para el resultado */
     }
     .resultado-aviso {
         font-size: 0.9em;
@@ -145,28 +115,20 @@
     }
     .resultado-aviso.alerta-correccion {
         color: orange;
-        /* Color diferente para aviso de corrección alta */
     }
     pre.pasos {
       background: #e6ffe6;
-      /* Verde muy claro */
       border: 1px solid #99e699;
-      /* Verde más fuerte */
       padding: 1em;
-      /* Ajustado a em */
       white-space: pre-wrap;
       margin-top: 1em;
-      /* Ajustado a em */
       border-radius: 6px;
       font-size: 0.9em;
-      /* Para que los pasos no sean demasiado grandes */
       line-height: 1.4;
     }
     .pasos-correccion-ratio, .pasos-calculo-ratio-basico {
         background: #e6ffe6;
-        /* Verde muy claro */
         border: 1px solid #99e699;
-        /* Verde más fuerte */
         padding: 1em;
         white-space: pre-wrap;
         margin-top: 1em;
@@ -177,7 +139,6 @@
     .error-message {
       color: red;
       font-size: 0.85em;
-      /* Un poco más pequeña pero legible */
       margin-top: -0.4em;
       margin-bottom: 0.4em;
       display: none;
@@ -188,16 +149,12 @@
     }
     .logo-container img {
         max-width: 400px;
-        /* Tamaño por defecto para PC */
         height: auto;
         display: block;
-        /* Asegura que ocupe su propio espacio y se centre */
         margin: 0 auto;
-        /* Centra la imagen */
     }
     .disclaimer-text p {
         margin-bottom: 0.5em;
-        /* Espacio entre párrafos para "puntos y aparte" */
     }
     .aviso-extra {
         font-size: 0.95em;
@@ -223,7 +180,6 @@
     @media (max-width: 600px) {
       body {
         font-size: 1.1em;
-        /* Aumenta el tamaño base para mayor legibilidad en móviles */
         padding: 0 0.8rem;
       }
       h1 {
@@ -232,19 +188,16 @@
       h2 {
         font-size: 1.4em;
       }
-      label, input[type=number], select { /* Aplicar a label y select también */
+      label, input[type=number], select {
         font-size: 1.1em;
-        /* Unificar tamaño de fuente para inputs y labels en móvil */
       }
       input[type=number], select {
         max-width: 100%;
-        /* Ocupa todo el ancho disponible */
         padding: 0.6em;
       }
       button {
         font-size: 1.1em;
         width: 100%;
-        /* Botones de ancho completo en móvil */
         padding: 0.8em 1em;
       }
       .resultado {
@@ -255,13 +208,11 @@
       }
       .checkbox-inline {
         display: block;
-        /* Checkboxes en líneas separadas para facilitar la interacción */
         margin-right: 0;
         margin-bottom: 0.5em;
       }
       .logo-container img {
         max-width: 150px;
-        /* Tamaño más pequeño para móviles */
       }
     }
 
@@ -271,28 +222,28 @@
         display: flex;
         flex-direction: column;
         gap: 1.5rem; /* Espacio entre los botones */
-        align-items: center; /* Centra los botones */
+        align-items: center;
     }
 
     .menu-option-group {
-        width: 80%; /* Ancho del grupo de botón y descripción */
+        width: 80%;
         max-width: 400px;
         text-align: center;
     }
 
     .menu-option-button {
-        display: block; /* Para que cada botón ocupe su propia línea */
-        width: 100%; /* Ocupa el ancho completo del grupo */
+        display: block;
+        width: 100%;
         padding: 1em 1.5em;
         background-color: #008000;
         color: white;
         text-decoration: none; /* Quita el subrayado de los enlaces */
         border: none;
-        border-radius: 8px; /* Bordes más redondeados */
-        font-size: 1.2em; /* Texto un poco más grande */
+        border-radius: 8px;
+        font-size: 1.2em;
         font-weight: bold;
         text-align: center;
-        transition: background-color 0.3s ease; /* Transición suave al pasar el ratón */
+        transition: background-color 0.3s ease;
     }
 
     .menu-option-button:hover {
@@ -305,7 +256,7 @@
         margin-top: 0.5em;
         line-height: 1.4;
         text-align: left; /* Alinea el texto de la descripción a la izquierda */
-        padding: 0 10px; /* Pequeño padding para no pegar al borde */
+        padding: 0 10px;
     }
 
     .image-container {
@@ -314,37 +265,43 @@
         display: flex;
         justify-content: center;
         gap: 2rem; /* Espacio entre las imágenes */
-        flex-wrap: wrap; /* Permite que las imágenes se envuelvan en pantallas pequeñas */
-        flex-direction: column; /* Apila las imágenes en móvil por defecto */
+        flex-wrap: wrap;
+        flex-direction: column;
         align-items: center;
     }
 
     .image-container img {
-        max-width: 150px; /* Tamaño de las imágenes del menú */
+        max-width: 150px;
         height: auto;
-        border-radius: 8px; /* Bordes ligeramente redondeados para las imágenes */
-        opacity: 0.8; /* Ligeramente transparentes para no distraer demasiado */
+        border-radius: 8px;
+        opacity: 0.8;
     }
     .image-attribution {
-        font-size: 0.7em;
+        font-size: 0.7em; /* Smaller font size as requested */
         color: #888;
         margin-top: 5px;
-        text-align: center;
+        text-align: center; /* Centered as requested */
     }
 
-    .final-disclaimer {
-        margin-top: 3rem;
-        padding: 1.5em;
-        background: #e6ffe6; /* Verde muy claro */
-        border: 1px solid #99e699; /* Verde más fuerte */
-        border-radius: 8px;
+    /* New style for the bold disclaimer text without green background */
+    .bold-disclaimer-no-bg {
+        margin-top: 2rem;
         font-size: 0.95em;
         color: #333;
         text-align: center;
         line-height: 1.4;
+        font-weight: bold;
     }
 
-    @media (min-width: 601px) { /* Para pantallas más grandes, las imágenes van en fila */
+    /* Style for the professional disclaimer */
+    .professional-disclaimer {
+        text-align: center;
+        font-weight: bold;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    @media (min-width: 601px) { /* For larger screens, images in a row */
         .image-container {
             flex-direction: row;
         }
@@ -352,14 +309,14 @@
 
     @media (max-width: 600px) {
         .menu-option-group {
-            width: 95%; /* Ocupa casi todo el ancho en móvil */
+            width: 95%;
         }
         .menu-option-button {
             font-size: 1.1em;
             padding: 1.2em 1em;
         }
         .image-container img {
-            max-width: 100px; /* Imágenes más pequeñas en móvil */
+            max-width: 100px;
         }
     }
 
@@ -380,25 +337,34 @@
 
   <hr>
 
-  <div class="menu-options">
-    <div class="menu-option-group">
-        <a href="calculadora_pauta_basica.html" class="menu-option-button">1. Calculadora básica de pauta de insulina rápida</a>
-        <p class="menu-description">Solo proporciona información sobre la pauta, no una dosis exacta de insulina. No es necesario conocer la ratio ni las raciones de hidratos de carbono, por lo que también será menos precisa.</p>
-    </div>
-    <div class="menu-option-group">
-        <a href="calculadora_dosis_basica.html" class="menu-option-button">2. Calculadora básica de dosis de insulina rápida</a>
-        <p class="menu-description">Conociendo la pauta, puede realizar los cálculos necesarios para obtener una dosis de insulina. No es necesario conocer la ratio ni las raciones de hidratos de carbono, por lo que también será menos precisa.</p>
-    </div>
-  </div>
-
   <div class="image-container">
     <img src="diabetes_icon.png" alt="Icono de Diabetes" title="Ilustración sobre la diabetes">
     <img src="calculator_icon.png" alt="Icono de Calculadora" title="Calculadora">
-    <p class="image-attribution">Iconos propiedad de Flaticon</p>
+  </div>
+  <p class="image-attribution">Iconos propiedad de Flaticon</p> <div class="bold-disclaimer-no-bg">
+    <p>Los resultados ofrecidos son únicamente orientativos y no sustituyen la consulta ni las indicaciones de su profesional sanitario.</p>
   </div>
 
-  <div class="final-disclaimer">
-    <p>Los resultados ofrecidos son únicamente orientativos y no sustituyen la consulta ni las indicaciones de su profesional sanitario.</p>
+  <div class="menu-options">
+    <div class="menu-option-group">
+        <a href="Calculadora basica.html" class="menu-option-button">1. Calculadora BÁSICA de dosis de insulina rápida</a>
+        <p class="menu-description">Utiliza una pauta por comida y aplica correcciones según la glucemia. No es necesario contar raciones (pero también es menos exacta).</p>
+    </div>
+    <div class="menu-option-group">
+        <a href="Calculadora avanzada.html" class="menu-option-button">2. Calculadora AVANZADA de dosis de insulina rápida</a>
+        <p class="menu-description">Para su uso es necesario contar raciones. Puede ayudarle a calcular la Ratio en cada comida y aplicar unos ajustes más complejos y exactos.</p>
+    </div>
+  </div>
+
+  <hr> <div class="professional-disclaimer">
+    <p><strong>SOLO PARA PROFESIONALES SANITARIOS:</strong></p>
+  </div>
+
+  <div class="menu-options">
+    <div class="menu-option-group">
+        <a href="Calculadora de pauta.html" class="menu-option-button">3. Calculadora de PAUTA básica de insulina rápida</a>
+        <p class="menu-description">Solo proporciona información sobre la pauta, no una dosis exacta de insulina. No es necesario conocer la ratio ni las raciones de hidratos de carbono, por lo que también será menos precisa.</p>
+    </div>
   </div>
 
 </body>
