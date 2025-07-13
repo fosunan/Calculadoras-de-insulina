@@ -17,22 +17,28 @@
       padding: 0 1rem;
       background-image: url('Imagen de fondo presentación.png'); /* IMAGEN DE FONDO */
       background-size: cover;
+      /* Cubre toda la pantalla */
       background-position: center;
+      /* Centra la imagen de fondo */
       background-attachment: fixed;
+      /* Mantiene la imagen fija al hacer scroll */
       background-color: #f9f9f9;
+      /* Color de fallback si la imagen no carga */
       color: #333;
       font-size: 1em;
+      /* Tamaño de fuente base relativo */
     }
     h1, h2 {
       color: #008000;
+      /* Verde oscuro similar al logo */
       font-size: 1.8em;
+      /* Ajuste para mejor lectura en móvil */
       margin-top: 1.5rem;
       margin-bottom: 0.8rem;
     }
     h1 {
       text-align: center;
       font-size: 2.2em;
-    /* This is the size for "Hospital Universitario La Merced" */
     }
     .hospital-info {
       text-align: center;
@@ -42,6 +48,7 @@
         font-size: 1.5em;
         margin-bottom: 0.2em;
         color: #008000;
+        /* Verde oscuro similar al logo */
     }
     .hospital-info p {
         font-size: 0.9em;
@@ -50,72 +57,86 @@
     }
     .main-title {
         text-align: center;
-        /* Apply same font size and color as h1 for "Hospital Universitario La Merced" */
-        font-size: 2.2em;
+        font-size: 3.6em; /* Doble de 1.8em */
         color: #008000;
+        /* Verde oscuro */
         font-weight: bold;
         margin-top: 1rem;
-        margin-bottom: 0.5rem; /* Adjusted for new line */
-    }
-    .subtitle-profesionales {
-        text-align: center;
-        font-size: 1.2em;
-        color: #000;
-        font-weight: bold;
         margin-bottom: 1.5rem;
     }
     label {
       font-weight: bold;
       display: block;
       margin-top: 1em;
+      /* Ajustado a em */
     }
     input[type=number], select {
       width: 100%;
-      max-width: 200px;
-      /* Incrementado para mejor pulsación en móvil */
+      max-width: 200px; /* Incrementado para mejor pulsación en móvil */
       padding: 0.5em;
+      /* Ajustado a em */
       margin-top: 0.2em;
+      /* Ajustado a em */
       margin-bottom: 0.6em;
+      /* Ajustado a em */
       border: 1px solid #ccc;
       border-radius: 4px;
       font-size: 1em;
+      /* Asegura que el texto dentro del input no sea muy pequeño */
     }
     .checkbox-inline {
       display: inline-block;
-      margin-right: 1.5em;
+      margin-right: 1.5em; /* Ajustado a em */
       font-size: 1em;
+      /* Asegura que el texto de la checkbox sea legible */
     }
     .checkbox-inline input {
       margin-right: 0.5em;
+      /* Espacio entre checkbox y texto */
       vertical-align: middle;
+      /* Alinea el checkbox con el texto */
     }
     #datosAyerContainer, #correccionRatioContainerAvanzado {
       background: #e6ffe6;
+      /* Verde muy claro */
       border: 1px solid #99e699;
+      /* Verde más fuerte */
       padding: 1em;
+      /* Ajustado a em */
       margin-top: 0.8em;
+      /* Ajustado a em */
       border-radius: 6px;
     }
     button {
       margin-top: 1.2em;
+      /* Ajustado a em */
       padding: 0.7em 1.2em;
+      /* Ajustado a em */
       background-color: #008000;
+      /* Verde oscuro */
       color: white;
       border: none;
       border-radius: 4px;
       font-size: 1.1em;
+      /* Un poco más grande para facilitar la pulsación */
       cursor: pointer;
       width: auto;
+      /* Ancho automático, no 100% */
       display: block;
+      /* Para que ocupe su propia línea si es necesario */
     }
     button:hover {
       background-color: #005500;
+      /* Verde más oscuro al pasar el ratón */
     }
     .resultado {
       margin-top: 1.5em;
+      /* Ajustado a em */
       font-size: 1.3em;
+      /* Ajustado para mayor visibilidad */
       font-weight: bold;
       color: #004d00;
+      /* Verde oscuro para el resultado */
     }
     .resultado-aviso {
         font-size: 0.9em;
@@ -125,20 +146,28 @@
     }
     .resultado-aviso.alerta-correccion {
         color: orange;
+        /* Color diferente para aviso de corrección alta */
     }
     pre.pasos {
       background: #e6ffe6;
+      /* Verde muy claro */
       border: 1px solid #99e699;
+      /* Verde más fuerte */
       padding: 1em;
+      /* Ajustado a em */
       white-space: pre-wrap;
       margin-top: 1em;
+      /* Ajustado a em */
       border-radius: 6px;
       font-size: 0.9em;
+      /* Para que los pasos no sean demasiado grandes */
       line-height: 1.4;
     }
     .pasos-correccion-ratio, .pasos-calculo-ratio-basico {
         background: #e6ffe6;
+        /* Verde muy claro */
         border: 1px solid #99e699;
+        /* Verde más fuerte */
         padding: 1em;
         white-space: pre-wrap;
         margin-top: 1em;
@@ -149,6 +178,7 @@
     .error-message {
       color: red;
       font-size: 0.85em;
+      /* Un poco más pequeña pero legible */
       margin-top: -0.4em;
       margin-bottom: 0.4em;
       display: none;
@@ -159,12 +189,16 @@
     }
     .logo-container img {
         max-width: 400px;
+        /* Tamaño por defecto para PC */
         height: auto;
         display: block;
+        /* Asegura que ocupe su propio espacio y se centre */
         margin: 0 auto;
+        /* Centra la imagen */
     }
     .disclaimer-text p {
         margin-bottom: 0.5em;
+        /* Espacio entre párrafos para "puntos y aparte" */
     }
     .aviso-extra {
         font-size: 0.95em;
@@ -190,6 +224,7 @@
     @media (max-width: 600px) {
       body {
         font-size: 1.1em;
+        /* Aumenta el tamaño base para mayor legibilidad en móviles */
         padding: 0 0.8rem;
       }
       h1 {
@@ -198,16 +233,19 @@
       h2 {
         font-size: 1.4em;
       }
-      label, input[type=number], select {
+      label, input[type=number], select { /* Aplicar a label y select también */
         font-size: 1.1em;
+        /* Unificar tamaño de fuente para inputs y labels en móvil */
       }
       input[type=number], select {
         max-width: 100%;
+        /* Ocupa todo el ancho disponible */
         padding: 0.6em;
       }
       button {
         font-size: 1.1em;
         width: 100%;
+        /* Botones de ancho completo en móvil */
         padding: 0.8em 1em;
       }
       .resultado {
@@ -218,11 +256,13 @@
       }
       .checkbox-inline {
         display: block;
+        /* Checkboxes en líneas separadas para facilitar la interacción */
         margin-right: 0;
         margin-bottom: 0.5em;
       }
       .logo-container img {
         max-width: 150px;
+        /* Tamaño más pequeño para móviles */
       }
   </style>
 </head>
@@ -236,21 +276,21 @@
     <h1>Hospital Universitario La Merced</h1>
     <h2>Consulta de Diabetes</h2>
     <p>Francisco José Osuna Navarro</p>
-    <br/> <p class="main-title">CALCULADORA BÁSICA DE PAUTA DE INSULINA RÁPIDA</p>
-    <p class="subtitle-profesionales">SOLO PARA PROFESIONALES SANITARIOS</p>
+    <br/> <p class="main-title">CALCULADORA BÁSICA DE DOSIS DE INSULINA RÁPIDA</p>
   </div>
 
   <div class="disclaimer-text">
-    <p>El funcionamiento de la calculadora se basa en el principio de que las glucemias pre y postprandiales deben ser lo más similares posible. Esta estabilidad sugiere que la cantidad de carbohidratos ingeridos guarda un equilibrio adecuado con la dosis de insulina rápida administrada para esa comida.</p>
-    <p>Es importante tener en cuenta que esta calculadora no realiza ajustes ni correcciones relacionadas con factores individuales como la actividad física, el estrés, o la composición específica de los alimentos.</p>
-    <p>El resultado obtenido representa una Pauta de Referencia, que puede introducirse posteriormente en la Calculadora Básica para determinar la dosis final de insulina rápida a administrar antes de la comida.</p>
+    <p>Esta herramienta tiene como objetivo ayudar para el cálculo de la dosis de insulina rápida a administrar, simplificando operaciones complejas y ayudando al paciente 
+a aplicar lo aprendido durante su Educación Terapéutica en Diabetes.</p>
+    <p>El uso correcto de esta calculadora parte del conocimiento adquirido en consulta y debe formar parte de una estrategia de autocuidado supervisada.</p>
   </div>
 
   <hr>
 
-  <p><strong>Edición en pruebas. Versión 1a.</strong></p>
+  <p><strong>Edición en pruebas.
+Versión 1a.</strong></p>
 
-  <h2>1. Cantidad total de insulina diaria</h2>
+  <h2>1. Insulina y glucemia</h2>
 
   <label for="rapida">Unidades totales de insulina rápida diaria (de media en los últimos 2 días):</label>
   <input id="rapida" type="number" min="0" step="0.1" />
@@ -262,15 +302,14 @@
 
   <label for="constanteCorreccion">Constante de corrección: Por defecto 1800. (Puede modificarse en personas muy sensibles a correcciones o frágiles).</label>
   <input id="constanteCorreccion" type="number" min="1" step="1" value="1800" />
-  <span class="error-message" id="errorConstanteCorreccion">Introduce un valor válido y mayor que cero.</span>
-
-  <h2>2. ¿Qué glucemias ha tenido de media estos últimos días, antes y 3 horas después de esta comida?</h2>
+  <span class="error-message" 
+id="errorConstanteCorreccion">Introduce un valor válido y mayor que cero.</span>
 
   <label for="glucemiaActual">Glucemia ANTERIOR a esta comida (mg/dL):</label>
   <input id="glucemiaActual" type="number" min="0" step="1" />
   <span class="error-message" id="errorGlucemiaActual">Introduce un valor válido y no negativo.</span>
 
-  <label for="flechaGlucemia">Si tiene Monitorización, indica cómo estaba la flecha de la glucemia antes de esta comida:</label>
+  <label for="flechaGlucemia">Si tiene Monitorización, indica cómo está la flecha:</label>
   <select id="flechaGlucemia">
     <option value="estable">Estable</option>
     <option value="ascenso_lento">Ascenso lento</option>
@@ -279,38 +318,62 @@
     <option value="descenso_rapido">Descenso rápido</option>
   </select>
 
-  <label for="glucemiaPosterior">Glucemia POSTERIOR a esta comida (mg/dL):</label>
-  <input id="glucemiaPosterior" type="number" min="0" step="1" />
-  <span class="error-message" id="errorGlucemiaPosterior">Introduce un valor válido y no negativo.</span>
+  <label for="glucemiaObjetivo">Glucemia objetivo dentro de 3 horas (mg/dL) (Por defecto 120).
+Por la noche, o en pacientes muy sensibles o con fragilidad, puede indicarse 150 o un valor mayor):</label>
+  <input id="glucemiaObjetivo" type="number" min="0" step="1" value="120" />
+  <span class="error-message" id="errorGlucemiaObjetivo">Introduce un valor válido y no negativo.</span>
 
-  <label for="flechaGlucemiaPosterior">Si tiene Monitorización, indica cómo estaba la flecha de la glucemia después de esta comida:</label>
-  <select id="flechaGlucemiaPosterior">
-    <option value="estable">Estable</option>
-    <option value="ascenso_lento">Ascenso lento</option>
-    <option value="ascenso_rapido">Ascenso rápido</option>
-    <option value="descenso_lento">Descenso lento</option>
-    <option value="descenso_rapido">Descenso rápido</option>
+  <hr>
+
+  <h2>2.
+Pauta habitual de insulina de esta comida:</h2>
+
+  <label for="dosisHabitualComidaActual">Pauta habitual (Unidades):</label>
+  <input id="dosisHabitualComidaActual" type="number" min="0" step="0.1" />
+  <span class="error-message" id="errorDosisHabitualComidaActual">Introduce un valor válido y no negativo.</span>
+
+  <label for="comidaComposicion">Composición de esta comida:</label>
+  <select id="comidaComposicion">
+    <option value="normal" selected>Normal</option>
+    <option value="liviana">Liviana (pocas proteínas y/o grasas) resta el 10%</option>
+    <option value="pesada">Pesada (muchas proteínas y/o grasas) suma el 10%</option>
+  </select>
+
+  <label for="deporteAntes">¿Hizo deporte/trabajo físico antes de esta comida?</label>
+  <select id="deporteAntes">
+    <option value="0" selected>No hizo</option>
+    <option value="-0.10">Poco (resta el 10% de la dosis 
+de insulina rápida)</option>
+    <option value="-0.20">Mucho (resta el 20% de la dosis de insulina rápida)</option>
+  </select>
+
+  <label for="deporteDespues">¿Va a hacer deporte/trabajo físico después de esta comida?</label>
+  <select id="deporteDespues">
+    <option value="0" selected>No tiene previsto</option>
+    <option value="-0.05">Poco (resta el 5% de la dosis de insulina rápida)</option>
+    <option value="-0.10">Mucho (resta el 10% de la dosis de insulina rápida)</option>
+  </select>
+
+  <label for="hipoglucemiaAyer">¿Ayer tuvo usted hipoglucemia después de esta comida?:</label>
+  <select id="hipoglucemiaAyer">
+    <option value="no" selected>No</option>
+    <option value="si">Sí</option>
   </select>
 
   <hr>
 
-  <h2>3. Pauta habitual de insulina de esta comida</h2>
+  
+<h2>3. Cálculo</h2>
+  <button onclick="calcularInsulina()">Calcular dosis de insulina</button>
 
-  <label for="dosisHabitualComidaActual">Pauta de insulina rápida (Unidades):</label>
-  <input id="dosisHabitualComidaActual" type="number" min="0" step="0.1" />
-  <span class="error-message" id="errorDosisHabitualComidaActual">Introduce un valor válido y no negativo.</span>
-
-  <hr>
-
-  <h2>4. Cálculo</h2>
-  <button onclick="calcularInsulina()">Calcular pauta de insulina</button>
-
-  <div class="resultado" id="resultadoReal">Pauta de insulina real: <span id="valorPautaReal"></span></div>
-  <div class="resultado" id="resultadoRecomendada">Pauta de insulina recomendada: <span id="valorPautaRecomendada"></span></div>
-
-  <p class="resultado-aviso" id="dosisAltaAviso" style="display:none;">⚠️ Esta es una pauta alta. Por favor, revise los datos introducidos y/o consulte con su profesional sanitario.</p>
-  <p class="resultado-aviso" id="correccionAltaAviso" style="display:none;">⚠️ Pauta de corrección alta ¿Está seguro?</p>
-  <p class="aviso-extra">⚠️ ATENCIÓN: Esta PAUTA no representa la DOSIS final de insulina rápida que necesita para esta comida. La pauta es solo una parte del cálculo, al que deben añadirse otros ajustes importantes, como el valor objetivo de glucemia, compensaciones según el tipo de comida, o correcciones por hiperglucemia o hipoglucemia, entre otros factores.</p>
+  <div class="resultado" id="resultado"></div>
+  <p class="resultado-aviso" id="dosisAltaAviso" style="display:none;">⚠️ Esta es una dosis alta.
+Por favor, revise los datos introducidos y/o consulte con su profesional sanitario.</p>
+  <p class="resultado-aviso" id="correccionAltaAviso" style="display:none;">⚠️ Dosis de corrección alta ¿Está seguro?</p>
+  <p class="mensaje-rojo" id="riesgoHipoglucemiaAviso" style="display:none;">⚠️ Riesgo de hipoglucemia. Revise los datos introducidos. Puede que tenga que comer más hidratos de carbono en esta comida</p>
+  <p style="color: black; font-weight: bold;">Los resultados ofrecidos son únicamente orientativos y no sustituyen la consulta ni las indicaciones de su profesional sanitario.</p>
+  <p class="aviso-extra">Puede que esta dosis de insulina necesite algún ajuste extra como es el caso de situaciones por enfermedad (fiebre, diarrea,...), algunos tratamientos (corticoides,...), menstruación,... que pueden hacer variar estos cálculos.
+Consulta con tu profesional.</p>
   <pre class="pasos" id="pasos"></pre>
 
   <script>
@@ -318,7 +381,7 @@
     function validateInput(inputId, errorId, condition) {
       const input = document.getElementById(inputId);
       const errorSpan = document.getElementById(errorId);
-      if (!condition(input.value) || isNaN(parseFloat(input.value))) {
+      if (!condition(input.value)) {
         input.classList.add('input-error');
         errorSpan.style.display = 'block';
         return false;
@@ -344,28 +407,36 @@
       const lenta = parseFloat(document.getElementById('lenta').value);
       const constanteCorreccion = parseFloat(document.getElementById('constanteCorreccion').value);
       let glucemiaActual = parseFloat(document.getElementById('glucemiaActual').value);
+      // Use let because it will be modified
       const flechaGlucemia = document.getElementById('flechaGlucemia').value;
-      const glucemiaPosterior = parseFloat(document.getElementById('glucemiaPosterior').value);
-      const flechaGlucemiaPosterior = document.getElementById('flechaGlucemiaPosterior').value;
+      const glucemiaObjetivo = parseFloat(document.getElementById('glucemiaObjetivo').value);
       const dosisHabitualComidaActual = parseFloat(document.getElementById('dosisHabitualComidaActual').value);
+      const comidaComposicion = document.getElementById('comidaComposicion').value;
+      const deporteAntes = parseFloat(document.getElementById('deporteAntes').value);
+      // Value will be 0, -0.10 or -0.20
+      const deporteDespues = parseFloat(document.getElementById('deporteDespues').value);
+      // Value will be 0, -0.05 or -0.10
+      const hipoglucemiaAyer = document.getElementById('hipoglucemiaAyer').value;
+      // Value will be "si" or "no"
 
 
       // Resetear mensajes de aviso
       document.getElementById('dosisAltaAviso').style.display = 'none';
       document.getElementById('correccionAltaAviso').style.display = 'none';
-      document.getElementById('valorPautaReal').textContent = '';
-      document.getElementById('valorPautaRecomendada').textContent = '';
-      document.getElementById('pasos').textContent = '';
+      document.getElementById('riesgoHipoglucemiaAviso').style.display = 'none'; // Ensure it's hidden initially
+
+
       // Validaciones iniciales para todos los campos principales
       let valid = true;
       valid = validateInput('rapida', 'errorRapida', isNonNegativeNumber) && valid;
       valid = validateInput('lenta', 'errorLenta', isNonNegativeNumber) && valid;
       valid = validateInput('constanteCorreccion', 'errorConstanteCorreccion', isPositiveNumber) && valid;
       valid = validateInput('glucemiaActual', 'errorGlucemiaActual', isNonNegativeNumber) && valid;
-      valid = validateInput('glucemiaPosterior', 'errorGlucemiaPosterior', isNonNegativeNumber) && valid;
+      valid = validateInput('glucemiaObjetivo', 'errorGlucemiaObjetivo', isNonNegativeNumber) && valid;
       valid = validateInput('dosisHabitualComidaActual', 'errorDosisHabitualComidaActual', isNonNegativeNumber) && valid;
       if (!valid) {
-        document.getElementById('valorPautaReal').textContent = 'Error: Por favor, corrige los errores marcados.';
+        document.getElementById('resultado').textContent = 'Por favor, corrige los errores marcados.';
+        document.getElementById('pasos').textContent = '';
         return;
       }
 
@@ -374,118 +445,158 @@
       if (totalInsulinaDiaria > 0) {
         fsi = constanteCorreccion / totalInsulinaDiaria;
       } else {
-        document.getElementById('valorPautaReal').textContent = 'Error: La suma de insulina rápida y lenta no puede ser cero para calcular el FSI.';
+        document.getElementById('resultado').textContent = 'Error: La suma de insulina rápida y lenta no puede ser cero para calcular el FSI.';
+        document.getElementById('pasos').textContent = '';
         return;
       }
       
       let pasosTexto = `Pasos del cálculo:\n\n`;
       // Adjustment of glucemiaActual based on flechaGlucemia
       const originalGlucemiaActual = glucemiaActual;
+      // Store original for display in steps
       let ajusteGlucemiaFlecha = 0;
-      pasosTexto += `1. Ajuste de Glucemia anterior según la flecha del Monitorización:\n`;
-      pasosTexto += `   Glucemia anterior inicial: ${originalGlucemiaActual} mg/dL\n`;
+      pasosTexto += `1.
+Ajuste de Glucemia actual según la flecha del Monitorización:\n`;
+      pasosTexto += `   Glucemia actual inicial: ${originalGlucemiaActual} mg/dL\n`;
       switch (flechaGlucemia) {
         case 'ascenso_lento':
           ajusteGlucemiaFlecha = 25;
-          pasosTexto += `   Flecha (Ascenso lento): Glucemia anterior + 25 mg/dL\n`;
+          pasosTexto += `   Flecha (Ascenso lento): Glucemia actual + 25 mg/dL\n`;
           break;
         case 'ascenso_rapido':
           ajusteGlucemiaFlecha = 50;
-          pasosTexto += `   Flecha (Ascenso rápido): Glucemia anterior + 50 mg/dL\n`;
+          pasosTexto += `   Flecha (Ascenso rápido): Glucemia actual + 50 mg/dL\n`;
           break;
         case 'descenso_lento':
           ajusteGlucemiaFlecha = -25;
-          pasosTexto += `   Flecha (Descenso lento): Glucemia anterior - 25 mg/dL\n`;
+          pasosTexto += `   Flecha (Descenso lento): Glucemia actual - 25 mg/dL\n`;
           break;
         case 'descenso_rapido':
           ajusteGlucemiaFlecha = -50;
-          pasosTexto += `   Flecha (Descenso rápido): Glucemia anterior - 50 mg/dL\n`;
+          pasosTexto += `   Flecha (Descenso rápido): Glucemia actual - 50 mg/dL\n`;
           break;
         case 'estable':
         default:
           ajusteGlucemiaFlecha = 0;
-          pasosTexto += `   Flecha (Estable): Glucemia anterior + 0 mg/dL\n`;
+          pasosTexto += `   Flecha (Estable): Glucemia actual + 0 mg/dL\n`;
           break;
       }
       glucemiaActual += ajusteGlucemiaFlecha;
-      pasosTexto += `   Glucemia anterior ajustada: ${glucemiaActual.toFixed(1)} mg/dL\n\n`;
-      // Adjustment of glucemiaPosterior based on flechaGlucemiaPosterior
-      const originalGlucemiaPosterior = glucemiaPosterior;
-      let ajusteGlucemiaFlechaPosterior = 0;
-      pasosTexto += `   Ajuste de Glucemia posterior según la flecha del Monitorización:\n`;
-      pasosTexto += `   Glucemia posterior inicial: ${originalGlucemiaPosterior} mg/dL\n`;
-      switch (flechaGlucemiaPosterior) {
-        case 'ascenso_lento':
-          ajusteGlucemiaFlechaPosterior = 25;
-          pasosTexto += `   Flecha (Ascenso lento): Glucemia posterior + 25 mg/dL\n`;
-          break;
-        case 'ascenso_rapido':
-          ajusteGlucemiaFlechaPosterior = 50;
-          pasosTexto += `   Flecha (Ascenso rápido): Glucemia posterior + 50 mg/dL\n`;
-          break;
-        case 'descenso_lento':
-          ajusteGlucemiaFlechaPosterior = -25;
-          pasosTexto += `   Flecha (Descenso lento): Glucemia posterior - 25 mg/dL\n`;
-          break;
-        case 'descenso_rapido':
-          ajusteGlucemiaFlechaPosterior = -50;
-          pasosTexto += `   Flecha (Descenso rápido): Glucemia posterior - 50 mg/dL\n`;
-          break;
-        case 'estable':
-        default:
-          ajusteGlucemiaFlechaPosterior = 0;
-          pasosTexto += `   Flecha (Estable): Glucemia posterior + 0 mg/dL\n`;
-          break;
-      }
-      const glucemiaPosteriorAjustada = glucemiaPosterior + ajusteGlucemiaFlechaPosterior;
-      pasosTexto += `   Glucemia posterior ajustada: ${glucemiaPosteriorAjustada.toFixed(1)} mg/dL\n\n`;
-      // 2. Cálculo de la Pauta de Corrección (PC)
-      let pautaCorreccion = 0;
-      let diferenciaGlucemia = glucemiaPosteriorAjustada - glucemiaActual;
-      pasosTexto += `2. Cálculo de la Pauta de Corrección:\n`;
-      pasosTexto += `   Glucemia anterior ajustada: ${glucemiaActual.toFixed(1)} mg/dL\n`;
-      pasosTexto += `   Glucemia posterior ajustada: ${glucemiaPosteriorAjustada.toFixed(1)} mg/dL\n`;
-      pasosTexto += `   Diferencia de Glucemia = Glucemia posterior ajustada - Glucemia anterior ajustada = ${glucemiaPosteriorAjustada.toFixed(1)} - ${glucemiaActual.toFixed(1)} = ${diferenciaGlucemia.toFixed(1)} mg/dL\n`;
+      pasosTexto += `   Glucemia actual ajustada: ${glucemiaActual.toFixed(1)} mg/dL\n\n`;
+      // 2. Cálculo de la Dosis de Corrección (DC)
+      let dosisCorreccion = 0;
+      let diferenciaGlucemia = glucemiaActual - glucemiaObjetivo;
+      pasosTexto += `2. Cálculo de la Dosis de Corrección (DC):\n`;
+      pasosTexto += `   Glucemia ajustada: ${glucemiaActual.toFixed(1)} mg/dL\n`;
+      pasosTexto += `   Glucemia objetivo: ${glucemiaObjetivo} mg/dL\n`;
+      pasosTexto += `   Diferencia de Glucemia = Glucemia ajustada - Glucemia objetivo = ${glucemiaActual.toFixed(1)} - ${glucemiaObjetivo} = ${diferenciaGlucemia.toFixed(1)} mg/dL\n`;
       pasosTexto += `   Factor de Sensibilidad a la Insulina (FSI) = Constante de Corrección / (Insulina Rápida + Lenta) = ${constanteCorreccion} / (${rapida} + ${lenta}) = ${fsi.toFixed(2)}\n`;
-      if (diferenciaGlucemia !== 0) {
-        pautaCorreccion = roundToHalf(diferenciaGlucemia / fsi);
-        pasosTexto += `   Pauta de Corrección = Diferencia de Glucemia / FSI = ${diferenciaGlucemia.toFixed(1)} / ${fsi.toFixed(2)} = ${pautaCorreccion.toFixed(1)} U\n\n`;
-        if (Math.abs(pautaCorreccion) > 4 && diferenciaGlucemia >= 0) {
+      if (diferenciaGlucemia !== 0) { // Aplicar corrección si hay diferencia, sea positiva o negativa
+        dosisCorreccion = roundToHalf(diferenciaGlucemia / fsi);
+        pasosTexto += `   Dosis de Corrección (DC) = Diferencia de Glucemia / FSI = ${diferenciaGlucemia.toFixed(1)} / ${fsi.toFixed(2)} = ${dosisCorreccion.toFixed(1)} U\n\n`;
+        // New condition for "corrección alta" warning
+        if (Math.abs(dosisCorreccion) > 4 && diferenciaGlucemia >= 0) {
             document.getElementById('correccionAltaAviso').style.display = 'block';
         }
       } else {
-        pautaCorreccion = 0;
-        pasosTexto += `   Las glucemias ajustadas son iguales. No se requiere pauta de corrección (Pauta de Corrección = 0 U).\n\n`;
+        dosisCorreccion = 0;
+        pasosTexto += `   Glucemia ajustada (${glucemiaActual.toFixed(1)}) es igual a Glucemia objetivo (${glucemiaObjetivo}).
+No se requiere dosis de corrección (DC = 0 U).\n\n`;
       }
 
 
-      // 3. Pauta habitual de insulina para la comida
-      let pautaHabitual = dosisHabitualComidaActual;
-      pasosTexto += `3. Pauta habitual de insulina para esta comida:\n`;
-      pasosTexto += `   Pauta Habitual = ${pautaHabitual.toFixed(1)} U\n\n`;
-      // 4. Pauta Total de Insulina
-      let pautaTotalReal = pautaCorreccion + pautaHabitual;
-      pautaTotalReal = roundToHalf(pautaTotalReal);
-      if (pautaTotalReal < 0) pautaTotalReal = 0;
+      // 3. Dosis habitual de insulina para la comida
+      let dosisHabitual = dosisHabitualComidaActual;
+      pasosTexto += `3. Dosis habitual de insulina para esta comida:\n`;
+      pasosTexto += `   Dosis Habitual = ${dosisHabitual.toFixed(1)} U\n\n`;
+      // 4. Ajustes por Composición de Comida y Actividad Física
+      let ajusteComposicion = 0;
+      let ajusteDeporteAntes = 0;
+      let ajusteDeporteDespues = 0;
+      let ajusteHipoglucemiaAyer = 0;
+      // New adjustment for hipoglucemia
 
-      pasosTexto += `4. Pauta Total de Insulina (Real):\n`;
-      pasosTexto += `   Pauta Total (Real) = Pauta de Corrección + Pauta Habitual\n`;
-      pasosTexto += `   Pauta Total (Real) = ${pautaCorreccion.toFixed(1)} U (Pauta de Corrección) + ${pautaHabitual.toFixed(1)} U (Pauta Habitual) = ${pautaTotalReal.toFixed(1)} U\n\n`;
-      // Calculate Pauta Recomendada (average of Pauta Habitual and Pauta Total Real)
-      const pautaRecomendada = roundToHalf((pautaHabitual + pautaTotalReal) / 2);
-      pasosTexto += `5. Pauta de insulina recomendada:\n`;
-      pasosTexto += `   Pauta Recomendada = (Pauta Habitual + Pauta Total Real) / 2 = (${pautaHabitual.toFixed(1)} + ${pautaTotalReal.toFixed(1)}) / 2 = ${pautaRecomendada.toFixed(1)} U\n\n`;
+      pasosTexto += `4. Ajustes adicionales:\n`;
+      // Ajuste por composición de comida
+      switch (comidaComposicion) {
+        case 'liviana':
+          ajusteComposicion = -0.10 * dosisHabitualComidaActual;
+          pasosTexto += `   Composición de esta comida (Liviana): -10% de la dosis habitual (${dosisHabitualComidaActual.toFixed(1)} U) = ${ajusteComposicion.toFixed(1)} U\n`;
+          break;
+        case 'pesada':
+          ajusteComposicion = 0.10 * dosisHabitualComidaActual;
+          pasosTexto += `   Composición de esta comida (Pesada): +10% de la dosis habitual (${dosisHabitualComidaActual.toFixed(1)} U) = ${ajusteComposicion.toFixed(1)} U\n`;
+          break;
+        case 'normal':
+        default:
+          ajusteComposicion = 0;
+          pasosTexto += `   Composición de esta comida (Normal): +0 U\n`;
+          break;
+      }
+      
+      // Ajuste por deporte antes de la comida
+      if (deporteAntes === -0.10) {
+        ajusteDeporteAntes = -0.10 * dosisHabitualComidaActual;
+        pasosTexto += `   Deporte/trabajo físico ANTES de esta comida (Poco): -10% de la dosis habitual (${dosisHabitualComidaActual.toFixed(1)} U) = ${ajusteDeporteAntes.toFixed(1)} U\n`;
+      } else if (deporteAntes === -0.20) {
+        ajusteDeporteAntes = -0.20 * dosisHabitualComidaActual;
+        pasosTexto += `   Deporte/trabajo físico ANTES de esta comida (Mucho): -20% de la dosis habitual (${dosisHabitualComidaActual.toFixed(1)} U) = ${ajusteDeporteAntes.toFixed(1)} U\n`;
+      } else {
+        ajusteDeporteAntes = 0;
+        pasosTexto += `   Deporte/trabajo físico ANTES de esta comida (No hizo): +0 U\n`;
+      }
+
+      // Ajuste por deporte después de la comida
+      if (deporteDespues === -0.05) {
+        ajusteDeporteDespues = -0.05 * dosisHabitualComidaActual;
+        pasosTexto += `   Deporte/trabajo físico DESPUÉS de esta comida (Poco): -5% de la dosis habitual (${dosisHabitualComidaActual.toFixed(1)} U) = ${ajusteDeporteDespues.toFixed(1)} U\n`;
+      } else if (deporteDespues === -0.10) {
+        ajusteDeporteDespues = -0.10 * dosisHabitualComidaActual;
+        pasosTexto += `   Deporte/trabajo físico DESPUÉS de esta comida (Mucho): -10% de la dosis habitual (${dosisHabitualComidaActual.toFixed(1)} U) = ${ajusteDeporteDespues.toFixed(1)} U\n`;
+      } else {
+        ajusteDeporteDespues = 0;
+        pasosTexto += `   Deporte/trabajo físico DESPUÉS de esta comida (No tiene previsto): +0 U\n`;
+      }
+
+      // Adjustment for hipoglucemia ayer
+      if (hipoglucemiaAyer === 'si') {
+        ajusteHipoglucemiaAyer = -0.10 * dosisHabitualComidaActual;
+        pasosTexto += `   ¿Ayer tuvo usted hipoglucemia después de esta comida?
+(Sí): -10% de de la dosis habitual (${dosisHabitualComidaActual.toFixed(1)} U) = ${ajusteHipoglucemiaAyer.toFixed(1)} U\n`;
+      } else {
+        ajusteHipoglucemiaAyer = 0;
+        pasosTexto += `   ¿Ayer tuvo usted hipoglucemia después de esta comida? (No): +0 U\n`;
+      }
+
+
+      let totalAjustes = ajusteComposicion + ajusteDeporteAntes + ajusteDeporteDespues + ajusteHipoglucemiaAyer;
+      pasosTexto += `   Total de Ajustes = ${ajusteComposicion.toFixed(1)} + ${ajusteDeporteAntes.toFixed(1)} + ${ajusteDeporteDespues.toFixed(1)} + ${ajusteHipoglucemiaAyer.toFixed(1)} = ${totalAjustes.toFixed(1)} U\n\n`;
+      // 5. Dosis Total de Insulina
+      let dosisTotal = dosisCorreccion + dosisHabitual + totalAjustes;
+      dosisTotal = roundToHalf(dosisTotal);
+      
+      // If dosisTotal is negative, show 0 and warning
+      if (dosisTotal < 0) {
+          dosisTotal = 0;
+          document.getElementById('riesgoHipoglucemiaAviso').style.display = 'block';
+      } else {
+          document.getElementById('riesgoHipoglucemiaAviso').style.display = 'none';
+      }
+
+
+      pasosTexto += `5. Dosis Total de Insulina:\n`;
+      pasosTexto += `   Dosis Total = DC + Dosis Habitual + Total Ajustes\n`;
+      pasosTexto += `   Dosis Total = ${dosisCorreccion.toFixed(1)} U (Corrección) + ${dosisHabitual.toFixed(1)} U (Dosis Habitual) + ${totalAjustes.toFixed(1)} U (Ajustes) = ${dosisTotal.toFixed(1)} U\n\n`;
       // Mostrar resultado y pasos
-      document.getElementById('valorPautaReal').textContent = `${pautaTotalReal.toFixed(1)} Unidades`;
-      document.getElementById('valorPautaRecomendada').textContent = `${pautaRecomendada.toFixed(1)} Unidades`;
+      document.getElementById('resultado').textContent = `Dosis de insulina recomendada: ${dosisTotal.toFixed(1)} Unidades`;
       document.getElementById('pasos').textContent = pasosTexto;
       document.getElementById('pasos').style.display = 'block';
 
-      // New condition for "pauta alta" warning
+      // New condition for "dosis alta" warning
       const threshold150pc = 1.5 * dosisHabitualComidaActual;
       const threshold50pcTotalInsulina = 0.5 * (rapida + lenta);
 
-      if (pautaTotalReal > threshold150pc || pautaTotalReal > threshold50pcTotalInsulina) {
+      if (dosisTotal > threshold150pc || dosisTotal > threshold50pcTotalInsulina) {
         document.getElementById('dosisAltaAviso').style.display = 'block';
       }
     }
