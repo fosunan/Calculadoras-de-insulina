@@ -50,7 +50,8 @@
     .main-title {
         text-align: center;
         font-size: 1.8em;
-        color: #008000; /* Verde oscuro */
+        color: #008000;
+        /* Verde oscuro */
         font-weight: bold;
         margin-top: 1rem;
         margin-bottom: 1.5rem;
@@ -62,7 +63,8 @@
     }
     input[type=number], select {
       width: 100%;
-      max-width: 200px; /* Incrementado para mejor pulsación en móvil */
+      max-width: 200px;
+      /* Incrementado para mejor pulsación en móvil */
       padding: 0.5em;
       margin-top: 0.2em;
       margin-bottom: 0.6em;
@@ -315,7 +317,8 @@
     <span class="error-message" id="errorGlucemia3hAyerNoConozco">Introduce un valor válido y no negativo.</span>
 
     <label for="insulinaAyer">¿Cuántas unidades de insulina rápida se administró ayer para 
-    esa comida?</label>
+   
+     esa comida?</label>
     <input id="insulinaAyer" type="number" min="0" step="0.1" />
     <span class="error-message" id="errorInsulinaAyer">Introduce un valor válido y no negativo.</span>
 
@@ -340,6 +343,7 @@
     <input id="glucemiaObjetivoRatio" type="number" min="0" step="1" value="120" />
     <span class="error-message" id="errorGlucemiaObjetivoRatio">Introduce un valor válido y no negativo.</span>
 
+    
     <label 
     for="racionesComidaAyerMedio">¿Cuántas raciones tomó ayer en esa comida? (10 g HC):</label>
     <input id="racionesComidaAyerMedio" type="number" min="0" step="0.1" />
@@ -358,7 +362,8 @@
     <div id="racionesHipoglucemiaContainerMedio" style="display:none; margin-top:0.5rem;">
       <label for="racionesParaHipoglucemiaMedio">Raciones (10 g HC) que tomó para revertir hipoglucemia:</label>
       <input id="racionesParaHipoglucemiaMedio" type="number" min="0" step="0.1" />
-      <span class="error-message" id="errorRacionesHipoglucemiaMedio">Introduce un valor válido y mayor que cero.</span>
+   
+    <span class="error-message" id="errorRacionesHipoglucemiaMedio">Introduce un valor válido y mayor que cero.</span>
     </div>
     
     <button type="button" onclick="calcularCorreccionRatio('Medio')">Calcular ratio corregida</button>
@@ -411,7 +416,7 @@
   <div class="resultado" id="resultado"></div>
   <p class="resultado-aviso" id="dosisAltaAviso" style="display:none;">⚠️ Esta es una dosis alta. Por favor, revise los datos introducidos y/o consulte con su profesional sanitario.</p>
   <p class="resultado-aviso" id="correccionAltaAviso" style="display:none;">⚠️ Dosis de corrección alta ¿Está seguro?</p>
-  <p class="resultado-aviso" id="riesgoHipoglucemiaAviso" style="display:none;"></p>
+  <p id="riesgoHipoglucemiaAviso" style="display:none;"></p>
   <p class="strong-black-text">Los resultados ofrecidos son únicamente orientativos y no sustituyen la consulta ni las indicaciones de su profesional sanitario.</p>
   <p class="aviso-extra">Puede que esta dosis de insulina necesite algún ajuste extra como es el caso de situaciones por enfermedad (fiebre, diarrea,...), algunos tratamientos (corticoides,...), menstruación,... que pueden hacer variar estos cálculos. Consulta con tu profesional.</p>
   <pre class="pasos" id="pasos"></pre>
@@ -742,8 +747,7 @@
       const hipoglucemiaAyer = document.getElementById('hipoglucemiaActual').value;
       let pasosTexto = `**Pasos para el cálculo de la dosis de insulina:**\n\n`;
       // 1. Cálculo del Factor de Corrección de Insulina (FCI)
-      const factorCorreccion = totalInsulina > 0 ?
-      constanteCorreccion / totalInsulina : 0;
+      const factorCorreccion = totalInsulina > 0 ? constanteCorreccion / totalInsulina : 0;
       if (factorCorreccion === 0) {
         document.getElementById('resultado').textContent = 'No se puede calcular el Factor de Corrección de Insulina (Insulina rápida + Insulina lenta es cero).';
         document.getElementById('pasos').style.display = 'none';
@@ -773,13 +777,7 @@
           break;
       }
       
-      let correccionInsulina = 0;
-      if (correccionGlucemia > 0) {
-          correccionInsulina = correccionGlucemia / factorCorreccion;
-      } else {
-          correccionInsulina = 0;
-      }
-
+      const correccionInsulina = correccionGlucemia / factorCorreccion;
       pasosTexto += `2. **Dosis de corrección**: (${glucemiaActual.toFixed(0)} mg/dL - ${glucemiaObjetivo.toFixed(0)} mg/dL ${ajusteFlechaTexto}) / ${factorCorreccion.toFixed(2)} mg/dL/unidad = ${correccionInsulina.toFixed(2)} Unidades.\n\n`;
       // 3. Cálculo de la dosis de comida
       let dosisComida = racionesComidaActual * ratio;
@@ -825,6 +823,7 @@
       pasosTexto += `4. **Ajustes de la dosis de comida**:\n`;
       pasosTexto += ajusteTexto;
       pasosTexto += `\n5. **Cálculo de la dosis total**: (Dosis de comida (${dosisComida.toFixed(2)} U) + Dosis de corrección (${correccionInsulina.toFixed(2)} U) + Ajustes (${ajusteTotal.toFixed(2)} U)) = ${dosisTotal.toFixed(2)} Unidades.\n\n`;
+      
       // Ajuste final por hipoglucemia ayer
       let hipoglucemiaAviso = document.getElementById('riesgoHipoglucemiaAviso');
       if (hipoglucemiaAyer === 'si') {
@@ -838,10 +837,19 @@
         hipoglucemiaAviso.style.display = 'none';
       }
 
-
       const dosisFinalRedondeada = roundToHalf(dosisTotal);
-      let mensajeFinal = `Dosis de insulina rápida a inyectar: <span style="color:red;"><b>${dosisFinalRedondeada.toFixed(1)} Unidades</b></span>`;
       
+      // Check for negative total dose and apply warning
+      let mensajeFinal;
+      if (dosisFinalRedondeada < 0) {
+          mensajeFinal = `Dosis de insulina rápida a inyectar: <span style="color:red;"><b>0.0 Unidades</b></span>`;
+          document.getElementById('riesgoHipoglucemiaAviso').innerHTML = `⚠️ <span class="warning">Riesgo de hipoglucemia. Revise los datos introducidos. Puede que tenga que comer más hidratos de carbono en esta comida.</span>`;
+          document.getElementById('riesgoHipoglucemiaAviso').style.display = 'block';
+      } else {
+          mensajeFinal = `Dosis de insulina rápida a inyectar: <span style="color:red;"><b>${dosisFinalRedondeada.toFixed(1)} Unidades</b></span>`;
+          document.getElementById('riesgoHipoglucemiaAviso').style.display = 'none';
+      }
+
       let correccionAltaAviso = document.getElementById('correccionAltaAviso');
       if (correccionInsulina > 3) {
           correccionAltaAviso.style.display = 'block';
@@ -875,6 +883,7 @@
         if (parseFloat(this.value) === 0 && !noConozcoRatio.checked && !necesitaCorregirRatio.checked) {
             avisoRatioCero.style.display = 'block';
         } else {
+          
             avisoRatioCero.style.display = 'none';
         }
     });
