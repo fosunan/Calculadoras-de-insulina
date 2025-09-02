@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Menú Principal - Calculadoras de Insulina</title>
+  <style>
+    /* Reset básico para asegurar box-sizing */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 1rem auto;
+      padding: 0 1rem;
+      background-image: url('Imagen de fondo presentación.png'); /* IMAGEN DE FONDO */
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-color: #f9f9f9;
+      color: #333;
+      font-size: 1em;
+    }
+    h1, h2 {
+      color: #008000;
+      font-size: 1.8em;
+      margin-top: 1.5rem;
+      margin-bottom: 0.8rem;
+    }
+    h1 {
+      text-align: center;
+      font-size: 2.2em;
+    }
+    .hospital-info {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    .hospital-info h2 {
+        font-size: 1.5em;
+        margin-bottom: 0.2em;
+        color: #008000;
+    }
+    .hospital-info p {
+        font-size: 0.9em;
+        color: #555;
+        margin-top: 0;
+    }
+    .main-title {
+        text-align: center;
+        font-size: 3.6em;
+        /* Doble de 1.8em */
+        color: #008000;
+        font-weight: bold;
+        margin-top: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 1em;
+    }
+    input[type=number], select {
+      width: 100%;
+      max-width: 200px;
+      /* Incrementado para mejor pulsación en móvil */
+      padding: 0.5em;
+      margin-top: 0.2em;
+      margin-bottom: 0.6em;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1em;
+    }
+    .checkbox-inline {
+      display: inline-block;
+      margin-right: 1.5em;
+      font-size: 1em;
+    }
+    .checkbox-inline input {
+      margin-right: 0.5em;
+      vertical-align: middle;
+    }
+    #datosAyerContainer, #correccionRatioContainerAvanzado {
+      background: #e6ffe6;
+      border: 1px solid #99e699;
+      padding: 1em;
+      margin-top: 0.8em;
+      border-radius: 6px;
+    }
+    button {
+      margin-top: 1.2em;
+      padding: 0.7em 1.2em;
+      background-color: #008000;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 1.1em;
+      cursor: pointer;
+      width: auto;
+      display: block;
+    }
+    button:hover {
+      background-color: #005500;
+    }
+    .resultado {
+      margin-top: 1.5em;
+      font-size: 1.3em;
+      font-weight: bold;
+      color: #004d00;
+    }
+    .resultado-aviso {
+        font-size: 0.9em;
+        color: #cc0000;
+        margin-top: 0.5em;
+        font-weight: normal;
+    }
+    .resultado-aviso.alerta-correccion {
+        color: orange;
+    }
+    pre.pasos {
+      background: #e6ffe6;
+      border: 1px solid #99e699;
+      padding: 1em;
+      white-space: pre-wrap;
+      margin-top: 1em;
+      border-radius: 6px;
+      font-size: 0.9em;
+      line-height: 1.4;
+    }
+    .pasos-correccion-ratio, .pasos-calculo-ratio-basico {
+        background: #e6ffe6;
+        border: 1px solid #99e699;
+        padding: 1em;
+        white-space: pre-wrap;
+        margin-top: 1em;
+        border-radius: 6px;
+        font-size: 0.85em;
+        line-height: 1.4;
+    }
+    .error-message {
+      color: red;
+      font-size: 0.85em;
+      margin-top: -0.4em;
+      margin-bottom: 0.4em;
+      display: none;
+    }
+    .logo-container {
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+    .logo-container img {
+        max-width: 400px;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+    }
+    .disclaimer-text p {
+        margin-bottom: 0.5em;
+    }
+    .aviso-extra {
+        font-size: 0.95em;
+        color: #555;
+        margin-top: 1em;
+        line-height: 1.4;
+    }
+    .mensaje-rojo {
+        color: red;
+        font-weight: bold;
+        margin-top: 0.8em;
+    }
+    /* Estilo para el mensaje de corrección alta en rojo y negrita */
+    #correccionAltaAviso {
+        color: red;
+        font-weight: bold;
+    }
+    .input-error {
+        border-color: red !important;
+    }
+
+    /* Media Queries para pantallas pequeñas (smartphones) */
+    @media (max-width: 600px) {
+      body {
+        font-size: 1.1em;
+        padding: 0 0.8rem;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+      h2 {
+        font-size: 1.4em;
+      }
+      label, input[type=number], select {
+        font-size: 1.1em;
+      }
+      input[type=number], select {
+        max-width: 100%;
+        padding: 0.6em;
+      }
+      button {
+        font-size: 1.1em;
+        width: 100%;
+        padding: 0.8em 1em;
+      }
+      .resultado {
+        font-size: 1.2em;
+      }
+      pre.pasos, .pasos-correccion-ratio, .pasos-calculo-ratio-basico {
+        font-size: 0.95em;
+      }
+      .checkbox-inline {
+        display: block;
+        margin-right: 0;
+        margin-bottom: 0.5em;
+      }
+      .logo-container img {
+        max-width: 150px;
+      }
+    }
+
+    /* Estilos específicos para el menú */
+    .menu-options {
+        margin-top: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem; /* Espacio entre los botones */
+        align-items: center;
+    }
+
+    .menu-option-group {
+        width: 80%;
+        max-width: 400px;
+        text-align: center;
+    }
+
+    .menu-option-button {
+        display: block;
+        width: 100%;
+        padding: 1em 1.5em;
+        background-color: #008000;
+        color: white;
+        text-decoration: none; /* Quita el subrayado de los enlaces */
+        border: none;
+        border-radius: 8px;
+        font-size: 1.2em;
+        font-weight: bold;
+        text-align: center;
+        transition: background-color 0.3s ease;
+    }
+
+    .menu-option-button:hover {
+        background-color: #005500;
+    }
+
+    .menu-description {
+        font-size: 0.9em;
+        color: #555;
+        margin-top: 0.5em;
+        line-height: 1.4;
+        text-align: left; /* Alinea el texto de la descripción a la izquierda */
+        padding: 0 10px;
+    }
+
+    .image-container {
+        text-align: center;
+        margin-top: 3rem;
+        display: flex;
+        justify-content: center;
+        gap: 2rem; /* Espacio entre las imágenes */
+        flex-wrap: wrap;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .image-container img {
+        max-width: 150px;
+        height: auto;
+        border-radius: 8px;
+        opacity: 0.8;
+    }
+    .image-attribution {
+        font-size: 0.7em;
+        /* Smaller font size as requested */
+        color: #888;
+        margin-top: 5px;
+        text-align: center;
+        /* Centered as requested */
+    }
+
+    /* New style for the bold disclaimer text without green background */
+    .bold-disclaimer-no-bg {
+        margin-top: 2rem;
+        font-size: 0.95em;
+        color: #333;
+        text-align: center;
+        line-height: 1.4;
+        font-weight: bold;
+    }
+
+    /* Style for the professional disclaimer */
+    .professional-disclaimer {
+        text-align: center;
+        font-weight: bold;
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+    
+    .menu-image {
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 400px; /* Tamaño unificado para todas las imágenes */
+    }
+
+    @media (min-width: 601px) { /* For larger screens, images in a row */
+        .image-container {
+            flex-direction: row;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .menu-option-group {
+            width: 95%;
+        }
+        .menu-option-button {
+            font-size: 1.1em;
+            padding: 1.2em 1em;
+        }
+        .image-container img {
+            max-width: 100px;
+        }
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="logo-container">
+    <img src="COLOR_3_TINTAS.jpg" alt="Logo Área de Gestión Sanitaria de Osuna" />
+  </div>
+
+  <div class="hospital-info">
+    <h1>Hospital Universitario La Merced</h1>
+    <h2>Consulta de Diabetes</h2>
+    <p>Francisco José Osuna Navarro</p>
+  </div>
+  
+  <br>
+
+  <img src="Canal diabetes.jpg" alt="Imagen del canal de diabetes" class="menu-image">
+
+  <div class="menu-options">
+    <div class="menu-option-group">
+        <a href="Menu-consulta-diabetes" class="menu-option-button">Tu consulta de diabetes</a>
+    </div>
+  </div>
+
+  <div class="bold-disclaimer-no-bg">
+    <p>Si tienes diabetes o eres familiar, este contenido te puede interesar</p>
+  </div>
+
+  <br>
+
+  <img src="Paciente y familiar.jpg" alt="Imagen de paciente y familiar" class="menu-image">
+  
+  <div class="menu-options">
+    <div class="menu-option-group">
+        <a href="#" class="menu-option-button">Soy un paciente o familiar</a>
+    </div>
+  </div>
+
+  <br>
+
+  <img src="Profesionales.jpg" alt="Imagen de profesionales sanitarios" class="menu-image">
+
+  <div class="menu-options">
+    <div class="menu-option-group">
+        <a href="#" class="menu-option-button">Soy un profesional sanitario</a>
+    </div>
+  </div>
+  
+</body>
+</html>
