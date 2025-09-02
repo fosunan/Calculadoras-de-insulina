@@ -4,13 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Menú Principal - Calculadoras de Insulina</title>
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new
-Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','G-EM6WGH2SJJ');</script>
-<style>
+  <style>
     /* Reset básico para asegurar box-sizing */
     *, *::before, *::after {
       box-sizing: border-box;
@@ -55,7 +49,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     .main-title {
         text-align: center;
-        font-size: 3.6em; /* Doble de 1.8em */
+        font-size: 3.6em;
+        /* Doble de 1.8em */
         color: #008000;
         font-weight: bold;
         margin-top: 1rem;
@@ -68,7 +63,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     input[type=number], select {
       width: 100%;
-      max-width: 200px; /* Incrementado para mejor pulsación en móvil */
+      max-width: 200px;
+      /* Incrementado para mejor pulsación en móvil */
       padding: 0.5em;
       margin-top: 0.2em;
       margin-bottom: 0.6em;
@@ -283,10 +279,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         opacity: 0.8;
     }
     .image-attribution {
-        font-size: 0.7em; /* Smaller font size as requested */
+        font-size: 0.7em;
+        /* Smaller font size as requested */
         color: #888;
         margin-top: 5px;
-        text-align: center; /* Centered as requested */
+        text-align: center;
+        /* Centered as requested */
     }
 
     /* New style for the bold disclaimer text without green background */
@@ -305,6 +303,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         font-weight: bold;
         margin-top: 2rem;
         margin-bottom: 1rem;
+    }
+    
+    .menu-image {
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      width: 400px; /* Tamaño unificado para todas las imágenes */
     }
 
     @media (min-width: 601px) { /* For larger screens, images in a row */
@@ -329,12 +338,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   </style>
 </head>
 <body>
-<noscript><iframe
-src="https://www.googletagmanager.com/ns.html?id=G-EM6WGH2SJJ"
-height="0"
-width="0"
-style="display:none;visibility:hidden"></iframe></noscript>
-<div class="logo-container">
+
+  <div class="logo-container">
     <img src="COLOR_3_TINTAS.jpg" alt="Logo Área de Gestión Sanitaria de Osuna" />
   </div>
 
@@ -342,40 +347,41 @@ style="display:none;visibility:hidden"></iframe></noscript>
     <h1>Hospital Universitario La Merced</h1>
     <h2>Consulta de Diabetes</h2>
     <p>Francisco José Osuna Navarro</p>
-    <br/> <p class="main-title">MENÚ PRINCIPAL DE CALCULADORAS DE INSULINA</p>
   </div>
+  
+  <br>
 
-  <hr>
-
-  <div class="image-container">
-    <img src="diabetes_icon.png" alt="Icono de Diabetes" title="Ilustración sobre la diabetes">
-    <img src="calculator_icon.png" alt="Icono de Calculadora" title="Calculadora">
-  </div>
-  <p class="image-attribution">Iconos propiedad de Flaticon</p> <div class="bold-disclaimer-no-bg">
-    <p>Los resultados ofrecidos son únicamente orientativos y no sustituyen la consulta ni las indicaciones de su profesional sanitario.</p>
-  </div>
+  <img src="Canal diabetes.jpg" alt="Imagen del canal de diabetes" class="menu-image">
 
   <div class="menu-options">
     <div class="menu-option-group">
-        <a href="Calculadora basica.html" class="menu-option-button">1. Calculadora BÁSICA de dosis de insulina rápida</a>
-        <p class="menu-description">Utiliza una pauta por comida y aplica correcciones según la glucemia. No es necesario contar raciones (pero también es menos exacta).</p>
-    </div>
-    <div class="menu-option-group">
-        <a href="Calculadora avanzada.html" class="menu-option-button">2. Calculadora AVANZADA de dosis de insulina rápida</a>
-        <p class="menu-description">Para su uso es necesario contar raciones. Puede ayudarle a calcular la Ratio en cada comida y aplicar unos ajustes más complejos y exactos.</p>
+        <a href="Menu-consulta-diabetes" class="menu-option-button">Tu consulta de diabetes</a>
     </div>
   </div>
 
-  <hr> <div class="professional-disclaimer">
-    <p><strong>SOLO PARA PROFESIONALES SANITARIOS:</strong></p>
+  <div class="bold-disclaimer-no-bg">
+    <p>Si tienes diabetes o eres familiar, este contenido te puede interesar</p>
   </div>
+
+  <br>
+
+  <img src="Paciente y familiar.jpg" alt="Imagen de paciente y familiar" class="menu-image">
+  
+  <div class="menu-options">
+    <div class="menu-option-group">
+        <a href="#" class="menu-option-button">Soy un paciente o familiar</a>
+    </div>
+  </div>
+
+  <br>
+
+  <img src="Profesionales.jpg" alt="Imagen de profesionales sanitarios" class="menu-image">
 
   <div class="menu-options">
     <div class="menu-option-group">
-        <a href="Calculadora de pauta.html" class="menu-option-button">3. Calculadora de PAUTA básica de insulina rápida</a>
-        <p class="menu-description">Solo proporciona información sobre la pauta, no una dosis exacta de insulina. No es necesario conocer la ratio ni las raciones de hidratos de carbono, por lo que también será menos precisa.</p>
+        <a href="#" class="menu-option-button">Soy un profesional sanitario</a>
     </div>
   </div>
-
+  
 </body>
 </html>
