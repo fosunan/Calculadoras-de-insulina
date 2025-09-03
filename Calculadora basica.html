@@ -188,6 +188,21 @@
         margin-top: 0.5em;
     }
 
+    .recomendaciones-box {
+        background-color: #008000;
+        color: white;
+        padding: 1em;
+        margin-top: 1em;
+        border-radius: 6px;
+        text-align: center;
+    }
+
+    .recomendaciones-box h3 {
+        color: white;
+        margin: 0;
+        font-size: 1.5em;
+        font-weight: bold;
+    }
 
     /* Media Queries para pantallas pequeñas (smartphones) */
     @media (max-width: 600px) {
@@ -256,6 +271,16 @@ a aplicar lo aprendido durante su Educación Terapéutica en Diabetes.</p>
   <p><strong>Edición en pruebas. Versión 1a.</strong></p>
 
   <h2>1. Insulina y glucemia</h2>
+
+  <label for="tipoInsulina">¿Qué tipo de insulina rápida usa?:</label>
+  <select id="tipoInsulina">
+    <option value="" selected>Seleccionar</option>
+    <option value="Apidra">Apidra</option>
+    <option value="Novorapid">Novorapid</option>
+    <option value="Humalog">Humalog</option>
+    <option value="Fiasp">Fiasp</option>
+  </select>
+  <span class="error-message" id="errorTipoInsulina">No ha indicado el tipo de insulina rápida que usa.</span>
 
   <label for="rapida">Unidades totales de insulina rápida diaria (de media en los últimos 2 días):</label>
   <input id="rapida" type="number" min="0" step="0.1" />
@@ -391,15 +416,20 @@ a aplicar lo aprendido durante su Educación Terapéutica en Diabetes.</p>
   <h2>3. Cálculo</h2>
   <button onclick="calcularInsulina()">Calcular dosis de insulina</button>
 
+  <div class="recomendaciones-box" id="recomendacionesBox" style="display:none;">
+      <h3>RECOMENDACIONES</h3>
+      <p id="recomendacionesTexto"></p>
+  </div>
+  
   <p class="mensaje-rojo" id="avisoValidacion" style="display:none; font-weight: bold;">Revise los valores introducidos, puede que no sean válidos.</p>
   <div class="resultado" id="resultado"></div>
   <p class="resultado-aviso" id="dosisAltaAviso" style="display:none;">⚠️ Esta es una dosis alta. Por favor, revise los datos introducidos y/o consulte con su profesional sanitario.</p>
   <p class="resultado-aviso" id="correccionAltaAviso" style="display:none;">⚠️ Dosis de corrección alta ¿Está seguro?</p>
   <p class="mensaje-rojo" id="riesgoHipoglucemiaAviso" style="display:none;">⚠️ El cálculo indica una dosis de 0 unidades, lo que podría suponer un riesgo de hipoglucemia. Consulte con su profesional sanitario para ajustar su dosis. </p>
-  <p style="color: red; font-weight: bold; display: none;"
-  id="avisoPautaHabitual">No ha registrado la dosis de insulina de esta comida. El resultado obtenido solo es útil si va a corregir su nivel actual de glucosa, pero sin comer.</p>
+  <p style="color: red; font-weight: bold; display: none;" id="avisoPautaHabitual">No ha registrado la dosis de insulina de esta comida. El resultado obtenido solo es útil si va a corregir su nivel actual de glucosa, pero sin comer.</p>
   <p style="color: black; font-weight: bold;">Los resultados ofrecidos son únicamente orientativos y no sustituyen la consulta ni las indicaciones de su profesional sanitario.</p>
   <p class="aviso-extra">Puede que esta dosis de insulina necesite algún ajuste extra como es el caso de situaciones por enfermedad (fiebre, diarrea,...), algunos tratamientos (corticoides,...), menstruación,... que pueden hacer variar estos cálculos. Consulta con tu profesional.</p>
+
   <pre class="pasos" id="pasos"></pre>
 
   <hr>
@@ -467,8 +497,9 @@ a aplicar lo aprendido durante su Educación Terapéutica en Diabetes.</p>
       document.getElementById('resultado').textContent = '';
       document.getElementById('pasos').textContent = '';
       document.getElementById('pasos').style.display = 'none';
+      document.getElementById('recomendacionesBox').style.display = 'none'; // Ocultar el cuadro de recomendaciones al inicio
 
-
+      const tipoInsulina = document.getElementById('tipoInsulina').value;
       const rapida = parseFloat(document.getElementById('rapida').value);
       const lenta = parseFloat(document.getElementById('lenta').value);
       const constanteCorreccion = 1800;
@@ -481,12 +512,24 @@ a aplicar lo aprendido durante su Educación Terapéutica en Diabetes.</p>
       const deporteDespues = document.getElementById('deporteDespues').value;
       const hipoglucemiaAyer = document.getElementById('hipoglucemiaAyer').value;
       // Obtener valores de ajuste de los nuevos campos (ahora son positivos, pero se restarán)
-      let ajusteLiviana = (comidaComposicion === 'liviana') ? parseFloat(document.getElementById('ajusteLiviana').value) || 0 : 0;
+      let ajusteLiviana = (comidaComposicion === 'liviana') ?
+      parseFloat(document.getElementById('ajusteLiviana').value) || 0 : 0;
       let ajustePesada = (comidaComposicion === 'pesada') ? parseFloat(document.getElementById('ajustePesada').value) || 0 : 0;
       let ajusteDeporteAntes = (deporteAntes === 'si') ? parseFloat(document.getElementById('ajusteDeporteAntes').value) || 0 : 0;
-      let ajusteDeporteDespues = (deporteDespues === 'si') ? parseFloat(document.getElementById('ajusteDeporteDespues').value) || 0 : 0;
+      let ajusteDeporteDespues = (deporteDespues === 'si') ?
+      parseFloat(document.getElementById('ajusteDeporteDespues').value) || 0 : 0;
       
 
+      // Validación de tipo de insulina
+      if (tipoInsulina === "") {
+          document.getElementById('errorTipoInsulina').style.display = 'block';
+          document.getElementById('avisoValidacion').style.display = 'block';
+          document.getElementById('tipoInsulina').classList.add('input-error');
+          return;
+      } else {
+          document.getElementById('errorTipoInsulina').style.display = 'none';
+          document.getElementById('tipoInsulina').classList.remove('input-error');
+      }
 
       // Validación especial para glucemia con texto
       const glucemiaValue = glucemiaActual.toLowerCase().trim();
@@ -552,8 +595,36 @@ a aplicar lo aprendido durante su Educación Terapéutica en Diabetes.</p>
       
       let pasosTexto = `Pasos del cálculo:\n\n`;
       const originalGlucemiaActual = glucemiaActual;
+      let gp15 = 0; // Nuevo parámetro GP15
+      
+      pasosTexto += `1. Cálculo del nuevo parámetro GP15:\n`;
+      pasosTexto += `   Glucemia ANTES de la comida: ${originalGlucemiaActual} mg/dL\n`;
+      switch (flechaGlucemia) {
+        case 'estable':
+          gp15 = originalGlucemiaActual;
+          pasosTexto += `   Flecha (Estable): GP15 = Glucemia ANTES de la comida = ${gp15.toFixed(1)} mg/dL\n`;
+          break;
+        case 'ascenso_lento':
+          gp15 = originalGlucemiaActual + 30;
+          pasosTexto += `   Flecha (Ascenso lento): GP15 = Glucemia ANTES + 30 = ${originalGlucemiaActual} + 30 = ${gp15.toFixed(1)} mg/dL\n`;
+          break;
+        case 'ascenso_rapido':
+          gp15 = originalGlucemiaActual + 60;
+          pasosTexto += `   Flecha (Ascenso rápido): GP15 = Glucemia ANTES + 60 = ${originalGlucemiaActual} + 60 = ${gp15.toFixed(1)} mg/dL\n`;
+          break;
+        case 'descenso_lento':
+          gp15 = originalGlucemiaActual - 20;
+          pasosTexto += `   Flecha (Descenso lento): GP15 = Glucemia ANTES - 20 = ${originalGlucemiaActual} - 20 = ${gp15.toFixed(1)} mg/dL\n`;
+          break;
+        case 'descenso_rapido':
+          gp15 = originalGlucemiaActual - 40;
+          pasosTexto += `   Flecha (Descenso rápido): GP15 = Glucemia ANTES - 40 = ${originalGlucemiaActual} - 40 = ${gp15.toFixed(1)} mg/dL\n`;
+          break;
+      }
+      pasosTexto += `   El valor del GP15 es: ${gp15.toFixed(1)} mg/dL\n\n`;
+
       let ajusteGlucemiaFlecha = 0;
-      pasosTexto += `1. Ajuste de Glucemia actual según la flecha del Monitorización:\n`;
+      pasosTexto += `2. Ajuste de Glucemia para el cálculo de corrección:\n`;
       pasosTexto += `   Glucemia actual inicial: ${originalGlucemiaActual} mg/dL\n`;
       switch (flechaGlucemia) {
         case 'ascenso_lento':
@@ -580,10 +651,11 @@ a aplicar lo aprendido durante su Educación Terapéutica en Diabetes.</p>
       }
       glucemiaActual += ajusteGlucemiaFlecha;
       pasosTexto += `   Glucemia actual ajustada: ${glucemiaActual.toFixed(1)} mg/dL\n\n`;
-      // 2. Cálculo de la Dosis de Corrección (DC)
+      
+      // 3. Cálculo de la Dosis de Corrección (DC)
       let dosisCorreccion = 0;
       let diferenciaGlucemia = glucemiaActual - glucemiaObjetivo;
-      pasosTexto += `2. Cálculo de la Dosis de Corrección (DC):\n`;
+      pasosTexto += `3. Cálculo de la Dosis de Corrección (DC):\n`;
       pasosTexto += `   Glucemia ajustada: ${glucemiaActual.toFixed(1)} mg/dL\n`;
       pasosTexto += `   Glucemia objetivo: ${glucemiaObjetivo} mg/dL\n`;
       pasosTexto += `   Diferencia de Glucemia = Glucemia ajustada - Glucemia objetivo = ${glucemiaActual.toFixed(1)} - ${glucemiaObjetivo} = ${diferenciaGlucemia.toFixed(1)} mg/dL\n`;
@@ -611,12 +683,12 @@ a aplicar lo aprendido durante su Educación Terapéutica en Diabetes.</p>
       }
 
 
-      // 3. Dosis habitual de insulina para la comida
+      // 4. Dosis habitual de insulina para la comida
       let dosisHabitual = dosisHabitualComidaActual;
-      pasosTexto += `3. Dosis habitual de insulina para esta comida:\n`;
+      pasosTexto += `4. Dosis habitual de insulina para esta comida:\n`;
       pasosTexto += `   Dosis Habitual = ${dosisHabitual.toFixed(1)} U\n\n`;
-      // 4. Ajustes por Composición de Comida y Actividad Física
-      pasosTexto += `4. Ajustes adicionales:\n`;
+      // 5. Ajustes por Composición de Comida y Actividad Física
+      pasosTexto += `5. Ajustes adicionales:\n`;
       // Ajuste por composición de comida
       let ajusteComida = 0;
       if (comidaComposicion === 'liviana') {
@@ -649,12 +721,12 @@ a aplicar lo aprendido durante su Educación Terapéutica en Diabetes.</p>
 
       let totalAjustes = ajusteComida + ajusteDeporteAntesFinal + ajusteDeporteDespuesFinal;
       pasosTexto += `   Total de Ajustes = ${totalAjustes.toFixed(1)} U\n\n`;
-      // 5. Dosis Total de Insulina (antes de ajuste por hipoglucemia)
+      // 6. Dosis Total de Insulina (antes de ajuste por hipoglucemia)
       let dosisTotal = dosisCorreccion + dosisHabitual + totalAjustes;
-      pasosTexto += `5. Dosis Total de Insulina (antes de ajuste por hipoglucemia):\n`;
+      pasosTexto += `6. Dosis Total de Insulina (antes de ajuste por hipoglucemia):\n`;
       pasosTexto += `   Dosis Total = DC + Dosis Habitual + Total Ajustes\n`;
       pasosTexto += `   Dosis Total = ${dosisCorreccion.toFixed(1)} U (Corrección) + ${dosisHabitual.toFixed(1)} U (Dosis Habitual) + ${totalAjustes.toFixed(1)} U (Ajustes) = ${dosisTotal.toFixed(1)} U\n\n`;
-      // 6. Ajuste por hipoglucemia del día anterior
+      // 7. Ajuste por hipoglucemia del día anterior
       if (hipoglucemiaAyer === 'si') {
           const dosisOriginal = dosisTotal;
           const ajusteCalculado = dosisTotal * 0.10;
@@ -662,18 +734,18 @@ a aplicar lo aprendido durante su Educación Terapéutica en Diabetes.</p>
           if (ajusteCalculado < 1 && dosisOriginal > 0) {
               ajusteAplicado = 1;
               dosisTotal = dosisOriginal - ajusteAplicado;
-              pasosTexto += `6. Ajuste por hipoglucemia de ayer:\n`;
+              pasosTexto += `7. Ajuste por hipoglucemia de ayer:\n`;
               pasosTexto += `   Dosis Original: ${dosisOriginal.toFixed(1)} U\n`;
               pasosTexto += `   El 10% de ajuste (${ajusteCalculado.toFixed(1)} U) es menor a 1 unidad. Se aplicará un ajuste mínimo de 1.0 U.\n`;
               pasosTexto += `   Dosis con ajuste: ${dosisTotal.toFixed(1)} U\n`;
           } else {
               dosisTotal *= 0.90; // Reducir en un 10%
-              pasosTexto += `6. Ajuste por hipoglucemia de ayer:\n`;
+              pasosTexto += `7. Ajuste por hipoglucemia de ayer:\n`;
               pasosTexto += `   Dosis Original: ${dosisOriginal.toFixed(1)} U\n`;
               pasosTexto += `   Ajuste por Hipoglucemia (-10%): ${dosisOriginal.toFixed(1)} * 0.90 = ${dosisTotal.toFixed(1)} U\n`;
           }
       } else {
-          pasosTexto += `6. Ajuste por hipoglucemia de ayer (No):\n`;
+          pasosTexto += `7. Ajuste por hipoglucemia de ayer (No):\n`;
           pasosTexto += `   Sin ajuste.\n`;
       }
 
@@ -686,7 +758,7 @@ a aplicar lo aprendido durante su Educación Terapéutica en Diabetes.</p>
       } else {
           document.getElementById('riesgoHipoglucemiaAviso').style.display = 'none';
       }
-
+      
       pasosTexto += `\n   Dosis Total Final redondeada: ${dosisTotal.toFixed(1)} U\n`;
       // Mostrar resultado y pasos
       document.getElementById('resultado').textContent = `Dosis de insulina recomendada: ${dosisTotal.toFixed(1)} Unidades`;
@@ -696,6 +768,69 @@ a aplicar lo aprendido durante su Educación Terapéutica en Diabetes.</p>
       // New condition for "dosis alta" warning
       if (dosisTotal > (0.60 * rapida)) {
         document.getElementById('dosisAltaAviso').style.display = 'block';
+      }
+
+      // Mostrar el cuadro de recomendaciones si la pauta habitual es > 0
+      if (dosisHabitual > 0) {
+          document.getElementById('recomendacionesBox').style.display = 'block';
+          let recomendacionText = '';
+          const insulinaNombre = tipoInsulina.charAt(0).toUpperCase() + tipoInsulina.slice(1);
+
+          // Lógica para recomendaciones de insulina
+          if (comidaComposicion !== 'pesada') {
+              // Comida NO pesada
+              if (tipoInsulina === 'Novorapid' || tipoInsulina === 'Apidra' || tipoInsulina === 'Humalog') {
+                  if (gp15 > 200) {
+                      recomendacionText = `<b>1º Administre la dosis de insulina ${insulinaNombre}.</b><br><b>2º Espere 20 minutos.</b><br><b>3º Puede comenzar a comer después.</b>`;
+                  } else if (gp15 >= 100 && gp15 <= 199) {
+                      recomendacionText = `<b>1º Administre la dosis de insulina ${insulinaNombre}.</b><br><b>2º Espere 15 minutos.</b><br><b>3º Puede comenzar a comer después.</b>`;
+                  } else if (gp15 >= 70 && gp15 <= 99) {
+                      recomendacionText = `<b>1º Administre la dosis de insulina ${insulinaNombre}.</b><br><b>2º NO ESPERE.</b><br><b>3º Puede comenzar a comer.</b>`;
+                  } else if (gp15 >= 50 && gp15 <= 69) {
+                      recomendacionText = `<b>HAY RIESGO DE HIPOGLUCEMIA, NO DEBE ESPERAR:</b><br><b>1º Tome un poco de zumo (si aun no lo ha hecho), o comience tomando el postre.</b><br><b>2º Tome el resto de la comida.</b><br><b>3º Después, administre la dosis de insulina ${insulinaNombre}.</b>`;
+                  } else if (gp15 < 50) {
+                      recomendacionText = `<b>HAY RIESGO DE HIPOGLUCEMIA, NO DEBE ESPERAR:</b><br><b>1º Tome zumo para frenar la hipoglucemia, si aun no lo ha hecho.</b><br><b>2º Puede comenzar a comer.</b><br><b>3º Después, administre la dosis de insulina ${insulinaNombre}.</b>`;
+                  }
+              } else if (tipoInsulina === 'Fiasp') {
+                  if (gp15 > 200) {
+                      recomendacionText = `<b>1º Administre la dosis de insulina Fiasp.</b><br><b>2º Espere 10 minutos.</b><br><b>3º Puede comenzar a comer después.</b>`;
+                  } else if (gp15 >= 100 && gp15 <= 199) {
+                      recomendacionText = `<b>1º Administre la dosis de insulina Fiasp.</b><br><b>2º Espere 5 minutos.</b><br><b>3º Puede comenzar a comer después.</b>`;
+                  } else if (gp15 >= 70 && gp15 <= 99) {
+                      recomendacionText = `<b>1º Administre la dosis de insulina Fiasp.</b><br><b>2º NO ESPERE.</b><br><b>3º Puede comenzar a comer.</b>`;
+                  } else if (gp15 >= 50 && gp15 <= 69) {
+                      recomendacionText = `<b>HAY RIESGO DE HIPOGLUCEMIA, NO DEBE ESPERAR:</b><br><b>1º Tome un poco de zumo (si aun no lo ha hecho), o comience tomando el postre.</b><br><b>2º Tome el resto de la comida.</b><br><b>3º Después, administre la dosis de insulina Fiasp.</b>`;
+                  } else if (gp15 < 50) {
+                      recomendacionText = `<b>HAY RIESGO DE HIPOGLUCEMIA, NO DEBE ESPERAR:</b><br><b>1º Tome zumo para frenar la hipoglucemia, si aun no lo ha hecho.</b><br><b>2º Puede comenzar a comer.</b><br><b>3º Después, administre la dosis de insulina Fiasp.</b>`;
+                  }
+              }
+          } else {
+              // Comida ES pesada
+              if (tipoInsulina === 'Novorapid' || tipoInsulina === 'Apidra' || tipoInsulina === 'Humalog') {
+                  if (gp15 > 200) {
+                      recomendacionText = `<b>1º Administre la dosis de insulina ${insulinaNombre}.</b><br><b>2º Espere 15 minutos.</b><br><b>3º Puede comenzar a comer después.</b>`;
+                  } else if (gp15 >= 120 && gp15 <= 199) {
+                      recomendacionText = `<b>1º Administre la dosis de insulina ${insulinaNombre}.</b><br><b>2º Espere 5 minutos.</b><br><b>3º Puede comenzar a comer después.</b>`;
+                  } else if (gp15 >= 80 && gp15 <= 119) {
+                      recomendacionText = `<b>1º Administre la dosis de insulina ${insulinaNombre}.</b><br><b>2º NO ESPERE.</b><br><b>3º Puede comenzar a comer.</b>`;
+                  } else if (gp15 >= 69 && gp15 <= 79) {
+                      recomendacionText = `<b>LA COMIDA PESADA PUEDE TENER BAJO ÍNDICE GLUCÉMICO, NO DEBE ESPERAR:</b><br><b>1º Comience tomando el postre.</b><br><b>2º Tome el resto de la comida.</b><br><b>3º Después, administre la dosis de insulina ${insulinaNombre}.</b>`;
+                  } else if (gp15 < 69) {
+                      recomendacionText = `<b>HAY RIESGO DE HIPOGLUCEMIA, NO DEBE ESPERAR:</b><br><b>1º Tome zumo para frenar la hipoglucemia, si aun no lo ha hecho.</b><br><b>2º Puede comenzar a comer.</b><br><b>3º Después, administre la dosis de insulina ${insulinaNombre}.</b>`;
+                  }
+              } else if (tipoInsulina === 'Fiasp') {
+                  if (gp15 > 180) {
+                      recomendacionText = `<b>1º Administre la dosis de insulina ${insulinaNombre}.</b><br><b>2º Espere 5 minutos.</b><br><b>3º Puede comenzar a comer después.</b>`;
+                  } else if (gp15 >= 100 && gp15 <= 179) {
+                      recomendacionText = `<b>1º Administre la dosis de insulina ${insulinaNombre}.</b><br><b>2º NO ESPERE.</b><br><b>3º Puede comenzar a comer.</b>`;
+                  } else if (gp15 >= 69 && gp15 <= 99) {
+                      recomendacionText = `<b>LA COMIDA PESADA PUEDE TENER BAJO ÍNDICE GLUCÉMICO, NO DEBE ESPERAR:</b><br><b>1º Comience tomando el postre.</b><br><b>2º Tome el resto de la comida.</b><br><b>3º Después, administre la dosis de insulina ${insulinaNombre}.</b>`;
+                  } else if (gp15 < 69) {
+                      recomendacionText = `<b>HAY RIESGO DE HIPOGLUCEMIA, NO DEBE ESPERAR:</b><br><b>1º Tome zumo para frenar la hipoglucemia, si aun no lo ha hecho.</b><br><b>2º Puede comenzar a comer.</b><br><b>3º Después, administre la dosis de insulina ${insulinaNombre}.</b>`;
+                  }
+              }
+          }
+          document.getElementById('recomendacionesTexto').innerHTML = recomendacionText;
       }
     }
 
