@@ -303,7 +303,7 @@ Diabetes.</p>
   <label for="glucemiaActual">¿Cuál es la glucemia ANTES de esta comida? (mg/dL):</label>
   <input id="glucemiaActual" type="number" min="0" step="1" />
   <span class="error-message" id="errorGlucemiaActual">Introduce un valor válido entre 55 y 450.</span>
-  <p class="mensaje-rojo" id="emergenciaAviso" style="display:none; font-weight: bold;">¡ATENCIÓN: Valores inferiores a 55 mg/dl o superiores a 450, puede ser debido a una EMERGENCIA DIABETOLÓGICA. Confirme estos valores y llame a los servicios de emergencia o acuda a un centro de salud para recibir atención!</p>
+  <p class="mensaje-rojo" id="emergenciaAviso" style="display:none; font-weight: bold;">¡ATENCIÓN: Valores inferiores a 55 mg/dl o superiores a 450, pueden ser una EMERGENCIA DIABETOLÓGICA. Confirme estos valores y llame a los servicios de emergencia (112) o acuda a un centro sanitario para recibir atención!</p>
 
   <label for="flechaGlucemia">Si tiene Monitorización, indica cómo está la flecha:</label>
   <select id="flechaGlucemia">
@@ -792,9 +792,9 @@ de glucosa debido al ejercicio o trabajo intenso, puedes tener una hipoglucemia.
                       } else if (gp15 >= 70 && gp15 <= 99) {
                           recomendacionText = `<b>1º Administre la dosis de insulina ${insulinaNombre}.</b><br><b>2º NO ESPERE.</b><br><b>3º Puede comenzar a comer.</b>`;
                       } else if (gp15 >= 50 && gp15 <= 69) {
-                          recomendacionText = `<b>HAY RIESGO DE HIPOGLUCEMIA, NO DEBE ESPERAR:</b><br><b>1º Tome un poco de zumo (si aun no lo ha hecho), o comience tomando el postre.</b><br><b>2º Tome el resto de la comida.</b><br><b>3º Después, administre la dosis de insulina ${insulinaNombre}.</b>`;
+                          recomendacionText = `<b>HAY RIESGO DE GRAVE HIPOGLUCEMIA, NO DEBE ESPERAR:</b><br><b>1º Tome un poco de zumo (si aun no lo ha hecho), o comience tomando el postre.</b><br><b>2º Tome el resto de la comida.</b><br><b>3º Después, administre la dosis de insulina ${insulinaNombre}.</b>`;
                       } else if (gp15 < 50) {
-                          recomendacionText = `<b>HAY RIESGO DE HIPOGLUCEMIA, NO DEBE ESPERAR:</b><br><b>1º Tome zumo para frenar la hipoglucemia, si aun no lo ha hecho.</b><br><b>2º Puede comenzar a comer.</b><br><b>3º Después, administre la dosis de insulina ${insulinaNombre}.</b>`;
+                          recomendacionText = `<b>HAY RIESGO DE GRAVE HIPOGLUCEMIA, NO DEBE ESPERAR:</b><br><b>1º Tome zumo para frenar la hipoglucemia, si aun no lo ha hecho.</b><br><b>2º Puede comenzar a comer.</b><br><b>3º Después, administre la dosis de insulina ${insulinaNombre}.</b>`;
                       }
                   } else if (tipoInsulina === 'Fiasp') {
                       if (gp15 > 200) {
@@ -804,9 +804,9 @@ de glucosa debido al ejercicio o trabajo intenso, puedes tener una hipoglucemia.
                       } else if (gp15 >= 70 && gp15 <= 99) {
                           recomendacionText = `<b>1º Administre la dosis de insulina Fiasp.</b><br><b>2º NO ESPERE.</b><br><b>3º Puede comenzar a comer.</b>`;
                       } else if (gp15 >= 50 && gp15 <= 69) {
-                          recomendacionText = `<b>HAY RIESGO DE HIPOGLUCEMIA, NO DEBE ESPERAR:</b><br><b>1º Tome un poco de zumo (si aun no lo ha hecho), o comience tomando el postre.</b><br><b>2º Tome el resto de la comida.</b><br><b>3º Después, administre la dosis de insulina Fiasp.</b>`;
+                          recomendacionText = `<b>HAY RIESGO DE GRAVE HIPOGLUCEMIA, NO DEBE ESPERAR:</b><br><b>1º Tome un poco de zumo (si aun no lo ha hecho), o comience tomando el postre.</b><br><b>2º Tome el resto de la comida.</b><br><b>3º Después, administre la dosis de insulina Fiasp.</b>`;
                       } else if (gp15 < 50) {
-                          recomendacionText = `<b>HAY RIESGO DE HIPOGLUCEMIA, NO DEBE ESPERAR:</b><br><b>1º Tome zumo para frenar la hipoglucemia, si aun no lo ha hecho.</b><br><b>2º Puede comenzar a comer.</b><br><b>3º Después, administre la dosis de insulina Fiasp.</b>`;
+                          recomendacionText = `<b>HAY RIESGO DE GRAVE HIPOGLUCEMIA, NO DEBE ESPERAR:</b><br><b>1º Tome zumo para frenar la hipoglucemia, si aun no lo ha hecho.</b><br><b>2º Puede comenzar a comer.</b><br><b>3º Después, administre la dosis de insulina Fiasp.</b>`;
                       }
                   }
               } else {
@@ -822,7 +822,7 @@ de glucosa debido al ejercicio o trabajo intenso, puedes tener una hipoglucemia.
                       } else if (gp15 >= 69 && gp15 <= 79) {
                           recomendacionText = `<b>LA COMIDA PESADA PUEDE TENER BAJO ÍNDICE GLUCÉMICO, NO DEBE ESPERAR:</b><br><b>1º Comience tomando el postre.</b><br><b>2º Tome el resto de la comida.</b><br><b>3º Después, administre la dosis de insulina ${insulinaNombre}.</b>`;
                       } else if (gp15 < 69) {
-                          recomendacionText = `<b>HAY RIESGO DE HIPOGLUCEMIA, NO DEBE ESPERAR:</b><br><b>1º Tome zumo para frenar la hipoglucemia, si aun no lo ha hecho.</b><br><b>2º Puede comenzar a comer.</b><br><b>3º Después, administre la dosis de insulina ${insulinaNombre}.</b>`;
+                          recomendacionText = `<b>HAY RIESGO DE GRAVE HIPOGLUCEMIA, NO DEBE ESPERAR:</b><br><b>1º Tome zumo para frenar la hipoglucemia, si aun no lo ha hecho.</b><br><b>2º Puede comenzar a comer.</b><br><b>3º Después, administre la dosis de insulina ${insulinaNombre}.</b>`;
                       }
                   } else if (tipoInsulina === 'Fiasp') {
                       if (gp15 > 180) {
@@ -832,7 +832,7 @@ de glucosa debido al ejercicio o trabajo intenso, puedes tener una hipoglucemia.
                       } else if (gp15 >= 69 && gp15 <= 99) {
                           recomendacionText = `<b>LA COMIDA PESADA PUEDE TENER BAJO ÍNDICE GLUCÉMICO, NO DEBE ESPERAR:</b><br><b>1º Comience tomando el postre.</b><br><b>2º Tome el resto de la comida.</b><br><b>3º Después, administre la dosis de insulina ${insulinaNombre}.</b>`;
                       } else if (gp15 < 69) {
-                          recomendacionText = `<b>HAY RIESGO DE HIPOGLUCEMIA, NO DEBE ESPERAR:</b><br><b>1º Tome zumo para frenar la hipoglucemia, si aun no lo ha hecho.</b><br><b>2º Puede comenzar a comer.</b><br><b>3º Después, administre la dosis de insulina ${insulinaNombre}.</b>`;
+                          recomendacionText = `<b>HAY RIESGO DE GRAVE HIPOGLUCEMIA, NO DEBE ESPERAR:</b><br><b>1º Tome zumo para frenar la hipoglucemia, si aun no lo ha hecho.</b><br><b>2º Puede comenzar a comer.</b><br><b>3º Después, administre la dosis de insulina ${insulinaNombre}.</b>`;
                       }
                   }
               }
