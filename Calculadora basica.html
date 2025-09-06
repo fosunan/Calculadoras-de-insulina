@@ -203,6 +203,15 @@
         font-size: 1.5em;
         font-weight: bold;
     }
+    /* Nuevos estilos para centrar el pie de página */
+    .footer-container {
+        text-align: center;
+    }
+    .footer-text p {
+      color: #008000;
+      font-weight: bold;
+      text-align: center;
+    }
 
     /* Media Queries para pantallas pequeñas (smartphones) */
     @media (max-width: 600px) {
@@ -253,8 +262,7 @@
 
   <div class="hospital-info">
     <h1>Hospital Universitario La Merced</h1>
-    <h2>Consulta de Diabetes</h2>
-    <p>Francisco José Osuna Navarro</p>
+   
 
     <h1 style="color: green;">CALCULADORA BÁSICA DE DOSIS DE INSULINA RÁPIDA</h1>
 
@@ -262,8 +270,9 @@
 
   <div class="disclaimer-text">
     <p>Esta herramienta tiene como objetivo ayudar para el cálculo de la dosis de insulina rápida a administrar, simplificando operaciones complejas y ayudando al paciente
-a aplicar lo aprendido durante su Educación Terapéutica en Diabetes.</p>
-    <p>El uso correcto de esta calculadora parte del conocimiento adquirido en consulta y debe formar parte de una estrategia de autocuidado supervisada.</p>
+a aplicar lo aprendido durante su Educación Terapéutica en 
+Diabetes.</p>
+    <p>No uses esta calculadora si todavía no has recibido formación en consulta. Estos cálculos son solo una parte de la estrategia de autocuidado.</p>
   </div>
 
   <hr>
@@ -286,7 +295,8 @@ a aplicar lo aprendido durante su Educación Terapéutica en Diabetes.</p>
   <input id="rapida" type="number" min="0" step="0.1" />
   <span class="error-message" id="errorRapida">Introduce un valor válido entre 3 y 100.</span>
 
-  <label for="lenta">Unidades totales de insulina lenta diaria (de media en los últimos 2 días):</label>
+  <label for="lenta">Unidades totales de insulina lenta diaria 
+(de media en los últimos 2 días):</label>
   <input id="lenta" type="number" min="0" step="0.1" />
   <span class="error-message" id="errorLenta">Introduce un valor válido entre 5 y 100.</span>
 
@@ -344,8 +354,8 @@ a aplicar lo aprendido durante su Educación Terapéutica en Diabetes.</p>
   </select>
   <div id="ajusteDeporteAntesContainer" style="display:none;">
     <p>
-      El ejercicio aumenta la sensibilidad de tu cuerpo a la insulina. Si has realizado deporte o trabajo físico antes de comer, es posible que necesites una dosis menor de insulina para evitar una hipoglucemia.
-    </p>
+      El ejercicio aumenta la sensibilidad de 
+tu cuerpo a la insulina. Si has realizado deporte o trabajo físico antes de comer, es posible que necesites una dosis menor de insulina para evitar una hipoglucemia. </p>
     <p>
       Ajuste recomendado: REDUCE la dosis entre 1 y 4 unidades. Elige el valor en función de la intensidad y la duración del ejercicio. Por ejemplo:
     </p>
@@ -353,18 +363,15 @@ a aplicar lo aprendido durante su Educación Terapéutica en Diabetes.</p>
       <p>
         Ejercicio ligero o corto (paseo, estiramientos):
         <br>
-        Reduce la dosis en 1 unidad.
-      </p>
+        Reduce la dosis en 1 unidad. </p>
       <p>
         Ejercicio moderado (correr, nadar, bicicleta): Reduce
         <br>
-        la dosis en 2 unidades.
-      </p>
+        la dosis en 2 unidades. </p>
       <p>
         Ejercicio intenso o prolongado (deportes de equipo,
         <br>
-        gimnasio): Reduce la dosis en 3 a 4 unidades.
-      </p>
+        gimnasio): Reduce la dosis en 3 a 4 unidades. </p>
     </div>
     <label for="ajusteDeporteAntes">Ajuste de dosis a REDUCIR (Unidades):</label>
     <input id="ajusteDeporteAntes" type="number" min="0.5" max="5" step="0.5" />
@@ -378,8 +385,8 @@ a aplicar lo aprendido durante su Educación Terapéutica en Diabetes.</p>
   </select>
   <div id="ajusteDeporteDespuesContainer" style="display:none;">
     <p>
-      La insulina que te inyectes ahora actuará durante las próximas 3 horas, si en este tiempo realizas un consumo extra de glucosa debido al ejercicio o trabajo intenso, puedes tener una hipoglucemia. Para evitarla, es importante reducir la dosis de insulina que vas a administrar.
-    </p>
+      La insulina que te inyectes ahora actuará durante las próximas 3 horas, si en este tiempo realizas un consumo extra 
+de glucosa debido al ejercicio o trabajo intenso, puedes tener una hipoglucemia. Para evitarla, es importante reducir la dosis de insulina que vas a administrar. </p>
     <p>
       Ajuste recomendado: REDUCE la dosis entre 1 y 4 unidades. Elige el valor en función de la intensidad y la duración del ejercicio. Por ejemplo:
     </p>
@@ -387,18 +394,15 @@ a aplicar lo aprendido durante su Educación Terapéutica en Diabetes.</p>
       <p>
         Ejercicio ligero o corto (paseo, estiramientos):
         <br>
-        Reduce la dosis en 1 unidad.
-      </p>
+        Reduce la dosis en 1 unidad. </p>
       <p>
         Ejercicio moderado (correr, nadar, bicicleta): Reduce
         <br>
-        la dosis en 2 unidades.
-      </p>
+        la dosis en 2 unidades. </p>
       <p>
         Ejercicio intenso o prolongado (deportes de equipo,
         <br>
-        gimnasio): Reduce la dosis en 3 a 4 unidades.
-      </p>
+        gimnasio): Reduce la dosis en 3 a 4 unidades. </p>
     </div>
     <label for="ajusteDeporteDespues">Ajuste de dosis a REDUCIR (Unidades):</label>
     <input id="ajusteDeporteDespues" type="number" min="0.5" max="5" step="0.5" />
@@ -433,10 +437,6 @@ a aplicar lo aprendido durante su Educación Terapéutica en Diabetes.</p>
   <pre class="pasos" id="pasos"></pre>
 
   <hr>
-
-  <a href="https://fosunan.github.io/Calculadoras-de-insulina/" style="text-decoration: none;">
-    <button style="margin-top: 1.5em;">Volver al Menú Principal</button>
-  </a>
 
   <script>
     // Función genérica para validar input y mostrar mensaje de error
@@ -477,6 +477,7 @@ a aplicar lo aprendido durante su Educación Terapéutica en Diabetes.</p>
         } else if (this.value === 'pesada') {
             document.getElementById('ajustePesadaContainer').style.display = 'block';
         }
+ 
     });
 
     document.getElementById('deporteAntes').addEventListener('change', function() {
@@ -622,7 +623,6 @@ a aplicar lo aprendido durante su Educación Terapéutica en Diabetes.</p>
           break;
       }
       pasosTexto += `   El valor del GP15 es: ${gp15.toFixed(1)} mg/dL\n\n`;
-
       let ajusteGlucemiaFlecha = 0;
       pasosTexto += `2. Ajuste de Glucemia para el cálculo de corrección:\n`;
       pasosTexto += `   Glucemia actual inicial: ${originalGlucemiaActual} mg/dL\n`;
@@ -651,7 +651,6 @@ a aplicar lo aprendido durante su Educación Terapéutica en Diabetes.</p>
       }
       glucemiaActual += ajusteGlucemiaFlecha;
       pasosTexto += `   Glucemia actual ajustada: ${glucemiaActual.toFixed(1)} mg/dL\n\n`;
-      
       // 3. Cálculo de la Dosis de Corrección (DC)
       let dosisCorreccion = 0;
       let diferenciaGlucemia = glucemiaActual - glucemiaObjetivo;
@@ -775,58 +774,66 @@ a aplicar lo aprendido durante su Educación Terapéutica en Diabetes.</p>
           document.getElementById('recomendacionesBox').style.display = 'block';
           let recomendacionText = '';
           const insulinaNombre = tipoInsulina.charAt(0).toUpperCase() + tipoInsulina.slice(1);
-
-          // Lógica para recomendaciones de insulina
-          if (comidaComposicion !== 'pesada') {
-              // Comida NO pesada
-              if (tipoInsulina === 'Novorapid' || tipoInsulina === 'Apidra' || tipoInsulina === 'Humalog') {
-                  if (gp15 > 200) {
-                      recomendacionText = `<b>1º Administre la dosis de insulina ${insulinaNombre}.</b><br><b>2º Espere 20 minutos.</b><br><b>3º Puede comenzar a comer después.</b>`;
-                  } else if (gp15 >= 100 && gp15 <= 199) {
-                      recomendacionText = `<b>1º Administre la dosis de insulina ${insulinaNombre}.</b><br><b>2º Espere 15 minutos.</b><br><b>3º Puede comenzar a comer después.</b>`;
-                  } else if (gp15 >= 70 && gp15 <= 99) {
-                      recomendacionText = `<b>1º Administre la dosis de insulina ${insulinaNombre}.</b><br><b>2º NO ESPERE.</b><br><b>3º Puede comenzar a comer.</b>`;
-                  } else if (gp15 >= 50 && gp15 <= 69) {
-                      recomendacionText = `<b>HAY RIESGO DE HIPOGLUCEMIA, NO DEBE ESPERAR:</b><br><b>1º Tome un poco de zumo (si aun no lo ha hecho), o comience tomando el postre.</b><br><b>2º Tome el resto de la comida.</b><br><b>3º Después, administre la dosis de insulina ${insulinaNombre}.</b>`;
-                  } else if (gp15 < 50) {
-                      recomendacionText = `<b>HAY RIESGO DE HIPOGLUCEMIA, NO DEBE ESPERAR:</b><br><b>1º Tome zumo para frenar la hipoglucemia, si aun no lo ha hecho.</b><br><b>2º Puede comenzar a comer.</b><br><b>3º Después, administre la dosis de insulina ${insulinaNombre}.</b>`;
-                  }
-              } else if (tipoInsulina === 'Fiasp') {
-                  if (gp15 > 200) {
-                      recomendacionText = `<b>1º Administre la dosis de insulina Fiasp.</b><br><b>2º Espere 10 minutos.</b><br><b>3º Puede comenzar a comer después.</b>`;
-                  } else if (gp15 >= 100 && gp15 <= 199) {
-                      recomendacionText = `<b>1º Administre la dosis de insulina Fiasp.</b><br><b>2º Espere 5 minutos.</b><br><b>3º Puede comenzar a comer después.</b>`;
-                  } else if (gp15 >= 70 && gp15 <= 99) {
-                      recomendacionText = `<b>1º Administre la dosis de insulina Fiasp.</b><br><b>2º NO ESPERE.</b><br><b>3º Puede comenzar a comer.</b>`;
-                  } else if (gp15 >= 50 && gp15 <= 69) {
-                      recomendacionText = `<b>HAY RIESGO DE HIPOGLUCEMIA, NO DEBE ESPERAR:</b><br><b>1º Tome un poco de zumo (si aun no lo ha hecho), o comience tomando el postre.</b><br><b>2º Tome el resto de la comida.</b><br><b>3º Después, administre la dosis de insulina Fiasp.</b>`;
-                  } else if (gp15 < 50) {
-                      recomendacionText = `<b>HAY RIESGO DE HIPOGLUCEMIA, NO DEBE ESPERAR:</b><br><b>1º Tome zumo para frenar la hipoglucemia, si aun no lo ha hecho.</b><br><b>2º Puede comenzar a comer.</b><br><b>3º Después, administre la dosis de insulina Fiasp.</b>`;
-                  }
-              }
+          // Nueva condición para glucemia > 350 mg/dL
+          if (glucemiaActual > 350) {
+              recomendacionText = `<b>Atención: Usted tiene ahora una gran hiperglucemia y no está aconsejado comer en este momento porque podría empeorar la situación.</b><br>
+                                 <b>1º Administre la dosis de insulina ${insulinaNombre}.</b><br>
+     
+                              <b>2º Revise cada 5 a 10 minutos su glucemia. Es importante controlar su nivel de glucemia.</b><br>
+                                 <b>3º Solo cuando su glucemia descienda por debajo de 300 mg/dl, podrá comenzar a comer.</b>`;
           } else {
-              // Comida ES pesada
-              if (tipoInsulina === 'Novorapid' || tipoInsulina === 'Apidra' || tipoInsulina === 'Humalog') {
-                  if (gp15 > 200) {
-                      recomendacionText = `<b>1º Administre la dosis de insulina ${insulinaNombre}.</b><br><b>2º Espere 15 minutos.</b><br><b>3º Puede comenzar a comer después.</b>`;
-                  } else if (gp15 >= 120 && gp15 <= 199) {
-                      recomendacionText = `<b>1º Administre la dosis de insulina ${insulinaNombre}.</b><br><b>2º Espere 5 minutos.</b><br><b>3º Puede comenzar a comer después.</b>`;
-                  } else if (gp15 >= 80 && gp15 <= 119) {
-                      recomendacionText = `<b>1º Administre la dosis de insulina ${insulinaNombre}.</b><br><b>2º NO ESPERE.</b><br><b>3º Puede comenzar a comer.</b>`;
-                  } else if (gp15 >= 69 && gp15 <= 79) {
-                      recomendacionText = `<b>LA COMIDA PESADA PUEDE TENER BAJO ÍNDICE GLUCÉMICO, NO DEBE ESPERAR:</b><br><b>1º Comience tomando el postre.</b><br><b>2º Tome el resto de la comida.</b><br><b>3º Después, administre la dosis de insulina ${insulinaNombre}.</b>`;
-                  } else if (gp15 < 69) {
-                      recomendacionText = `<b>HAY RIESGO DE HIPOGLUCEMIA, NO DEBE ESPERAR:</b><br><b>1º Tome zumo para frenar la hipoglucemia, si aun no lo ha hecho.</b><br><b>2º Puede comenzar a comer.</b><br><b>3º Después, administre la dosis de insulina ${insulinaNombre}.</b>`;
+              // Lógica para recomendaciones de insulina existentes (Novorapid, Apidra, Humalog, Fiasp, etc.)
+              if (comidaComposicion !== 'pesada') {
+                  if (tipoInsulina === 'Novorapid' || tipoInsulina === 'Apidra' || tipoInsulina === 'Humalog') {
+                      if (gp15 > 200) {
+                          recomendacionText = `<b>1º Administre la dosis de insulina ${insulinaNombre}.</b><br><b>2º Espere 20 minutos.</b><br><b>3º Puede comenzar a comer después.</b>`;
+                      } else if (gp15 >= 100 && gp15 <= 199) {
+                          recomendacionText = `<b>1º Administre la dosis de insulina ${insulinaNombre}.</b><br><b>2º Espere 15 minutos.</b><br><b>3º Puede comenzar a comer después.</b>`;
+                      } else if (gp15 >= 70 && gp15 <= 99) {
+                          recomendacionText = `<b>1º Administre la dosis de insulina ${insulinaNombre}.</b><br><b>2º NO ESPERE.</b><br><b>3º Puede comenzar a comer.</b>`;
+                      } else if (gp15 >= 50 && gp15 <= 69) {
+                          recomendacionText = `<b>HAY RIESGO DE HIPOGLUCEMIA, NO DEBE ESPERAR:</b><br><b>1º Tome un poco de zumo (si aun no lo ha hecho), o comience tomando el postre.</b><br><b>2º Tome el resto de la comida.</b><br><b>3º Después, administre la dosis de insulina ${insulinaNombre}.</b>`;
+                      } else if (gp15 < 50) {
+                          recomendacionText = `<b>HAY RIESGO DE HIPOGLUCEMIA, NO DEBE ESPERAR:</b><br><b>1º Tome zumo para frenar la hipoglucemia, si aun no lo ha hecho.</b><br><b>2º Puede comenzar a comer.</b><br><b>3º Después, administre la dosis de insulina ${insulinaNombre}.</b>`;
+                      }
+                  } else if (tipoInsulina === 'Fiasp') {
+                      if (gp15 > 200) {
+                          recomendacionText = `<b>1º Administre la dosis de insulina Fiasp.</b><br><b>2º Espere 10 minutos.</b><br><b>3º Puede comenzar a comer después.</b>`;
+                      } else if (gp15 >= 100 && gp15 <= 199) {
+                          recomendacionText = `<b>1º Administre la dosis de insulina Fiasp.</b><br><b>2º Espere 5 minutos.</b><br><b>3º Puede comenzar a comer después.</b>`;
+                      } else if (gp15 >= 70 && gp15 <= 99) {
+                          recomendacionText = `<b>1º Administre la dosis de insulina Fiasp.</b><br><b>2º NO ESPERE.</b><br><b>3º Puede comenzar a comer.</b>`;
+                      } else if (gp15 >= 50 && gp15 <= 69) {
+                          recomendacionText = `<b>HAY RIESGO DE HIPOGLUCEMIA, NO DEBE ESPERAR:</b><br><b>1º Tome un poco de zumo (si aun no lo ha hecho), o comience tomando el postre.</b><br><b>2º Tome el resto de la comida.</b><br><b>3º Después, administre la dosis de insulina Fiasp.</b>`;
+                      } else if (gp15 < 50) {
+                          recomendacionText = `<b>HAY RIESGO DE HIPOGLUCEMIA, NO DEBE ESPERAR:</b><br><b>1º Tome zumo para frenar la hipoglucemia, si aun no lo ha hecho.</b><br><b>2º Puede comenzar a comer.</b><br><b>3º Después, administre la dosis de insulina Fiasp.</b>`;
+                      }
                   }
-              } else if (tipoInsulina === 'Fiasp') {
-                  if (gp15 > 180) {
-                      recomendacionText = `<b>1º Administre la dosis de insulina ${insulinaNombre}.</b><br><b>2º Espere 5 minutos.</b><br><b>3º Puede comenzar a comer después.</b>`;
-                  } else if (gp15 >= 100 && gp15 <= 179) {
-                      recomendacionText = `<b>1º Administre la dosis de insulina ${insulinaNombre}.</b><br><b>2º NO ESPERE.</b><br><b>3º Puede comenzar a comer.</b>`;
-                  } else if (gp15 >= 69 && gp15 <= 99) {
-                      recomendacionText = `<b>LA COMIDA PESADA PUEDE TENER BAJO ÍNDICE GLUCÉMICO, NO DEBE ESPERAR:</b><br><b>1º Comience tomando el postre.</b><br><b>2º Tome el resto de la comida.</b><br><b>3º Después, administre la dosis de insulina ${insulinaNombre}.</b>`;
-                  } else if (gp15 < 69) {
-                      recomendacionText = `<b>HAY RIESGO DE HIPOGLUCEMIA, NO DEBE ESPERAR:</b><br><b>1º Tome zumo para frenar la hipoglucemia, si aun no lo ha hecho.</b><br><b>2º Puede comenzar a comer.</b><br><b>3º Después, administre la dosis de insulina ${insulinaNombre}.</b>`;
+              } else {
+                  // Comida ES pesada
+                  if (tipoInsulina === 'Novorapid' || tipoInsulina === 'Apidra' || tipoInsulina === 'Humalog') {
+               
+                       if (gp15 > 200) {
+                          recomendacionText = `<b>1º Administre la dosis de insulina ${insulinaNombre}.</b><br><b>2º Espere 15 minutos.</b><br><b>3º Puede comenzar a comer después.</b>`;
+                      } else if (gp15 >= 120 && gp15 <= 199) {
+                          recomendacionText = `<b>1º Administre la dosis de insulina ${insulinaNombre}.</b><br><b>2º Espere 5 minutos.</b><br><b>3º Puede comenzar a comer después.</b>`;
+                      } else if (gp15 >= 80 && gp15 <= 119) {
+                          recomendacionText = `<b>1º Administre la dosis de insulina ${insulinaNombre}.</b><br><b>2º NO ESPERE.</b><br><b>3º Puede comenzar a comer.</b>`;
+                      } else if (gp15 >= 69 && gp15 <= 79) {
+                          recomendacionText = `<b>LA COMIDA PESADA PUEDE TENER BAJO ÍNDICE GLUCÉMICO, NO DEBE ESPERAR:</b><br><b>1º Comience tomando el postre.</b><br><b>2º Tome el resto de la comida.</b><br><b>3º Después, administre la dosis de insulina ${insulinaNombre}.</b>`;
+                      } else if (gp15 < 69) {
+                          recomendacionText = `<b>HAY RIESGO DE HIPOGLUCEMIA, NO DEBE ESPERAR:</b><br><b>1º Tome zumo para frenar la hipoglucemia, si aun no lo ha hecho.</b><br><b>2º Puede comenzar a comer.</b><br><b>3º Después, administre la dosis de insulina ${insulinaNombre}.</b>`;
+                      }
+                  } else if (tipoInsulina === 'Fiasp') {
+                      if (gp15 > 180) {
+                          recomendacionText = `<b>1º Administre la dosis de insulina ${insulinaNombre}.</b><br><b>2º Espere 5 minutos.</b><br><b>3º Puede comenzar a comer después.</b>`;
+                      } else if (gp15 >= 100 && gp15 <= 179) {
+                          recomendacionText = `<b>1º Administre la dosis de insulina ${insulinaNombre}.</b><br><b>2º NO ESPERE.</b><br><b>3º Puede comenzar a comer.</b>`;
+                      } else if (gp15 >= 69 && gp15 <= 99) {
+                          recomendacionText = `<b>LA COMIDA PESADA PUEDE TENER BAJO ÍNDICE GLUCÉMICO, NO DEBE ESPERAR:</b><br><b>1º Comience tomando el postre.</b><br><b>2º Tome el resto de la comida.</b><br><b>3º Después, administre la dosis de insulina ${insulinaNombre}.</b>`;
+                      } else if (gp15 < 69) {
+                          recomendacionText = `<b>HAY RIESGO DE HIPOGLUCEMIA, NO DEBE ESPERAR:</b><br><b>1º Tome zumo para frenar la hipoglucemia, si aun no lo ha hecho.</b><br><b>2º Puede comenzar a comer.</b><br><b>3º Después, administre la dosis de insulina ${insulinaNombre}.</b>`;
+                      }
                   }
               }
           }
@@ -840,5 +847,22 @@ a aplicar lo aprendido durante su Educación Terapéutica en Diabetes.</p>
         document.getElementById('dosisHabitualComidaActual').step = "0.1";
     });
   </script>
+
+  <hr>
+  
+  <div class="footer-container">
+    <div class="footer-text">
+      <p>CREADO POR:</p>
+    </div>
+    <div class="footer-author-info">
+      <p><strong>Francisco José Osuna Navarro</strong></p>
+      <p>Enfermero de la consulta EPA de Diabetes</p>
+    </div>
+    <div class="larger-spacing"></div>
+    <a href="https://fosunan.github.io/Calculadoras-de-insulina/" style="text-decoration: none;">
+      <button>Volver al Menú Principal</button>
+    </a>
+  </div>
+
 </body>
 </html>
