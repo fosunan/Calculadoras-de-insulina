@@ -272,12 +272,14 @@
     <p>Esta herramienta tiene como objetivo ayudar para el cálculo de la dosis de insulina rápida a administrar, simplificando operaciones complejas y ayudando al paciente
 a aplicar lo aprendido durante su Educación Terapéutica en 
 Diabetes.</p>
-    <p>No uses esta calculadora si todavía no has recibido formación en consulta. Estos cálculos son solo una parte de la estrategia de autocuidado.</p>
+    <p>No uses esta calculadora si todavía 
+ no has recibido formación en consulta. Estos cálculos son solo una parte de la estrategia de autocuidado.</p>
   </div>
 
   <hr>
 
-  <p><strong>Edición en pruebas. Versión 1a.</strong></p>
+  <p><strong>Edición en pruebas.
+ Versión 1a.</strong></p>
 
   <h2>1. Insulina y glucemia</h2>
 
@@ -300,10 +302,12 @@ Diabetes.</p>
   <input id="lenta" type="number" min="0" step="0.1" />
   <span class="error-message" id="errorLenta">Introduce un valor válido entre 5 y 100.</span>
 
-  <label for="glucemiaActual">¿Cuál es la glucemia ANTES de esta comida? (mg/dL):</label>
+  <label for="glucemiaActual">¿Cuál es la glucemia ANTES de esta comida?
+ (mg/dL):</label>
   <input id="glucemiaActual" type="number" min="0" step="1" />
   <span class="error-message" id="errorGlucemiaActual">Introduce un valor válido entre 55 y 450.</span>
-  <p class="mensaje-rojo" id="emergenciaAviso" style="display:none; font-weight: bold;">¡ATENCIÓN: Valores inferiores a 55 mg/dl o superiores a 450, pueden ser una EMERGENCIA DIABETOLÓGICA. Confirme estos valores y llame a los servicios de emergencia (112) o acuda a un centro sanitario para recibir atención!</p>
+  <p class="mensaje-rojo" id="emergenciaAviso" style="display:none; font-weight: bold;">¡ATENCIÓN: Valores inferiores a 55 mg/dl o superiores a 450, pueden ser una EMERGENCIA DIABETOLÓGICA.
+ Confirme la glucemia (haga una prueba capilar para comprobar el resultado). Solucione esta situación cuanto antes o llame a los servicios de emergencia (112)</p>
 
   <label for="flechaGlucemia">Si tiene Monitorización, indica cómo está la flecha:</label>
   <select id="flechaGlucemia">
@@ -314,18 +318,20 @@ Diabetes.</p>
     <option value="descenso_rapido">Descenso rápido</option>
   </select>
 
-  <label for="glucemiaObjetivo">¿Cuál es la glucemia que quiere tener DESPUÉS de 3 horas? (mg/dL) (Por defecto 120). Por la noche, o en pacientes muy sensibles o con fragilidad, puede indicarse 150 o un valor mayor):</label>
+  <label for="glucemiaObjetivo">¿Cuál es la glucemia que quiere tener DESPUÉS de 3 horas?
+ (mg/dL) (Por defecto 120). Por la noche, o en pacientes muy sensibles o con fragilidad, puede indicarse 150 o un valor mayor):</label>
   <input id="glucemiaObjetivo" type="number" min="0" step="1" value="120" />
   <span class="error-message" id="errorGlucemiaObjetivo">Introduce un valor válido entre 100 y 180.</span>
 
   <hr>
 
-  <h2>2. Pauta habitual de insulina de esta comida:</h2>
+  <h2>2.
+ Pauta habitual de insulina de esta comida:</h2>
 
   <label for="dosisHabitualComidaActual">Pauta habitual (Unidades):</label>
   <input id="dosisHabitualComidaActual" type="number" min="0" step="0.1" />
   <p style="color: black;">Si va a aplicar una corrección de glucemia sin comer, indique de pauta “0”.</p>
-  <span class="error-message" id="errorDosisHabitualComidaActual">Introduce un valor válido entre 0 y 20.</span>
+  <span class="error-message" id="errorDosisHabitualComidaActual">Introduce un valor válido entre 0 y el total de insulina rápida diaria.</span>
 
 
   <label for="comidaComposicion">Composición de esta comida:</label>
@@ -335,13 +341,15 @@ Diabetes.</p>
     <option value="pesada">Pesada</option>
   </select>
   <div id="ajusteLivianaContainer" style="display:none;">
-    <p>Se trata de una comida con menos proteína y/o grasa de lo habitual. Para evitar una hipoglucemia, es recomendable RESTAR una dosis de insulina entre 0.5 y 3 unidades de insulina para compensarlo.</p>
+    <p>Se trata de una comida con menos proteína y/o grasa de lo habitual.
+ Para evitar una hipoglucemia, es recomendable RESTAR una dosis de insulina entre 0.5 y 3 unidades de insulina para compensarlo.</p>
     <label for="ajusteLiviana">Ajuste de dosis a REDUCIR (Unidades):</label>
     <input id="ajusteLiviana" type="number" min="0.5" max="3" step="0.5" />
     <span class="error-message" id="errorAjusteLiviana">Introduce un valor válido entre 0.5 y 3.</span>
   </div>
   <div id="ajustePesadaContainer" style="display:none;">
-    <p>Se trata de una comida con más proteína y/o grasa de lo habitual. Para evitar una hiperglucemia de forma tardía, es recomendable SUMAR una dosis de insulina entre 0.5 y 3 unidades de insulina para compensarlo.</p>
+    <p>Se trata de una comida con más proteína y/o grasa de lo habitual.
+ Para evitar una hiperglucemia de forma tardía, es recomendable SUMAR una dosis de insulina entre 0.5 y 3 unidades de insulina para compensarlo.</p>
     <label for="ajustePesada">Ajuste de dosis (Unidades):</label>
     <input id="ajustePesada" type="number" min="0.5" max="3" step="0.5" />
     <span class="error-message" id="errorAjustePesada">Introduce un valor válido entre 0.5 y 3.</span>
@@ -355,23 +363,29 @@ Diabetes.</p>
   <div id="ajusteDeporteAntesContainer" style="display:none;">
     <p>
       El ejercicio aumenta la sensibilidad de 
-tu cuerpo a la insulina. Si has realizado deporte o trabajo físico antes de comer, es posible que necesites una dosis menor de insulina para evitar una hipoglucemia. </p>
+ tu cuerpo a la insulina. Si has realizado deporte o trabajo físico antes de comer, es posible que necesites una dosis menor de insulina para evitar una hipoglucemia.
+ </p>
     <p>
-      Ajuste recomendado: REDUCE la dosis entre 1 y 4 unidades. Elige el valor en función de la intensidad y la duración del ejercicio. Por ejemplo:
+      Ajuste recomendado: REDUCE la dosis entre 1 y 4 unidades.
+ Elige el valor en función de la intensidad y la duración del ejercicio.
+ Por ejemplo:
     </p>
     <div class="ajuste-ejemplos">
       <p>
         Ejercicio ligero o corto (paseo, estiramientos):
         <br>
-        Reduce la dosis en 1 unidad. </p>
+        Reduce la dosis en 1 unidad.
+ </p>
       <p>
         Ejercicio moderado (correr, nadar, bicicleta): Reduce
         <br>
-        la dosis en 2 unidades. </p>
+        la dosis en 2 unidades.
+ </p>
       <p>
         Ejercicio intenso o prolongado (deportes de equipo,
         <br>
-        gimnasio): Reduce la dosis en 3 a 4 unidades. </p>
+        gimnasio): Reduce la dosis en 3 a 4 unidades.
+ </p>
     </div>
     <label for="ajusteDeporteAntes">Ajuste de dosis a REDUCIR (Unidades):</label>
     <input id="ajusteDeporteAntes" type="number" min="0.5" max="5" step="0.5" />
@@ -386,23 +400,30 @@ tu cuerpo a la insulina. Si has realizado deporte o trabajo físico antes de com
   <div id="ajusteDeporteDespuesContainer" style="display:none;">
     <p>
       La insulina que te inyectes ahora actuará durante las próximas 3 horas, si en este tiempo realizas un consumo extra 
-de glucosa debido al ejercicio o trabajo intenso, puedes tener una hipoglucemia. Para evitarla, es importante reducir la dosis de insulina que vas a administrar. </p>
+ de glucosa debido al ejercicio o trabajo intenso, puedes tener una hipoglucemia.
+ Para evitarla, es importante reducir la dosis de insulina que vas a administrar.
+ </p>
     <p>
-      Ajuste recomendado: REDUCE la dosis entre 1 y 4 unidades. Elige el valor en función de la intensidad y la duración del ejercicio. Por ejemplo:
+      Ajuste recomendado: REDUCE la dosis entre 1 y 4 unidades.
+ Elige el valor en función de la intensidad y la duración del ejercicio.
+ Por ejemplo:
     </p>
     <div class="ajuste-ejemplos">
       <p>
         Ejercicio ligero o corto (paseo, estiramientos):
         <br>
-        Reduce la dosis en 1 unidad. </p>
+        Reduce la dosis en 1 unidad.
+ </p>
       <p>
         Ejercicio moderado (correr, nadar, bicicleta): Reduce
         <br>
-        la dosis en 2 unidades. </p>
+        la dosis en 2 unidades.
+ </p>
       <p>
         Ejercicio intenso o prolongado (deportes de equipo,
         <br>
-        gimnasio): Reduce la dosis en 3 a 4 unidades. </p>
+        gimnasio): Reduce la dosis en 3 a 4 unidades.
+ </p>
     </div>
     <label for="ajusteDeporteDespues">Ajuste de dosis a REDUCIR (Unidades):</label>
     <input id="ajusteDeporteDespues" type="number" min="0.5" max="5" step="0.5" />
@@ -417,7 +438,8 @@ de glucosa debido al ejercicio o trabajo intenso, puedes tener una hipoglucemia.
 
   <hr>
 
-  <h2>3. Cálculo</h2>
+  <h2>3.
+ Cálculo</h2>
   <button onclick="calcularInsulina()">Calcular dosis de insulina</button>
 
   <div class="recomendaciones-box" id="recomendacionesBox" style="display:none;">
@@ -427,16 +449,34 @@ de glucosa debido al ejercicio o trabajo intenso, puedes tener una hipoglucemia.
   
   <p class="mensaje-rojo" id="avisoValidacion" style="display:none; font-weight: bold;">Revise los valores introducidos, puede que no sean válidos.</p>
   <div class="resultado" id="resultado"></div>
-  <p class="resultado-aviso" id="dosisAltaAviso" style="display:none;">⚠️ Esta es una dosis alta. Por favor, revise los datos introducidos y/o consulte con su profesional sanitario.</p>
+  <p class="resultado-aviso" id="dosisAltaAviso" style="display:none;">⚠️ Esta es una dosis alta.
+ Por favor, revise los datos introducidos y/o consulte con su profesional sanitario.</p>
   <p class="resultado-aviso" id="correccionAltaAviso" style="display:none;">⚠️ Dosis de corrección alta ¿Está seguro?</p>
-  <p class="mensaje-rojo" id="riesgoHipoglucemiaAviso" style="display:none;">⚠️ El cálculo indica una dosis de 0 unidades, lo que podría suponer un riesgo de hipoglucemia. Consulte con su profesional sanitario para ajustar su dosis. </p>
-  <p style="color: red; font-weight: bold; display: none;" id="avisoPautaHabitual">No ha registrado la dosis de insulina de esta comida. El resultado obtenido solo es útil si va a corregir su nivel actual de glucosa, pero sin comer.</p>
-  <p style="color: black; font-weight: bold;">Los resultados ofrecidos son únicamente orientativos y no sustituyen la consulta ni las indicaciones de su profesional sanitario.</p>
-  <p class="aviso-extra">Puede que esta dosis de insulina necesite algún ajuste extra como es el caso de situaciones por enfermedad (fiebre, diarrea,...), algunos tratamientos (corticoides,...), menstruación,... que pueden hacer variar estos cálculos. Consulta con tu profesional.</p>
+  <p class="mensaje-rojo" id="riesgoHipoglucemiaAviso" style="display:none;">⚠️ RIESGO DE HIPOGLUCEMIA: Puede que sea necesario tomar carbohidratos extras.</p>
+  <p style="color: red; font-weight: bold; display: none;"
+ id="avisoPautaHabitual">No ha registrado la dosis de insulina de esta comida.
+ El resultado obtenido solo es útil si va a corregir su nivel actual de glucosa, pero sin comer.</p>
+  <p style="color: black; font-weight: bold;">Compruebe los datos introducidos. Los resultados ofrecidos son únicamente orientativos y no sustituyen la consulta ni las indicaciones de su profesional sanitario.</p>
+  <p class="aviso-extra">Puede que esta dosis de insulina necesite algún ajuste extra como es el caso de situaciones por enfermedad (fiebre, diarrea,...), algunos tratamientos (corticoides,...), menstruación,... que pueden hacer variar estos cálculos.
+ Consulta con tu profesional.</p>
 
   <pre class="pasos" id="pasos"></pre>
 
-  <hr>
+    <hr>
+
+  <div class="footer-container">
+    <div class="footer-text">
+      <p>DESARROLLADO POR:</p>
+    </div>
+    <div class="footer-author-info">
+      <p><strong>Francisco José Osuna Navarro</strong></p>
+      <p>Enfermero de la consulta EPA de Diabetes</p>
+    </div>
+    <div class="larger-spacing"></div>
+    <a href="https://fosunan.github.io/Calculadoras-de-insulina/" style="text-decoration: none;">
+      <button>Volver al Menú Principal</button>
+    </a>
+  </div>
 
   <script>
     // Función genérica para validar input y mostrar mensaje de error
@@ -477,6 +517,7 @@ de glucosa debido al ejercicio o trabajo intenso, puedes tener una hipoglucemia.
         } else if (this.value === 'pesada') {
             document.getElementById('ajustePesadaContainer').style.display = 'block';
         }
+ 
  
     });
 
@@ -556,7 +597,9 @@ de glucosa debido al ejercicio o trabajo intenso, puedes tener una hipoglucemia.
       }
 
       valid = validateInput('glucemiaObjetivo', 'errorGlucemiaObjetivo', (val) => isInRange(val, 100, 180), 'Introduce un valor válido entre 100 y 180.') && valid;
-      valid = validateInput('dosisHabitualComidaActual', 'errorDosisHabitualComidaActual', (val) => isInRange(val, 0, 20), 'Introduce un valor válido entre 0 y 20.') && valid;
+      // Nueva validación para dosisHabitualComidaActual
+      const dosisHabitualMax = parseFloat(document.getElementById('rapida').value);
+      valid = validateInput('dosisHabitualComidaActual', 'errorDosisHabitualComidaActual', (val) => isInRange(val, 0, dosisHabitualMax), `Introduce un valor válido entre 0 y ${dosisHabitualMax}.`) && valid;
       // Nuevas validaciones para los campos de ajuste (ahora positivos)
       if (comidaComposicion === 'liviana') {
           valid = validateInput('ajusteLiviana', 'errorAjusteLiviana', (val) => isInRange(val, 0.5, 3), 'Introduce un valor válido entre 0.5 y 3.') && valid;
@@ -598,7 +641,8 @@ de glucosa debido al ejercicio o trabajo intenso, puedes tener una hipoglucemia.
       const originalGlucemiaActual = glucemiaActual;
       let gp15 = 0; // Nuevo parámetro GP15
       
-      pasosTexto += `1. Cálculo del nuevo parámetro GP15:\n`;
+      pasosTexto += `1.
+ Cálculo del nuevo parámetro GP15:\n`;
       pasosTexto += `   Glucemia ANTES de la comida: ${originalGlucemiaActual} mg/dL\n`;
       switch (flechaGlucemia) {
         case 'estable':
@@ -608,19 +652,19 @@ de glucosa debido al ejercicio o trabajo intenso, puedes tener una hipoglucemia.
         case 'ascenso_lento':
           gp15 = originalGlucemiaActual + 30;
           pasosTexto += `   Flecha (Ascenso lento): GP15 = Glucemia ANTES + 30 = ${originalGlucemiaActual} + 30 = ${gp15.toFixed(1)} mg/dL\n`;
-          break;
+ break;
         case 'ascenso_rapido':
           gp15 = originalGlucemiaActual + 60;
           pasosTexto += `   Flecha (Ascenso rápido): GP15 = Glucemia ANTES + 60 = ${originalGlucemiaActual} + 60 = ${gp15.toFixed(1)} mg/dL\n`;
-          break;
+ break;
         case 'descenso_lento':
           gp15 = originalGlucemiaActual - 20;
           pasosTexto += `   Flecha (Descenso lento): GP15 = Glucemia ANTES - 20 = ${originalGlucemiaActual} - 20 = ${gp15.toFixed(1)} mg/dL\n`;
-          break;
+ break;
         case 'descenso_rapido':
           gp15 = originalGlucemiaActual - 40;
           pasosTexto += `   Flecha (Descenso rápido): GP15 = Glucemia ANTES - 40 = ${originalGlucemiaActual} - 40 = ${gp15.toFixed(1)} mg/dL\n`;
-          break;
+ break;
       }
       pasosTexto += `   El valor del GP15 es: ${gp15.toFixed(1)} mg/dL\n\n`;
       let ajusteGlucemiaFlecha = 0;
@@ -678,7 +722,8 @@ de glucosa debido al ejercicio o trabajo intenso, puedes tener una hipoglucemia.
         }
       } else {
         dosisCorreccion = 0;
-        pasosTexto += `   Glucemia ajustada (${glucemiaActual.toFixed(1)}) es igual a Glucemia objetivo (${glucemiaObjetivo}). No se requiere dosis de corrección (DC = 0 U).\n\n`;
+        pasosTexto += `   Glucemia ajustada (${glucemiaActual.toFixed(1)}) es igual a Glucemia objetivo (${glucemiaObjetivo}).
+ No se requiere dosis de corrección (DC = 0 U).\n\n`;
       }
 
 
@@ -735,16 +780,20 @@ de glucosa debido al ejercicio o trabajo intenso, puedes tener una hipoglucemia.
               dosisTotal = dosisOriginal - ajusteAplicado;
               pasosTexto += `7. Ajuste por hipoglucemia de ayer:\n`;
               pasosTexto += `   Dosis Original: ${dosisOriginal.toFixed(1)} U\n`;
-              pasosTexto += `   El 10% de ajuste (${ajusteCalculado.toFixed(1)} U) es menor a 1 unidad. Se aplicará un ajuste mínimo de 1.0 U.\n`;
+              pasosTexto += `   El 10% de ajuste (${ajusteCalculado.toFixed(1)} U) es menor a 1 unidad.
+ Se aplicará un ajuste mínimo de 1.0 U.\n`;
               pasosTexto += `   Dosis con ajuste: ${dosisTotal.toFixed(1)} U\n`;
           } else {
-              dosisTotal *= 0.90; // Reducir en un 10%
-              pasosTexto += `7. Ajuste por hipoglucemia de ayer:\n`;
+              dosisTotal *= 0.90;
+              // Reducir en un 10%
+              pasosTexto += `7.
+ Ajuste por hipoglucemia de ayer:\n`;
               pasosTexto += `   Dosis Original: ${dosisOriginal.toFixed(1)} U\n`;
               pasosTexto += `   Ajuste por Hipoglucemia (-10%): ${dosisOriginal.toFixed(1)} * 0.90 = ${dosisTotal.toFixed(1)} U\n`;
           }
       } else {
-          pasosTexto += `7. Ajuste por hipoglucemia de ayer (No):\n`;
+          pasosTexto += `7.
+ Ajuste por hipoglucemia de ayer (No):\n`;
           pasosTexto += `   Sin ajuste.\n`;
       }
 
@@ -768,9 +817,12 @@ de glucosa debido al ejercicio o trabajo intenso, puedes tener una hipoglucemia.
       if (dosisTotal > (0.60 * rapida)) {
         document.getElementById('dosisAltaAviso').style.display = 'block';
       }
-
-      // Mostrar el cuadro de recomendaciones si la pauta habitual es > 0
-      if (dosisHabitual > 0) {
+      
+      // Lógica para el cuadro de recomendaciones, incluyendo el caso de 0 unidades
+      if (dosisTotal === 0) {
+        document.getElementById('recomendacionesBox').style.display = 'block';
+        document.getElementById('recomendacionesTexto').innerHTML = "<b>NO HACE FALTA ADMINISTRAR INSULINA.</b><br><b>Puede comenzar a comer.</b>";
+      } else if (dosisHabitual > 0) {
           document.getElementById('recomendacionesBox').style.display = 'block';
           let recomendacionText = '';
           const insulinaNombre = tipoInsulina.charAt(0).toUpperCase() + tipoInsulina.slice(1);
@@ -779,13 +831,15 @@ de glucosa debido al ejercicio o trabajo intenso, puedes tener una hipoglucemia.
               recomendacionText = `<b>Atención: Usted tiene ahora una gran hiperglucemia y no está aconsejado comer en este momento porque podría empeorar la situación.</b><br>
                                  <b>1º Administre la dosis de insulina ${insulinaNombre}.</b><br>
      
-                              <b>2º Revise cada 5 a 10 minutos su glucemia. Es importante controlar su nivel de glucemia.</b><br>
+                              <b>2º Revise cada 5 a 10 minutos su glucemia.
+ Es importante controlar su nivel de glucemia.</b><br>
                                  <b>3º Solo cuando su glucemia descienda por debajo de 300 mg/dl, podrá comenzar a comer.</b>`;
           } else {
               // Lógica para recomendaciones de insulina existentes (Novorapid, Apidra, Humalog, Fiasp, etc.)
               if (comidaComposicion !== 'pesada') {
                   if (tipoInsulina === 'Novorapid' || tipoInsulina === 'Apidra' || tipoInsulina === 'Humalog') {
-                      if (gp15 > 200) {
+                      if (gp15 > 
+ 200) {
                           recomendacionText = `<b>1º Administre la dosis de insulina ${insulinaNombre}.</b><br><b>2º Espere 20 minutos.</b><br><b>3º Puede comenzar a comer después.</b>`;
                       } else if (gp15 >= 100 && gp15 <= 199) {
                           recomendacionText = `<b>1º Administre la dosis de insulina ${insulinaNombre}.</b><br><b>2º Espere 15 minutos.</b><br><b>3º Puede comenzar a comer después.</b>`;
@@ -846,23 +900,7 @@ de glucosa debido al ejercicio o trabajo intenso, puedes tener una hipoglucemia.
         // Ajustar step para dosis habitual (1 decimal)
         document.getElementById('dosisHabitualComidaActual').step = "0.1";
     });
-  </script>
-
-  <hr>
-  
-  <div class="footer-container">
-    <div class="footer-text">
-      <p>DESARROLLADO POR:</p>
-    </div>
-    <div class="footer-author-info">
-      <p><strong>Francisco José Osuna Navarro</strong></p>
-      <p>Enfermero de la consulta EPA de Diabetes</p>
-    </div>
-    <div class="larger-spacing"></div>
-    <a href="https://fosunan.github.io/Calculadoras-de-insulina/" style="text-decoration: none;">
-      <button>Volver al Menú Principal</button>
-    </a>
-  </div>
+    </script>
 
 </body>
 </html>
