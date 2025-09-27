@@ -310,7 +310,7 @@
 
   <h2>1. Insulina y glucemia</h2>
 
-  <label for="rapida">¿Cuántas unidades de insulina rápida se administra cada día en total? (de media en los últimos 2 días):</label>
+  <label for="rapida">¿Cuántas unidades de insulina rápida se administró cada día en total? (de media en los últimos 2 días):</label>
   <input id="rapida" type="number" min="3" max="100" step="0.1" />
   <span class="error-message" id="errorRapida"></span>
 
@@ -355,17 +355,6 @@
     <p>      Ejemplo: No conozco la ratio. Necesito ayuda para calcularla.</p>   
   </label>
 
-
-  <label class="checkbox-inline">
-    <input type="checkbox" id="necesitoCorregirRatioMedio" onchange="toggleCorreccionRatio('Medio')" />
-    2. AJUSTE AVANZADO (Basado en Ratio y Raciones): 
-    </label>
-    <p>      Ejemplo: Conozco mi ratio para esta comida, pero no funcionó ayer. Necesito ayuda para corregirla.</p>   
-
-  </label>
-
-  <br />
-
   <div id="datosAyerContainer" style="display:none;">
     <p>Este apartado está pensado para iniciarse en los cálculos de ratio de insulina por ración. Este valor deberá ir ajustándose con el paso de los días. En su cálculo no se tiene en cuenta, composición de la comida, deporte,... </p>
     <p>El objetivo de la ratio insulina/carbohidratos es lograr que, aproximadamente tres horas después de la administración de insulina rápida, los valores de glucemia se encuentren en niveles similares a los registrados antes de la ingesta. Esto indicaría que la insulina administrada y los hidratos de carbono consumidos han ejercido un efecto compensatorio.</p>
@@ -378,24 +367,34 @@
     <input id="glucemia3hAyerNoConozco" type="number" min="55" max="450" step="1" value="120"/>
     <span class="error-message" id="errorGlucemia3hAyerNoConozco"></span>
 
-    <label for="insulinaAyer">¿Cuántas UNIDADES de insulina rápida se administra para esa comida?</label>
-     <p><strong>No incluya las unidades de corrección.</strong></p>   
+    <label for="insulinaAyer">¿Cuántas UNIDADES de insulina rápida se administró para esa comida?</label>
+     <p><strong>Importante:</strong> No incluya las unidades de corrección.</p>   
 
     <input id="insulinaAyer" type="number" min="0" step="0.1" />
     <span class="error-message" id="errorInsulinaAyer"></span>
 
-    <label for="racionesAyer">¿Cuántas RACIONES (de 10 g HC) tomó ayer para esa comida?</label>
+    <label for="racionesAyer">¿Cuántas RACIONES (de 10 g HC) tomó para esa comida?</label>
     <input id="racionesAyer" type="number" min="0" max="25" step="0.1" />
     <span class="error-message" id="errorRacionesAyer"></span>
 
     <button type="button" onclick="calcularRatioNoConozco()">Calcular ratio</button>
     <div id="resultadoRatioNoConozco" style="margin-top: 1rem; font-weight: bold; color: #004d00;"></div>
     <div class="pasos-calculo-ratio-basico" id="pasosCalculoRatioNoConozco" style="display:none;"></div>
-</div>
+  </div>
+  <br />
+
+
+  <label class="checkbox-inline">
+    <input type="checkbox" id="necesitoCorregirRatioMedio" onchange="toggleCorreccionRatio('Medio')" />
+    2. AJUSTE AVANZADO (Basado en Ratio y Raciones): 
+    </label>
+    <p>      Ejemplo: Conozco mi ratio para esta comida, pero no funcionó ayer. Necesito ayuda para corregirla.</p>   
+  </label>
+ 
 
   <div id="correccionRatioContainerMedio" style="display:none; margin-top:1rem;">
     <p><u><b>Para corregir la ratio de ayer (con ajuste avanzado), introduzca los siguientes datos:</b></u></p>
-    <p style="font-style: italic;">ATENCIÓN: Si ayer, antes o después de esta misma comida (desayuno, comida, merienda o cena) realizó deporte o trabajo físico, tenga en cuenta que estos cálculos pueden no ser exactos, debido a la dificultad para cuantificar el gasto de glucosa.</p>
+    <p style="font-style: italic;">ATENCIÓN: Si ayer, antes o después de esta misma comida (desayuno, comida, merienda o cena) realizó deporte o trabajo físico, tenga en cuenta que estos cálculos de ratio pueden ser poco exáctos, debido a la dificultad para cuantificar el gasto de glucosa por dicho motivo. Quizás sea recomendable utilizar la última ratio conocida (sin haber realizado deporte).</p>
     <br>
 
     <label for="glucemia3hAyerMedio">¿Qué glucemia tuvo ayer, 3 horas DESPUÉS de esa comida?</label>
@@ -403,7 +402,8 @@
     <span class="error-message" id="errorGlucemia3hAyerMedio"></span>
 
     <label for="racionesComidaAyerMedio">¿Cuántas RACIONES tomó ayer en esa comida? (10 g HC):</label>
-    <input id="racionesComidaAyerMedio" type="number" min="0" max="25" step="0.1" />
+    <span id="notaRacionesAyerMedio" style="color: black; font-style: italic; font-size: 0.9em;">NOTA: No se permite indicar menos de 3 raciones por comida porque pueden producirse errores en los cálculos. Si en su caso, realiza comidas con menos de 3 raciones, utilice la opción Ajustes Básicos.</span>
+    <input id="racionesComidaAyerMedio" type="number" min="3" max="25" step="0.1" />
     <span class="error-message" id="errorRacionesComidaAyerMedio"></span>
 
     <label for="ratioUtilizadaAyerMedio">¿Cuál fue la RATIO utilizada ayer? (Insulina/Ración):</label>
@@ -528,7 +528,7 @@
     <p class="resultado-aviso" id="dosisAltaAviso" style="display:none;">⚠️ Esta es una dosis alta para usted. Por favor, revise los datos introducidos.</p>
   <p class="resultado-aviso" id="correccionAltaAviso" style="display:none;">⚠️ Esta es una dosis alta para usted. Por favor, revise los datos introducidos.</p>
   <p id="riesgoHipoglucemiaAviso" style="display:none;">Mensaje de riesgo de hipoglucemia</p>
-  <p class="mensaje-rojo" id="noRegistroAviso" style="display:none;">No ha indicado el ratio y/o raciones de esta comida. El resultado obtenido solo es útil si va a corregir su nivel actual de glucosa sin comer. </p>
+  <p class="mensaje-rojo" id="noRegistroAviso" style="display:none;">No ha indicado la ratio y/o raciones de esta comida. El resultado obtenido solo es útil si va a corregir su nivel actual de glucosa sin comer. </p>
   <p class="strong-black-text">Los resultados ofrecidos son únicamente orientativos y no sustituyen la consulta ni las indicaciones de un profesional sanitario.</p>
   <p class="aviso-extra">Puede que esta dosis de insulina necesite algún ajuste extra como es el caso de situaciones por enfermedad (fiebre, diarrea,...), algunos tratamientos (corticoides,...), menstruación,... que pueden hacer variar estos cálculos. Consulta con tu profesional sanitario.</p>
   <pre class="pasos" id="pasos"></pre>
@@ -749,15 +749,19 @@
         pasosTexto += `2. No se puede calcular la Corrección unidades de ayer porque el Factor de Corrección de Insulina es cero.\n`;
       }
       
-      const insulinaNetaAyer = insulinaAyer - correccionUnidadesAyer;
-      pasosTexto += `3. Insulina neta por carbohidratos: ${insulinaAyer.toFixed(1)} (Insulina total) - ${correccionUnidadesAyer.toFixed(2)} (Corrección de glucemia) = ${insulinaNetaAyer.toFixed(2)} Unidades.\n`;
+      const insulinaNetaAyer = insulinaAyer + correccionUnidadesAyer;
+      pasosTexto += `3. Insulina neta por carbohidratos: ${insulinaAyer.toFixed(1)} (Insulina total) + ${correccionUnidadesAyer.toFixed(2)} (Corrección de glucemia) = ${insulinaNetaAyer.toFixed(2)} Unidades.\n`;
       
       if (racionesAyer > 0) {
-        nuevaRatio = insulinaNetaAyer / racionesAyer;
+        // Asegura que la nuevaRatio no sea negativa
+        nuevaRatio = Math.max(0, insulinaNetaAyer / racionesAyer);
         pasosTexto += `4. Nueva Ratio: ${insulinaNetaAyer.toFixed(2)} (Insulina neta) / ${racionesAyer.toFixed(1)} (Raciones) = ${formatRatio(nuevaRatio)} Unidades/Ración.\n`;
-        document.getElementById('resultadoRatioNoConozco').innerHTML = '<span style="color: #008000; font-weight: bold;">La ratio necesaria ayer fue de ' + formatRatio(nuevaRatio) + ' Unidades/Ración.</span>';
+        document.getElementById('ratioInput').value = formatRatio(nuevaRatio);
+        document.getElementById('resultadoRatioNoConozco').innerHTML = '<span style="color: #008000; font-weight: bold;">La ratio necesaria en esa comida fue de ' + formatRatio(nuevaRatio) + ' Unidades/Ración.</span>';
+        document.getElementById('resultadoRatioNoConozco').style.display = 'block';
       } else {
           document.getElementById('resultadoRatioNoConozco').innerHTML = '<span style="color: red; font-weight: bold;">No se puede calcular la ratio si las raciones son 0. Solo se puede aplicar el ajuste de corrección por glucemia.</span>';
+          document.getElementById('resultadoRatioNoConozco').innerHTML = '';
       }
       
       pasosContainer.innerHTML = pasosTexto.replace(/\n/g, '<br>');
@@ -777,7 +781,7 @@
       isValid = validateInput('glucemia3hAyerMedio', 'errorGlucemia3hAyerMedio', value => isWithinRange(value, 55, 450)) && isValid;
       
       const racionesComidaAyerMedio = parseFloat(document.getElementById('racionesComidaAyerMedio').value);
-      isValid = validateInput('racionesComidaAyerMedio', 'errorRacionesComidaAyerMedio', value => isWithinRange(value, 0, 25)) && isValid;
+      isValid = validateInput('racionesComidaAyerMedio', 'errorRacionesComidaAyerMedio', value => isWithinRange(value, 3, 25)) && isValid;
       
       const ratioUtilizadaAyerMedio = parseFloat(document.getElementById('ratioUtilizadaAyerMedio').value);
       isValid = validateInput('ratioUtilizadaAyerMedio', 'errorRatioUtilizadaAyerMedio', value => isWithinRange(value, 0, 10)) && isValid;
@@ -811,10 +815,12 @@
       }
       
       let insulinaTotal = (ratioUtilizadaAyerMedio * racionesComidaAyerMedio) + correccionUnidades;
-      let nuevaRatio = racionesNetas > 0 ? insulinaTotal / racionesNetas : 0;
+      // Asegura que la nuevaRatio no sea negativa
+      let nuevaRatio = racionesNetas > 0 ? Math.max(0, insulinaTotal / racionesNetas) : 0;
       if (hipoglucemiaAyerMedio === 'si') {
           // Special case for hipoglucemia, if the new ratio is higher than old, reduce it by 0.5
           if (nuevaRatio > ratioUtilizadaAyerMedio) {
+              // También asegúrate de que esta reducción no la haga negativa si ya es 0.5 o menos.
               nuevaRatio = Math.max(0, nuevaRatio - 0.5);
           }
       }
@@ -828,7 +834,8 @@
       pasosTexto += `5. Raciones totales: ${racionesComidaAyerMedio.toFixed(1)} (Raciones tomadas) + ${racionesParaHipoglucemiaMedio.toFixed(1)} (Raciones para Hipoglucemia) = ${racionesNetas.toFixed(1)} Raciones.\n`;
       pasosTexto += `6. Insulina total administrada ayer: ${ratioUtilizadaAyerMedio.toFixed(1)} (Ratio utilizada) * ${racionesComidaAyerMedio.toFixed(1)} (Raciones tomadas) + ${correccionUnidades.toFixed(2)} (Unidades de corrección) = ${insulinaTotal.toFixed(2)} Unidades.\n`;
       pasosTexto += `7. Nueva Ratio Corregida: ${insulinaTotal.toFixed(2)} (Insulina total) / ${racionesNetas.toFixed(1)} (Raciones totales) = ${nuevaRatio.toFixed(2)} Unidades/Ración.\n`;
-      document.getElementById('resultadoCorreccionRatioMedio').innerHTML = '<span style="color: #008000; font-weight: bold;">La nueva ratio corregida es de ' + nuevaRatio.toFixed(1) + ' Unidades/Ración.</span>';
+      document.getElementById('resultadoCorreccionRatioMedio').innerHTML = '<span style="color: #008000; font-weight: bold;">La ratio corregida es de ' + nuevaRatio.toFixed(1) + ' Unidades/Ración.</span>';
+      document.getElementById('resultadoCorreccionRatioMedio').style.display = 'block';
       document.getElementById('pasosCorreccionRatioMedio').innerHTML = pasosTexto.replace(/\n/g, '<br>');
       document.getElementById('pasosCorreccionRatioMedio').style.display = 'block';
 
@@ -973,39 +980,69 @@
       // 2. Dosis de corrección (ajuste por glucemia)
       let dosisCorreccion = 0;
       let flechaGlucemia = document.getElementById('flechaGlucemia').value;
-      let ajusteFlecha = 0;
+      let ajusteGlucemiaFlecha = 0; // El nuevo ajuste en mg/dL
 
-      if (glucemiaActual > glucemiaObjetivo) {
-        dosisCorreccion = (glucemiaActual - glucemiaObjetivo) / factorCorreccion;
-        pasosTexto += `2. Dosis de corrección (por glucemia): (Glucemia actual (${glucemiaActual.toFixed(0)}) - Objetivo (${glucemiaObjetivo.toFixed(0)})) / Factor de Corrección (${factorCorreccion.toFixed(2)}) = ${dosisCorreccion.toFixed(2)} Unidades.\n`;
+      // Determinar el ajuste en mg/dL basado en la flecha
+      if (flechaGlucemia === 'ascenso_lento') {
+          ajusteGlucemiaFlecha = 25;
+      } else if (flechaGlucemia === 'ascenso_rapido') {
+          ajusteGlucemiaFlecha = 50;
+      } else if (flechaGlucemia === 'descenso_lento') {
+          ajusteGlucemiaFlecha = -25;
+      } else if (flechaGlucemia === 'descenso_rapido') {
+          ajusteGlucemiaFlecha = -50;
+      }
+      
+      let diferenciaGlucemia = glucemiaActual - glucemiaObjetivo;
+      let diferenciaGlucemiaAjustada = diferenciaGlucemia + ajusteGlucemiaFlecha;
+      
+      pasosTexto += `2. Diferencia de glucemia sin ajuste: Glucemia actual (${glucemiaActual.toFixed(0)}) - Objetivo (${glucemiaObjetivo.toFixed(0)}) = ${diferenciaGlucemia.toFixed(0)} mg/dL.\n`;
 
-        // Ajuste por flecha de glucemia (solo si hay corrección al alza)
-        if (flechaGlucemia === 'ascenso_lento') {
-            ajusteFlecha = 0.5;
-        } else if (flechaGlucemia === 'ascenso_rapido') {
-            ajusteFlecha = 1;
-        }
-        if (ajusteFlecha > 0) {
-            dosisCorreccion += ajusteFlecha;
-            pasosTexto += `   Ajuste por flecha en ascenso: +${ajusteFlecha.toFixed(1)} Unidades. Dosis de corrección final: ${dosisCorreccion.toFixed(2)} Unidades.\n`;
-        }
-      } else if (glucemiaActual < glucemiaObjetivo) {
-        // Dosis de corrección negativa, se resta
-        dosisCorreccion = (glucemiaActual - glucemiaObjetivo) / factorCorreccion;
-        pasosTexto += `2. Dosis de corrección (por glucemia): (Glucemia actual (${glucemiaActual.toFixed(0)}) - Objetivo (${glucemiaObjetivo.toFixed(0)})) / Factor de Corrección (${factorCorreccion.toFixed(2)}) = ${dosisCorreccion.toFixed(2)} Unidades.\n`;
-        
-        // Ajuste por flecha de glucemia (solo si hay corrección a la baja)
-        if (flechaGlucemia === 'descenso_lento') {
-            ajusteFlecha = 0.5;
-        } else if (flechaGlucemia === 'descenso_rapido') {
-            ajusteFlecha = 1;
-        }
-        if (ajusteFlecha > 0) {
-            dosisCorreccion -= ajusteFlecha; // Restar ajuste
-            pasosTexto += `   Ajuste por flecha en descenso: -${ajusteFlecha.toFixed(1)} Unidades. Dosis de corrección final: ${dosisCorreccion.toFixed(2)} Unidades.\n`;
-        }
+      if (ajusteGlucemiaFlecha !== 0) {
+          pasosTexto += `   Ajuste por flecha (${flechaGlucemia.replace('_', ' ')}): ${ajusteGlucemiaFlecha > 0 ? '+' : ''}${ajusteGlucemiaFlecha.toFixed(0)} mg/dL.\n`;
+          pasosTexto += `   Diferencia de glucemia ajustada: ${diferenciaGlucemia.toFixed(0)} ${ajusteGlucemiaFlecha > 0 ? '+' : ''}${ajusteGlucemiaFlecha.toFixed(0)} = ${diferenciaGlucemiaAjustada.toFixed(0)} mg/dL.\n`;
       } else {
-        pasosTexto += `2. Dosis de corrección: 0 Unidades (Glucemia en el objetivo).\n`;
+          pasosTexto += `   No hay ajuste por flecha: 0 mg/dL.\n`;
+      }
+      
+      if (factorCorreccion > 0) {
+          dosisCorreccion = diferenciaGlucemiaAjustada / factorCorreccion;
+          pasosTexto += `   Dosis de corrección: ${diferenciaGlucemiaAjustada.toFixed(0)} (Dif. ajustada) / Factor de Corrección (${factorCorreccion.toFixed(2)}) = ${dosisCorreccion.toFixed(2)} Unidades.\n`;
+      } else {
+          dosisCorreccion = 0;
+          pasosTexto += `   Dosis de corrección: 0 Unidades (Factor de Corrección es cero).\n`;
+      }
+
+      // Lógica de ajuste mínimo por baja glucemia (mantenida y simplificada)
+      let ajusteMinimoBajaGlucemia = 0;
+      let valorCorteGlucemia = 0;
+      
+      if (glucemiaActual < 70) {
+          ajusteMinimoBajaGlucemia = -1.0;
+          valorCorteGlucemia = 70;
+      } else if (glucemiaActual < 100) {
+          ajusteMinimoBajaGlucemia = -0.5;
+          valorCorteGlucemia = 100;
+      }
+
+      if (ajusteMinimoBajaGlucemia < 0) {
+          // Si la dosisCorreccion calculada es *menos* negativa (más cerca de cero) 
+          // que el ajuste mínimo obligatorio, se usa el ajuste mínimo.
+          if (dosisCorreccion > ajusteMinimoBajaGlucemia) {
+              const correccionAplicada = ajusteMinimoBajaGlucemia - dosisCorreccion;
+              dosisCorreccion = ajusteMinimoBajaGlucemia;
+              pasosTexto += `   Ajuste por Glucemia Baja (<${valorCorteGlucemia} mg/dL): Se aplica un ajuste mínimo de ${ajusteMinimoBajaGlucemia.toFixed(1)} Unidades. Ajuste adicional de ${correccionAplicada.toFixed(2)} Unidades.\n`;
+          }
+      }
+
+      if (dosisCorreccion > 0) {
+          // Si la dosis de corrección da positivo después del cálculo (es decir, requiere corrección al alza)
+          // pero la glucemia actual está en o por debajo del objetivo, la corrección debe ser cero.
+          // Esto evita una corrección al alza innecesaria si la flecha positiva "fuerza" un valor positivo.
+          if (glucemiaActual <= glucemiaObjetivo) {
+              dosisCorreccion = 0;
+              pasosTexto += `   Aviso: Glucemia actual (${glucemiaActual.toFixed(0)}) no requiere corrección al alza. Dosis de corrección final: ${dosisCorreccion.toFixed(2)} Unidades.\n`;
+          }
       }
 
       // 3. Ajuste por composición de la comida
@@ -1036,12 +1073,11 @@
       } else {
           pasosTexto += `5. Ajuste por hipoglucemia (día anterior): 0 Unidades.\n`;
       }
-
       // 6. Dosis total
       const dosisTotal = dosisCarbohidratos + dosisCorreccion + ajusteComposicion + ajusteDeporte + ajusteHipoglucemia;
       const dosisRedondeada = roundToHalf(dosisTotal);
-      pasosTexto += `\n6. Dosis Total: ${dosisCarbohidratos.toFixed(2)} (HC) + ${dosisCorreccion.toFixed(2)} (Corrección) + ${ajusteComposicion.toFixed(1)} (Composición) + ${ajusteDeporte.toFixed(1)} (Deporte) + ${ajusteHipoglucemia.toFixed(1)} (Hipoglucemia) = ${dosisTotal.toFixed(2)} Unidades.\n`;
-      pasosTexto += `   Dosis Final Redondeada: ${dosisRedondeada.toFixed(1)} Unidades.\n`;
+      pasosTexto += `6. Dosis Total: ${dosisCarbohidratos.toFixed(2)} (HC) + ${dosisCorreccion.toFixed(2)} (Corrección) + ${ajusteComposicion.toFixed(1)} (Composición) + ${ajusteDeporte.toFixed(1)} (Deporte) + ${ajusteHipoglucemia.toFixed(1)} (Hipoglucemia) = ${dosisTotal.toFixed(2)} Unidades.\n`;
+      pasosTexto += `7. Dosis Final Redondeada: ${dosisRedondeada.toFixed(1)} Unidades.\n`;
 
       if (dosisRedondeada < 0) {
         document.getElementById('resultado').innerHTML = 'La dosis de insulina recomendada es: <span style="font-weight: bold; font-size: 1.5em; color: red;">0</span> Unidades.';
@@ -1051,7 +1087,7 @@
         document.getElementById('resultado').innerHTML = 'La dosis de insulina recomendada es: <span style="font-weight: bold; font-size: 1.5em; color: green;">' + dosisRedondeada.toFixed(1) + '</span> Unidades.';
 
         // Check for high dose
-        const dosisAltaThreshold = 0.5 * rapida;
+        const dosisAltaThreshold = 0.8 * rapida;
         if (dosisRedondeada > dosisAltaThreshold) {
           document.getElementById('dosisAltaAviso').style.display = 'block';
         }
@@ -1075,6 +1111,54 @@
       document.getElementById('ajustePesadaContainer').style.display = 'none';
       document.getElementById('ajusteDeporteAntesContainer').style.display = 'none';
       document.getElementById('ajusteDeporteDespuesContainer').style.display = 'none';
+
+    function calcularRatioBasico() {
+    const tipoPauta = document.getElementById('tipoPauta').value;
+    let insulinaTotal = 0;
+    let isValid = true;
+    let nuevaRatio = 0;
+
+    // Validación según el tipo de pauta
+    if (tipoPauta === 'flexible') {
+        const insulinaTotalDiariaInput = document.getElementById('insulinaTotalDiaria');
+        const insulinaTotalDiaria = parseFloat(insulinaTotalDiariaInput.value);
+
+        isValid = validateInput('insulinaTotalDiaria', 'errorInsulinaTotalDiaria', value => isWithinRange(value, 5, 100)) && isValid;
+        
+        if (isValid) {
+            insulinaTotal = insulinaTotalDiaria;
+            nuevaRatio = 500 / insulinaTotal; // Fórmula 500
+        }
+    } else if (tipoPauta === 'estricta') {
+        const boloDiarioInput = document.getElementById('boloDiario');
+        const boloDiario = parseFloat(boloDiarioInput.value);
+
+        isValid = validateInput('boloDiario', 'errorBoloDiario', value => isWithinRange(value, 5, 100)) && isValid;
+        
+        if (isValid) {
+            insulinaTotal = boloDiario;
+            nuevaRatio = 500 / insulinaTotal; // Fórmula 500
+        }
+    } else {
+        isValid = false; // Si no se ha seleccionado pauta, no es válido.
+    }
+
+    // Mostrar el resultado, volcarlo al campo principal (ratioInput) y limpiar
+    if (isValid && nuevaRatio > 0) {
+        // **VUELCA EL RESULTADO AUTOMÁTICAMENTE**
+        document.getElementById('ratioInput').value = formatRatio(nuevaRatio); 
+        
+        // **MUESTRA EL MENSAJE EN EL CUADRO VERDE**
+        document.getElementById('resultadoRatioBasico').innerHTML = '<span style="color: #008000; font-weight: bold;">La ratio necesaria en esa comida fue de ' + formatRatio(nuevaRatio) + ' Unidades/Ración.</span>';
+        document.getElementById('resultadoRatioBasico').style.display = 'block';
+    } else {
+        // Limpiar y ocultar si el cálculo es inválido
+        document.getElementById('ratioInput').value = ''; 
+        document.getElementById('resultadoRatioBasico').style.display = 'none';
+        document.getElementById('resultadoRatioBasico').innerHTML = '';
+    }
+}
+
     });
   </script>
 </body>
