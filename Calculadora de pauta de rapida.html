@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculadora Dosis de Insulina - Hospital Universitario La Merced</title>
+  <style>
+    /* Reset básico para asegurar box-sizing */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 1rem auto;
+      padding: 0 1rem;
+      background-image: url('Imagen de fondo presentación.png'); /* IMAGEN DE FONDO */
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      background-color: #f9f9f9;
+      color: #333;
+      font-size: 1em;
+    }
+    h1, h2 {
+      color: #008000;
+      font-size: 1.8em;
+      margin-top: 1.5rem;
+      margin-bottom: 0.8rem;
+    }
+    h1 {
+      text-align: center;
+      font-size: 2.2em;
+    /* This is the size for "Hospital Universitario La Merced" */
+    }
+    .hospital-info {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    .hospital-info h2 {
+        font-size: 1.5em;
+        margin-bottom: 0.2em;
+        color: #008000;
+    }
+    .hospital-info p {
+        font-size: 0.9em;
+        color: #555;
+        margin-top: 0;
+    }
+    .main-title {
+        text-align: center;
+        /* Apply same font size and color as h1 for "Hospital Universitario La Merced" */
+        font-size: 2.2em;
+        color: #008000;
+        font-weight: bold;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem; /* Adjusted for new line */
+    }
+    .subtitle-profesionales {
+        text-align: center;
+        font-size: 1.2em;
+        color: #000;
+        font-weight: bold;
+        margin-bottom: 1.5rem;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 1em;
+    }
+    input[type=number], select {
+      width: 100%;
+      max-width: 200px;
+      /* Incrementado para mejor pulsación en móvil */
+      padding: 0.5em;
+      margin-top: 0.2em;
+      margin-bottom: 0.6em;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 1em;
+    }
+    .checkbox-inline {
+      display: inline-block;
+      margin-right: 1.5em;
+      font-size: 1em;
+    }
+    .checkbox-inline input {
+      margin-right: 0.5em;
+      vertical-align: middle;
+    }
+    #datosAyerContainer, #correccionRatioContainerAvanzado {
+      background: #e6ffe6;
+      border: 1px solid #99e699;
+      padding: 1em;
+      margin-top: 0.8em;
+      border-radius: 6px;
+    }
+    button {
+      margin-top: 1.2em;
+      padding: 0.7em 1.2em;
+      background-color: #008000;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 1.1em;
+      cursor: pointer;
+      width: auto;
+      display: block;
+    }
+    button:hover {
+      background-color: #005500;
+    }
+    .resultado {
+      margin-top: 1.5em;
+      font-size: 1.3em;
+      font-weight: bold;
+      color: #004d00;
+    }
+    .resultado-aviso {
+        font-size: 0.9em;
+        color: #cc0000;
+        margin-top: 0.5em;
+        font-weight: normal;
+    }
+    .resultado-aviso.alerta-correccion {
+        color: orange;
+    }
+    pre.pasos {
+      background: #e6ffe6;
+      border: 1px solid #99e699;
+      padding: 1em;
+      white-space: pre-wrap;
+      margin-top: 1em;
+      border-radius: 6px;
+      font-size: 0.9em;
+      line-height: 1.4;
+    }
+    .pasos-correccion-ratio, .pasos-calculo-ratio-basico {
+        background: #e6ffe6;
+        border: 1px solid #99e699;
+        padding: 1em;
+        white-space: pre-wrap;
+        margin-top: 1em;
+        border-radius: 6px;
+        font-size: 0.85em;
+        line-height: 1.4;
+    }
+    .error-message {
+      color: red;
+      font-size: 0.85em;
+      margin-top: -0.4em;
+      margin-bottom: 0.4em;
+      display: none;
+    }
+    .logo-container {
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+    .logo-container img {
+        max-width: 400px;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+    }
+    .disclaimer-text p {
+        margin-bottom: 0.5em;
+    }
+    .aviso-extra {
+        font-size: 0.95em;
+        color: #555;
+        margin-top: 1em;
+        line-height: 1.4;
+    }
+    .mensaje-rojo {
+        color: red;
+        font-weight: bold;
+        margin-top: 0.8em;
+    }
+    /* Estilo para el mensaje de corrección alta en rojo y negrita */
+    #correccionAltaAviso {
+        color: red;
+        font-weight: bold;
+    }
+    .input-error {
+        border-color: red !important;
+    }
+
+    /* Media Queries para pantallas pequeñas (smartphones) */
+    @media (max-width: 600px) {
+      body {
+        font-size: 1.1em;
+        padding: 0 0.8rem;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+      h2 {
+        font-size: 1.4em;
+      }
+      label, input[type=number], select {
+        font-size: 1.1em;
+      }
+      input[type=number], select {
+        max-width: 100%;
+        padding: 0.6em;
+      }
+      button {
+        font-size: 1.1em;
+        width: 100%;
+        padding: 0.8em 1em;
+      }
+      .resultado {
+        font-size: 1.2em;
+      }
+      pre.pasos, .pasos-correccion-ratio, .pasos-calculo-ratio-basico {
+        font-size: 0.95em;
+      }
+      .checkbox-inline {
+        display: block;
+        margin-right: 0;
+        margin-bottom: 0.5em;
+      }
+      .logo-container img {
+        max-width: 150px;
+      }
+  </style>
+</head>
+<body>
+
+  <div class="logo-container">
+    <img src="COLOR_3_TINTAS.jpg" alt="Logo Área de Gestión Sanitaria de Osuna" />
+  </div>
+
+  <div class="hospital-info">
+    <h1>Hospital Universitario La Merced</h1>
+  
+    <h1 style="color: green;">CALCULADORA CORRECTORA DE PAUTA DE INSULINA RÁPIDA</h1>
+    <h4 class="subtitle-profesionales">SOLO PARA PROFESIONALES SANITARIOS</h4>
+  </div>
+
+  <div class="disclaimer-text">
+    <p>Esta herramienta ayuda en el cálculo de una pauta de insulina rápida ajustada a las necesidades actuales del usuario, basándose en los controles de los últimos 3 días.</p>
+    <p>El funcionamiento de la calculadora se basa en el principio de que las glucemias pre y postprandiales (a las 3 horas) deben ser lo más similares posible. Esta estabilidad sugiere que la cantidad de carbohidratos ingeridos guarda un equilibrio adecuado con la dosis de insulina rápida administrada para esa comida.</p>
+    <p>Es importante tener en cuenta que esta calculadora no realiza ajustes ni correcciones relacionadas con factores individuales como la actividad física, el estrés, o la composición específica de los alimentos. Por eso, la exactitud de estos resultados va a depender de que la ingesta de carbohidratos y el grado de actividad sea similar entre un día y los demás.</p>
+    <p>
+        El resultado representa una "Pauta de Referencia" para la dosis de insulina rápida. Esta Pauta de Referencia tiene dos usos principales:
+        <ol>
+            <li>
+                Cálculo con Herramienta Digital: Se puede introducir en la Calculadora Básica (desde web, móvil u otro dispositivo) para que, al combinarla con el dato de la glucemia actual determine la dosis final de insulina rápida a administrar antes de la comida.
+            </li>
+                <p></p>
+            <li>
+                Pauta escrita de Corrección: Alternativamente, si el usuario no dispone de un dispositivo para acceder a la calculadora web o tiene dificultades con la tecnología, es fundamental entregarle una Pauta de Corrección escrita basada en esta referencia, que pueda aplicar manualmente para ajustar su dosis.
+            </li>
+        </ol>
+    </p>
+    </div>
+
+  <hr>
+
+  <p><strong>Edición en pruebas. Versión 1a.</strong></p>
+
+  <h2>1. Cantidad total de insulina diaria</h2>
+
+  <label for="rapida">Unidades totales de insulina RÁPIDA diaria (de media en los últimos 3 días):</label>
+  <input id="rapida" type="number" min="0" step="0.1" />
+  <span class="error-message" id="errorRapida">Introduce un valor válido y no negativo.</span>
+
+  <label for="lenta">Unidades totales de insulina LENTA diaria (de media en los últimos 3 días):</label>
+  <input id="lenta" type="number" min="0" step="0.1" />
+  <span class="error-message" id="errorLenta">Introduce un valor válido y no negativo.</span>
+
+  <h2>2. Glucemia meta u objetivo</h2>
+    <label>¿Cuál es la glucemia que quiere tener DESPUÉS de 3 horas? (mg/dL) (Por defecto 120). </label> 
+    <p>Por la noche, o en personas muy sensibles o con fragilidad, puede indicarse 150 o un valor mayor):</p>
+
+    <input id="glucemiaMeta" type="number" min="0" step="1" value="120" />
+    <span class="error-message" id="errorGlucemiaMeta">Introduce un valor válido y no negativo.</span>
+
+  <h2>3. Controles glucémicos de varios días en una comida</h2>
+    <p><label>Indique los controles de la misma comida en tres días seguidos. No mezcle comidas distintas.</label></p>
+    <p>Ejemplo: Los tres últimos desayunos, los tres últimos almuerzos, las 3 últimas cenas,...</p>
+  <hr>
+  
+
+  <h3>3.1 ¿Qué glucemias ha tenido el día 1?</h3>
+
+  <label for="glucemiaAnterior1">Glucemia ANTERIOR a esta comida (mg/dL):</label>
+  <input id="glucemiaAnterior1" type="number" min="0" step="1" />
+  <span class="error-message" id="errorGlucemiaAnterior1">Introduce un valor válidos entre 55 y 450.</span>
+
+  <label for="glucemiaPosterior1">Glucemia POSTERIOR a esta comida (mg/dL):</label>
+  <input id="glucemiaPosterior1" type="number" min="0" step="1" />
+  <span class="error-message" id="errorGlucemiaPosterior1">Introduce un valor válidos entre 55 y 450.</span>
+
+  <label for="dosis1">DOSIS de insulina total administrada:</label>
+      <p>Incluir la pauta y el ajuste de corrección aplicado.</p>
+  <input id="dosis1" type="number" min="0" step="1" />
+  <span class="error-message" id="errorDosis1">Introduce un valor válido entre 1 y 50.</span>
+  <hr>
+
+  
+  <h3>3.2 ¿Qué glucemias ha tenido el día 2?</h3>
+
+  <label for="glucemiaAnterior2">Glucemia ANTERIOR a esta comida (mg/dL):</label>
+  <input id="glucemiaAnterior2" type="number" min="0" step="1" />
+  <span class="error-message" id="errorGlucemiaAnterior2">Introduce un valor válidos entre 55 y 450.</span>
+
+  <label for="glucemiaPosterior2">Glucemia POSTERIOR a esta comida (mg/dL):</label>
+  <input id="glucemiaPosterior2" type="number" min="0" step="1" />
+  <span class="error-message" id="errorGlucemiaPosterior2">Introduce un valor válidos entre 55 y 450.</span>
+
+  <label for="dosis2">DOSIS de insulina total administrada:</label>
+       <p>Incluir la pauta y el ajuste de corrección aplicado.</p>  <input id="dosis2" type="number" min="0" step="1" />
+  <span class="error-message" id="errorDosis2">Introduce un valor válido entre 1 y 50.</span>
+  <hr>
+
+  <h3>3.3 ¿Qué glucemias ha tenido el día 3?</h3>
+
+  <label for="glucemiaAnterior3">Glucemia ANTERIOR a esta comida (mg/dL):</label>
+  <input id="glucemiaAnterior3" type="number" min="0" step="1" />
+  <span class="error-message" id="errorGlucemiaAnterior3">Introduce un valor válido entre 55 y 450.</span>
+
+  <label for="glucemiaPosterior3">Glucemia POSTERIOR a esta comida (mg/dL):</label>
+  <input id="glucemiaPosterior3" type="number" min="0" step="1" />
+  <span class="error-message" id="errorGlucemiaPosterior3">Introduce un valor válido entre 55 y 450.</span>
+
+  <label for="dosis3">DOSIS de insulina total administrada:</label>
+       <p>Incluir la pauta y el ajuste de corrección aplicado.</p>
+  <input id="dosis3" type="number" min="0" step="1" />
+  <span class="error-message" id="errorDosis3">Introduce un valor válido entre 1 y 50.</span>  <hr>
+
+
+  <h2>4. Cálculos promedios</h2>
+  <button onclick="calcularInsulina()">Calcular pauta de insulina</button>
+
+  <div class="resultado">Dosis Total de Insulina (DTI): <span id="valorDTI">—</span></div>
+  <div class="resultado">Factor de Sensibilidad (FS): <span id="valorFS">—</span></div>
+  <div class="resultado">Dosis de Insulina Rápida Promedio: <span id="valorDRP">—</span></div>
+  <div class="resultado">Glucemia Anterior Promedio: <span id="valorGAP">—</span></div>
+  <div class="resultado">Glucemia Posterior Promedio: <span id="valorGPP">—</span></div>
+
+  <pre class="pasos" id="pasos"></pre>
+
+
+  <hr>
+
+  <h2>5. Cálculos de la pauta de insulina rápida</h2>
+
+  <div class="resultado" id="resultadoReal">Pauta de insulina rápida aplicada: <span id="valorPautaReal"></span></div>
+  <div class="resultado" id="resultadoRecomendada">Pauta de insulina rápida recomendada: <span id="valorPautaRecomendada"></span></div>
+  <p> </p>
+  <span style="font-weight: bold; color: red;">⚠️ ATENCIÓN:</span><span style="font-weight: bold; color: black;"> Esta PAUTA no representa la DOSIS final de insulina rápida que necesita para esta comida (no contiene los ajustes necesarios).</span>
+  <p>La pauta es solo una parte del cálculo, al que deben añadirse otros ajustes importantes, compensaciones según el tipo de comida, o correcciones por hiperglucemia o hipoglucemia, actividad, entre otros factores.</p> 
+  <pre class="pasos" id="pasosSeccion5"></pre>
+
+  <hr class="linea">
+    
+  <h2>6. Pauta de corrección propuesta</h2>
+  <div id="seccion6-mensaje-intro"></div> 
+  <p> </p>
+  <div id="contenedorPautaReferencia" style="display: none;">
+    <p> </p> 
+    <label for="pautaReferencia" style="font-weight: bold;">Indique la pauta a utilizar (Unidades):</label> 
+    <input id="pautaReferencia" type="number" min="0" step="1" /> 
+    <span class="error-message" id="errorPautaReferencia"></span>
+    <div class="resultado-aviso" id="avisoPautaReferencia"></div>
+  </div>
+  <p></p>
+  <button id="btnCalcularCorreccion" type="button" class="btn-calcular" style="display: none;">Calcular pauta de corrección</button>
+  <p></p>
+  <div class="pasos-detalle" id="pasosSeccion6">
+    <div class="pasos-detalle" id="pasosSeccion6">
+    </div>
+  </div> <hr class="linea">
+    <p> </p>
+    <p> </p>
+
+      <div style="text-align: center;">
+      <p style="font-weight: bold; color: green;">DESARROLLADO POR:</p>
+      <p style="font-weight: bold; color: black; margin;">Francisco José Osuna Navarro</p>
+      <p style="margin:">Enfermero de la consulta EPA de Diabetes</p>
+    </div>
+
+    <div class="larger-spacing"></div>
+    <a href="https://fosunan.github.io/Calculadoras-de-insulina/" style="text-decoration: none;">
+      <button>Volver al Menú Principal</button>
+    </a>
+  </div>
+<script>
+    // Mapeo de IDs de campo con sus IDs de error
+    const errorMap = {
+        'rapida': 'errorRapida', 
+        'lenta': 'errorLenta',
+        'glucemiaMeta': 'errorGlucemiaMeta',
+        'glucemiaAnterior1': 'errorGlucemiaAnterior1',
+        'glucemiaPosterior1': 'errorGlucemiaPosterior1',
+        'dosis1': 'errorDosis1',
+        'glucemiaAnterior2': 'errorGlucemiaAnterior2',
+        'glucemiaPosterior2': 'errorGlucemiaPosterior2',
+        'dosis2': 'errorDosis2',
+        'glucemiaAnterior3': 'errorGlucemiaAnterior3',
+        'glucemiaPosterior3': 'errorGlucemiaPosterior3',
+        'dosis3': 'errorDosis3',
+        'pautaReferencia': 'errorPautaReferencia',
+    };
+
+    /**
+     * Función auxiliar para obtener un valor y validar rango, obligatoriedad y formato.
+     */
+    function obtenerValor(id, nombreCampo, min, max, canBeEmpty) {
+        const input = document.getElementById(id);
+        if (!input) {
+            console.error(`Campo de entrada no encontrado con ID: ${id}`);
+            return null;
+        }
+        
+        const valueStr = input.value.trim();
+        const currentErrorElement = document.getElementById(errorMap[id]);
+
+        // Limpieza de estado previo
+        input.classList.remove('input-error');
+        if (currentErrorElement) currentErrorElement.style.display = 'none';
+
+        // 1. Manejar campo en blanco
+        if (valueStr === '') {
+            if (canBeEmpty) {
+                return null; // Opcional y vacío: retorna null sin error.
+            } else {
+                // Obligatorio y vacío: muestra error.
+                input.classList.add('input-error');
+                if (currentErrorElement) {
+                    currentErrorElement.textContent = `Introduce un valor válido entre ${min} y ${max}.`;
+                    currentErrorElement.style.display = 'block';
+                }
+                return null;
+            }
+        }
+        
+        // 2. Manejar valor numérico
+        const valor = parseFloat(valueStr);
+
+        if (isNaN(valor)) {
+            input.classList.add('input-error');
+            if (currentErrorElement) {
+                currentErrorElement.textContent = `Introduce un valor numérico válido.`;
+                currentErrorElement.style.display = 'block';
+            }
+            return null;
+        }
+
+        // 3. Manejar rango
+        if (valor < min || valor > max) {
+            input.classList.add('input-error');
+            if (currentErrorElement) {
+                currentErrorElement.textContent = `Introduce un valor válido entre ${min} y ${max}.`;
+                currentErrorElement.style.display = 'block';
+            }
+            return null;
+        }
+
+        return valor;
+    }
+    /**
+     * Función para calcular el Coeficiente de Variación (CV).
+     * @param {number[]} data - Array de números (glucemias o dosis).
+     * @param {number} average - La media (promedio) de los datos.
+     * @returns {number|null} El Coeficiente de Variación como decimal (ej. 0.45) o null si el promedio es 0.
+     */
+    function calcularCV(data, average) {
+        if (average === 0) return null;
+
+        // 1. Calcular la Desviación Estándar (muestra: n-1)
+        const n = data.length;
+        if (n < 2) return null; // Necesitamos al menos dos puntos para el cálculo.
+
+        // Suma de los cuadrados de las diferencias con la media
+        const squaredDifferences = data.map(value => Math.pow(value - average, 2));
+        const sumOfSquaredDifferences = squaredDifferences.reduce((sum, current) => sum + current, 0);
+
+        // Varianza (sumar / (n - 1))
+        const variance = sumOfSquaredDifferences / (n - 1);
+
+        // Desviación Estándar (raíz cuadrada de la varianza)
+        const standardDeviation = Math.sqrt(variance);
+
+        // 2. Coeficiente de Variación (CV = DS / Media)
+        const cv = standardDeviation / average;
+        return cv;
+    }
+        function calcularInsulina() {
+          const pasosElemento = document.getElementById('pasos');
+        let pasosDetalle = "### CÁLCULOS PROMEDIOS:\n\n";
+        limpiarResultadoElementos();
+        function limpiarResultadoElementos() {
+            document.getElementById('valorDTI').textContent = '—';
+            document.getElementById('valorFS').textContent = '—';
+            document.getElementById('valorDRP').textContent = '—';
+            document.getElementById('valorGAP').textContent = '—';
+            document.getElementById('valorGPP').textContent = '—';
+            // Eliminar cualquier aviso de CV previo
+            const oldAvisos = document.querySelectorAll('.cv-aviso-parent');
+            oldAvisos.forEach(el => el.remove());
+        
+            document.getElementById('valorPautaReal').textContent = '—';
+            // Lógica CORREGIDA para eliminar el aviso de variación del 60% (reseteando el DIV padre)
+            const resultadoRecomendadaElement = document.getElementById('resultadoRecomendada');
+            resultadoRecomendadaElement.innerHTML = 'Pauta de insulina rápida recomendada: <span id="valorPautaRecomendada">—</span>';
+            document.getElementById('pasosSeccion5').textContent = '';
+            document.getElementById('pasos').textContent = '';
+            document.getElementById('contenedorPautaReferencia').style.display = 'none';    
+            document.getElementById('btnCalcularCorreccion').style.display = 'none';           
+        }
+
+        // --- 1. OBTENCIÓN Y VALIDACIÓN DE DATOS (12 campos obligatorios) ---
+        const rapida = obtenerValor('rapida', 'Insulina RÁPIDA', 3, 100, false);
+        const lenta = obtenerValor('lenta', 'Insulina LENTA', 5, 100, false);
+        const glucemiaMeta = obtenerValor('glucemiaMeta', 'Glucemia Meta', 100, 180, false);
+        let rangoMinimoPauta = 0;
+        let rangoMaximoPauta = 50; 
+        const gA1 = obtenerValor('glucemiaAnterior1', 'Glucemia Anterior Día 1', 55, 450, false);
+        const gP1 = obtenerValor('glucemiaPosterior1', 'Glucemia Posterior Día 1', 55, 450, false);
+        const d1 = obtenerValor('dosis1', 'Dosis Día 1', 1, 50, false);
+        const gA2 = obtenerValor('glucemiaAnterior2', 'Glucemia Anterior Día 2', 55, 450, false);
+        const gP2 = obtenerValor('glucemiaPosterior2', 'Glucemia Posterior Día 2', 55, 450, false);
+        const d2 = obtenerValor('dosis2', 'Dosis Día 2', 1, 50, false);
+        const gA3 = obtenerValor('glucemiaAnterior3', 'Glucemia Anterior Día 3', 55, 450, false);
+        const gP3 = obtenerValor('glucemiaPosterior3', 'Glucemia Posterior Día 3', 55, 450, false);
+        const d3 = obtenerValor('dosis3', 'Dosis Día 3', 1, 50, false);
+        const pautaReferencia = obtenerValor('pautaReferencia', 'Pauta de Referencia', 0, 50, false);
+
+        // Comprobación de errores
+        const errorEnObligatorios = rapida === null || lenta === null || glucemiaMeta === null ||
+                                    gA1 === null || gP1 === null || d1 === null ||
+                                    gA2 === null || gP2 === null || d2 === null ||
+                                    gA3 === null || gP3 === null || d3 === null;
+        
+        if (errorEnObligatorios) {
+            pasosElemento.textContent = "¡ERROR! Por favor, revisa los 12 campos OBLIGATORIOS en rojo para continuar (Secciones 1, 2 y 3).";
+            limpiarResultadoElementos();
+            return;
+        }
+
+
+        // --- 2. CÁLCULOS PRINCIPALES (Sección 4) ---
+        
+        // PASO 1. Dosis total de insulina (DTI)
+        const dosisTotalInsulina = rapida + lenta;
+        pasosDetalle += "PASO 1. Dosis Total de Insulina (DTI)\n";
+        pasosDetalle += `  Fórmula: DTI = Insulina RÁPIDA (${rapida.toFixed(1)}) + Insulina LENTA (${lenta.toFixed(1)})\n`;
+        pasosDetalle += `  Resultado: ${dosisTotalInsulina.toFixed(1)} Unidades\n\n`;
+
+        // PASO 2. Factor de Sensibilidad (FS)
+        let factorSensibilidad;
+        pasosDetalle += "PASO 2. Cálculo del Factor de Sensibilidad (FS)\n";
+        
+        if (dosisTotalInsulina === 0) {
+            factorSensibilidad = null; 
+            pasosDetalle += "  Fórmula: FS = 1800 / DTI\n";
+            pasosDetalle += "  Resultado: ERROR, la DTI es 0. No se puede calcular el Factor de Sensibilidad.\n\n";
+        } else {
+            factorSensibilidad = 1800 / dosisTotalInsulina;
+            pasosDetalle += `  Fórmula: FS = 1800 / DTI (${dosisTotalInsulina.toFixed(1)})\n`;
+            pasosDetalle += `  Resultado: ${factorSensibilidad.toFixed(1)} mg/dL por Unidad\n\n`;
+        }
+
+        // PASO 3. Dosis Rápida Total Promedio (DRTP)
+        const dosisTotales = [d1, d2, d3];
+        const sumaDosis = dosisTotales.reduce((sum, current) => sum + current, 0);
+        const dosisRapidaPromedio = sumaDosis / dosisTotales.length; 
+        
+        pasosDetalle += "PASO 3. Dosis de Insulina Rápida Promedio\n";
+        pasosDetalle += `  Fórmula: Dosis de insulina rápida promedio = Total insulina rápida administrada (${sumaDosis.toFixed(1)}) / 3 Días\n`;
+        pasosDetalle += `  Resultado: ${dosisRapidaPromedio.toFixed(1)} Unidades\n\n`;
+
+        // PASO 4. Glucemia Anterior Promedio (GAP) y Glucemia Posterior Promedio (GPP)
+        const gAnteriorValues = [gA1, gA2, gA3];
+        const gPosteriorValues = [gP1, gP2, gP3];
+        const sumaGAP = gAnteriorValues.reduce((sum, current) => sum + current, 0);
+        const sumaGPP = gPosteriorValues.reduce((sum, current) => sum + current, 0);
+        const gap = sumaGAP / gAnteriorValues.length;
+        const gpp = sumaGPP / gPosteriorValues.length;
+
+        pasosDetalle += "PASO 4. Glucemia Anterior Promedio\n";
+        pasosDetalle += `  Fórmula: Glucemia anterior promedio = Total glucemias anteriores (${sumaGAP.toFixed(0)}) / 3 Días\n`;
+        pasosDetalle += `  Resultado GAP: ${gap.toFixed(0)} mg/dL\n\n`;
+
+        pasosDetalle += "PASO 5. Glucemia Posterior Promedio\n";
+        pasosDetalle += `  Fórmula: Glucemia posterior promedio = Total glucemias posteriores (${sumaGPP.toFixed(0)}) / 3 Días\n`;
+        pasosDetalle += `  Resultado GPP: ${gpp.toFixed(0)} mg/dL\n\n`;
+
+        // --- CÁLCULO Y VERIFICACIÓN DEL COEFICIENTE DE VARIACIÓN (CV) ---
+        
+        const cvDosis = calcularCV(dosisTotales, dosisRapidaPromedio);
+        const cvGlucemiaAnterior = calcularCV(gAnteriorValues, gap);
+        const cvGlucemiaPosterior = calcularCV(gPosteriorValues, gpp);
+        const cvUmbral = 0.50; // 50%
+
+        let cvAvisoMensajes = '';
+        let avisoPresente = false;
+
+        const construirAviso = (campo, cvValor) => {
+            if (cvValor !== null && cvValor >= cvUmbral) {
+                avisoPresente = true;
+                const cvPocentaje = (cvValor * 100).toFixed(1);
+                return `<div class="resultado-aviso cv-aviso" style="color: red; font-size: 1.0em; margin-bottom: 0.5em;">
+                            ⚠️ **AVISO POR COEFICIENTE DE VARIACIÓN DE ${campo} ALTO:** El Coeficiente de Variación (${cvPocentaje}%) está fuera del rango adecuado (Máximo aconsejable 36%).
+                            Los datos son muy dispersos y esto podría dar errores en el cálculo de la pauta. **Revise la consistencia de los datos o pregunte al usuario a qué ha podido ser debida la variabilidad de los últimos días.**
+                        </div>`;
+            }
+            return '';
+        };
+
+        cvAvisoMensajes += construirAviso("DOSIS", cvDosis);
+        cvAvisoMensajes += construirAviso("GLUCEMIA ANTERIOR", cvGlucemiaAnterior);
+        cvAvisoMensajes += construirAviso("GLUCEMIA POSTERIOR", cvGlucemiaPosterior);
+
+        // --- 3. CÁLCULO DE LA PAUTA DE INSULINA RÁPIDA (Sección 5 - 6 Pasos) ---
+
+        const pasosSeccion5Elemento = document.getElementById('pasosSeccion5');
+        let pasosDetalleSeccion5 = "### CÁLCULOS DE AJUSTE DE PAUTA DE INSULINA RÁPIDA:\n\n";
+
+        const pautaAplicadaReal = dosisRapidaPromedio;
+        let piraAplicada = null; // PIRA (Aplicada)
+        let pautaRecomendada = null; // PIRR (Recomendada)
+        
+        let dosisCorreccionAnterior = null;
+        let dosisCorreccionPosterior = null;
+        
+        // PASO 1. Corrección de glucemia ANTERIOR = GAP - GM
+        const correccionGlucemiaAnterior = gap - glucemiaMeta;
+        pasosDetalleSeccion5 += "PASO 1. Corrección de glucemia anterior\n";
+        pasosDetalleSeccion5 += `  Fórmula: Corrección de glucemia anterior = Glucemia anterior promedio (${gap.toFixed(0)}) - Glucemia objetivo (${glucemiaMeta.toFixed(0)}) \n`;
+        pasosDetalleSeccion5 += `  Resultado: ${correccionGlucemiaAnterior.toFixed(0)} mg/dL\n\n`;
+
+        // PASO 2. Ajuste de Corrección ANTERIOR (DC Anterior)
+        if (factorSensibilidad !== null && factorSensibilidad !== 0) {
+            dosisCorreccionAnterior = correccionGlucemiaAnterior / factorSensibilidad; 
+            pasosDetalleSeccion5 += "PASO 2. Ajuste de corrección anterior\n";
+            pasosDetalleSeccion5 += `  Fórmula: Ajuste de corrección anterior = Corrección de glucemia anterior (${correccionGlucemiaAnterior.toFixed(0)}) mg/dL / Factor de sensibilidad (${factorSensibilidad.toFixed(1)}) \n`;
+            pasosDetalleSeccion5 += `  Resultado: ${dosisCorreccionAnterior.toFixed(1)} Unidades\n\n`;
+        } else {
+            pasosDetalleSeccion5 += "PASO 2. Ajuste de corrección anterior: No se pudo calcular (FS=0).\n\n";
+        }
+
+        // PASO 3. Corrección de glucemia POSTERIOR = GPP - GAP
+        const correccionGlucemiaPosterior = gpp - gap;
+        pasosDetalleSeccion5 += "PASO 3. Corrección de glucemia posterior\n";
+        pasosDetalleSeccion5 += `  Fórmula: Corrección de glucemia posterior = Glucemia posterior promedio (${gpp.toFixed(0)}) - Glucemia anterior promedio (${gap.toFixed(0)}) \n`;
+        pasosDetalleSeccion5 += `  Resultado: ${correccionGlucemiaPosterior.toFixed(0)} mg/dL\n\n`;
+
+        // PASO 4. Ajuste de Corrección POSTERIOR (DC Posterior)
+        if (factorSensibilidad !== null && factorSensibilidad !== 0) {
+            dosisCorreccionPosterior = correccionGlucemiaPosterior / factorSensibilidad;
+            pasosDetalleSeccion5 += "PASO 4. Ajuste de corrección posterior\n";
+            pasosDetalleSeccion5 += `  Fórmula: Ajuste de corrección posterior = Corrección de glucemia posterior (${correccionGlucemiaPosterior.toFixed(0)}) mg/dL / Factor de sensibilidad (${factorSensibilidad.toFixed(1)}) \n`;
+            pasosDetalleSeccion5 += `  Resultado: ${dosisCorreccionPosterior.toFixed(1)} Unidades\n\n`;
+        } else {
+            pasosDetalleSeccion5 += "PASO 4. Ajuste de corrección posterior: No se pudo calcular (FS=0).\n\n";
+        }
+
+        // 🟢 PASO 5. Pauta de Insulina Rápida Aplicada (PIRA) - USA AJUSTE ANTERIOR
+        if (dosisCorreccionAnterior !== null) {
+            piraAplicada = dosisRapidaPromedio - dosisCorreccionAnterior;
+
+            pasosDetalleSeccion5 += "PASO 5. Pauta de Insulina Rápida Aplicada (PIRA)\n";
+            pasosDetalleSeccion5 += `  Fórmula: PIRA = Dosis de insulina rápida promedio (${dosisRapidaPromedio.toFixed(1)}) - Ajuste de corrección anterior (${dosisCorreccionAnterior.toFixed(1)}) \n`;
+            
+            if (piraAplicada < 0) {
+                piraAplicada = 0;
+                pasosDetalleSeccion5 += `  PIRA se ajusta a 0, ya que el resultado fue negativo.\n`;
+            }
+            
+            pasosDetalleSeccion5 += `  Resultado: ${piraAplicada.toFixed(1)} Unidades\n\n`;
+        } else {
+            pasosDetalleSeccion5 += "PASO 5. Pauta de Insulina Rápida Aplicada (PIRA): No se pudo calcular.\n\n";
+        }
+
+        // 🟢 PASO 6. Pauta de Insulina Rápida Recomendada (PIRR) - USA AJUSTE POSTERIOR
+        if (piraAplicada !== null && dosisCorreccionPosterior !== null) {
+        pautaRecomendada = dosisRapidaPromedio + dosisCorreccionPosterior; 
+        pasosDetalleSeccion5 += "PASO 6. Pauta de Insulina Rápida Recomendada (PIRR)\n";
+        pasosDetalleSeccion5 += `  Fórmula: PIRR = Dosis de insulina rápida promedio (${dosisRapidaPromedio.toFixed(1)}) + Ajuste de corrección posterior (${dosisCorreccionPosterior.toFixed(1)}) \n`; // <-- NUEVA FÓRMULA MOSTRADA
+    
+        if (pautaRecomendada < 0) {
+            pautaRecomendada = 0;
+            pasosDetalleSeccion5 += `  PIRR se ajusta a 0, ya que el resultado fue negativo.\n`;
+        }
+     
+        pasosDetalleSeccion5 += `  Resultado: ${pautaRecomendada.toFixed(1)} Unidades\n\n`;
+    } else {
+        pasosDetalleSeccion5 += "PASO 6. Pauta de Insulina Rápida Recomendada (PIRR): No se pudo calcular (faltan valores de PIRA o DC Posterior).\n\n";
+    }
+     
+        // --- LÓGICA DE SEGURIDAD (Variación > 60%) ---
+        let avisoVariacion = '';
+        if (piraAplicada !== null && pautaRecomendada !== null && piraAplicada > 0) {
+            const variacionPorcentual = Math.abs(pautaRecomendada - piraAplicada) / piraAplicada;
+           
+            if (variacionPorcentual >= 0.60) {
+                const tipoCambio = pautaRecomendada > piraAplicada ? 'aumento' : 'descenso';
+                avisoVariacion = `<span class="resultado-aviso">
+                    <p> </p>           
+                    <span style="font-weight: bold; color: red;">⚠️ AVISO:</span>
+                    <span style="font-weight: bold; color: black;">La nueva pauta recomendada supone un ${tipoCambio} mayor al 60% de la pauta aplicada: Revise los datos.</span>
+                </span>`;
+            }
+        }
+        // --- 5. CÁLCULO DE LA PAUTA DE CORRECCIÓN PROPUESTA (Sección 6) ---
+        
+        const pasosSeccion6Elemento = document.getElementById('pasosSeccion6');
+        // Inicializar pasosDetalleSeccion6 (necesario para el registro, aunque no contenga el mensaje HTML)
+        let pasosDetalleSeccion6 = "";
+
+        // --- 6. CÁLCULO DE LA PAUTA DE CORRECCIÓN PROPUESTA (Sección 6) ---
+        
+        // 1. GENERACIÓN E INSERCIÓN DEL MENSAJE HTML INTRODUCTORIO
+        const mensajeIntroductorioHTML = `
+            <p>
+                La pauta aplicada por el usuario es de ${piraAplicada.toFixed(1)} Unidades, pero los cálculos recomiendan una pauta de ${pautaRecomendada.toFixed(1)} Unidades.
+            </p>
+            <p>
+                Sin embargo, a veces, por seguridad, por datos poco consistentes (debido a un Coeficiente de Variación alto), por fragilidad,... puede ser recomendable elegir un valor de pauta intermedio que evite un ajuste brusco y prevenga riesgos de hipoglucemias.
+            </p>
+            <p>
+            </p>
+        `;
+        document.getElementById('seccion6-mensaje-intro').innerHTML = mensajeIntroductorioHTML;
+
+        // Lógica de cálculo de la tabla
+        let relacionInsulinaGlucemia = null;
+        pasosDetalleSeccion6 += "### CÁLCULOS DE LA PAUTA DE CORRECCIÓN PROPUESTA:\n\n";
+
+        // Verificar que la pauta de referencia sea válida, no cero y exista el factor de sensibilidad
+        if (pautaReferencia !== null && pautaReferencia > 0 && factorSensibilidad !== null) {
+            
+            relacionInsulinaGlucemia = factorSensibilidad / pautaReferencia;
+
+            pasosDetalleSeccion6 += `PASO 1. Pauta de Referencia seleccionada: ${pautaReferencia.toFixed(1)} Unidades.\n\n`;
+
+            pasosDetalleSeccion6 += "PASO 2. Relación Insulina/Glucemia (RIG)\n";
+            pasosDetalleSeccion6 += `  Fórmula: RIG = Factor de Sensibilidad (${factorSensibilidad.toFixed(1)}) / Pauta de Referencia (${pautaReferencia.toFixed(1)})\n`;
+            pasosDetalleSeccion6 += `  Resultado: 1 unidad por cada ${relacionInsulinaGlucemia.toFixed(0)} mg/dL\n\n`;
+            
+            // 2. GENERACIÓN DE LA TABLA DE CORRECCIÓN
+            let tablaCorreccionHTML = '<h3>Tabla de Corrección Rápida:</h3>';
+            tablaCorreccionHTML += '<pre class="pasos-correccion-ratio">';
+            tablaCorreccionHTML += `Glucemia Objetivo: ${glucemiaMeta.toFixed(0)} mg/dL\n\n`;
+            tablaCorreccionHTML += 'Glucemia (mg/dL) | Dosis a Añadir (U)\n';
+            tablaCorreccionHTML += '------------------|------------------\n';
+
+            // Bucle para generar los rangos de corrección (incrementos de 30 mg/dL)
+            for (let i = 1; i <= 6; i++) {
+                const glucemia = glucemiaMeta + (i * 30); 
+                const correccion = (glucemia - glucemiaMeta) / relacionInsulinaGlucemia;
+                // Redondeamos al 0.5 más cercano
+                const dosisAAnadir = Math.round(correccion * 2) / 2; 
+
+                if (glucemia <= 450) { // Límite de seguridad
+                     tablaCorreccionHTML += `${glucemia.toFixed(0)} mg/dL | +${dosisAAnadir.toFixed(1)} Unidades\n`;
+                }
+            }
+            tablaCorreccionHTML += '</pre>';
+
+            // Insertar la tabla de corrección en la sección de pasos
+            pasosDetalleSeccion6 += tablaCorreccionHTML;
+
+        } else if (pautaReferencia === 0) {
+            pasosDetalleSeccion6 += `⚠️ AVISO: No se puede calcular la tabla de corrección porque la Pauta de Referencia es 0.`;
+        } else {
+             pasosDetalleSeccion6 += `PASO 1. Pauta de Referencia: Ingrese un valor válido para calcular la corrección.`;
+        }       
+
+
+        // Sección 4
+        pasosElemento.textContent = pasosDetalle;
+        document.getElementById('valorDTI').textContent = `${dosisTotalInsulina.toFixed(1)} Unidades.`;
+        document.getElementById('valorFS').textContent = factorSensibilidad !== null ? `${factorSensibilidad.toFixed(1)} mg/dL por Unidad.` : "No calculado (DTI = 0).";
+        document.getElementById('valorDRP').textContent = `${dosisRapidaPromedio.toFixed(1)} Unidades.`;
+        document.getElementById('valorGAP').textContent = `${gap.toFixed(0)} mg/dL.`;
+        document.getElementById('valorGPP').textContent = `${gpp.toFixed(0)} mg/dL.`;
+
+        // Insertar los avisos de CV justo después de los promedios
+        if (cvAvisoMensajes) {
+            const tempDiv = document.createElement('div');
+            tempDiv.classList.add('cv-aviso-parent'); // Contenedor para la limpieza
+            tempDiv.innerHTML = cvAvisoMensajes;
+            // Insertar los avisos antes del elemento 'pasos'
+            pasosElemento.parentNode.insertBefore(tempDiv, pasosElemento);
+        }
+
+        // Sección 5
+        pasosSeccion5Elemento.textContent = pasosDetalleSeccion5;          
+        document.getElementById('valorPautaReal').textContent = piraAplicada !== null ? `${piraAplicada.toFixed(1)} Unidades.` : '—';
+        const valorPautaRecomendadaElement = document.getElementById('valorPautaRecomendada');
+        valorPautaRecomendadaElement.innerHTML = pautaRecomendada !== null ? `${pautaRecomendada.toFixed(1)} Unidades.` : '—';
+  
+        // Añadir el mensaje de aviso de variación si existe.
+        if (avisoVariacion) {
+            valorPautaRecomendadaElement.parentElement.innerHTML += avisoVariacion;
+        }       
+
+        // 1. Establecer el rango dinámico para el campo de Pauta de Referencia y actualizar el mensaje
+        if (piraAplicada !== null && pautaRecomendada !== null) {
+            rangoMinimoPauta = Math.min(piraAplicada, pautaRecomendada);
+            rangoMaximoPauta = Math.max(piraAplicada, pautaRecomendada);
+            
+            // 2. Actualizar el mensaje de error dinámico con el rango calculado
+            document.getElementById('errorPautaReferencia').textContent = 
+                `Introduce un valor válido entre ${rangoMinimoPauta.toFixed(1)} y ${rangoMaximoPauta.toFixed(1)} Unidades.`;
+        }
+
+        if (piraAplicada !== null && pautaRecomendada !== null) {
+            document.getElementById('contenedorPautaReferencia').style.display = 'block';
+            document.getElementById('btnCalcularCorreccion').style.display = 'block';           
+        }
+        // Sección 6 (Mostrando mensajes por defecto)
+        pasosSeccion6Elemento.textContent = '';
+      
+    // VINCULACIÓN DE BOTONES (Debe estar fuera de la función)
+    document.getElementById('btnCalcular').addEventListener('click', calcularInsulina);
+    document.getElementById('btnCalcularCorreccion').addEventListener('click', calcularInsulina);
+        
+    } // Fin de la función calcularInsulina()        
+  </script>
+            
+</body>
+</html>
